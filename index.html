@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☆☆☆ RADIO QUEBRADA ☆☆☆ The Coolest Station on the Web!</title>
+    
+    <!-- OpenGraph Meta Tags for Social Media Previews -->
+    <meta property="og:title" content="☆ RADIO QUEBRADA ☆ - The Coolest Station on the Web!">
+    <meta property="og:description" content="🎵 Tune into Radio Quebrada - Your ultimate underground radio station! Fresh beats, DJ mixes, and the hottest tracks from cyberspace. Join the audio revolution! 📻✨">
+    <meta property="og:image" content="./preview.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Radio Quebrada - Underground Web Radio Station">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Radio Quebrada">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="☆ RADIO QUEBRADA ☆ - The Coolest Station on the Web!">
+    <meta name="twitter:description" content="🎵 Tune into Radio Quebrada - Your ultimate underground radio station! Fresh beats, DJ mixes, and the hottest tracks from cyberspace. Join the audio revolution! 📻✨">
+    <meta name="twitter:image" content="./preview.jpg">
+    <meta name="twitter:image:alt" content="Radio Quebrada - Underground Web Radio Station">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="description" content="🎵 Tune into Radio Quebrada - Your ultimate underground radio station! Fresh beats, DJ mixes, and the hottest tracks from cyberspace. Join the audio revolution! 📻✨">
+    <meta name="keywords" content="radio, music, DJ, underground, electronic, beats, mixcloud, radio station, web radio, retro">
+    <meta name="author" content="Radio Quebrada">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/x-icon" href="./preview.jpg">
+    <link rel="apple-touch-icon" href="./preview.jpg">
+    
+    <!-- Additional OpenGraph Tags for Better Compatibility -->
+    <meta property="fb:app_id" content="">
+    <meta property="article:author" content="Radio Quebrada">
+    <meta property="og:video" content="">
+    <meta property="og:audio" content="">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "RadioStation",
+      "name": "Radio Quebrada",
+      "description": "The coolest underground radio station on the web featuring DJ mixes and electronic beats",
+      "url": "",
+      "logo": "./preview.jpg",
+      "sameAs": [
+        "https://www.mixcloud.com/radioquebrada/"
+      ]
+    }
+    </script>
+    <style>
+        body {
+            background-image: url('data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7');
+            background-color: #000080;
+            color: #FFFF00;
+            font-family: "Comic Sans MS", "Times New Roman", cursive;
+            margin: 0;
+            padding: 20px;
+            cursor: crosshair;
+        }
+
+        /* Scrolling stars background */
+        @keyframes stars {
+            from { background-position: 0 0; }
+            to { background-position: -10000px 5000px; }
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, white, transparent),
+                radial-gradient(2px 2px at 40px 70px, white, transparent),
+                radial-gradient(1px 1px at 50px 160px, white, transparent),
+                radial-gradient(1px 1px at 130px 40px, white, transparent),
+                radial-gradient(2px 2px at 80px 10px, white, transparent);
+            background-repeat: repeat;
+            background-size: 200px 200px;
+            animation: stars 200s linear infinite;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* Blinking title */
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        h1 {
+            font-size: 48px;
+            text-shadow: 3px 3px 0px #FF00FF;
+            margin: 20px 0;
+            animation: blink 1s infinite;
+            font-family: "Impact", "Arial Black", sans-serif;
+        }
+
+        .marquee {
+            background: #FF0000;
+            color: #FFFF00;
+            padding: 10px;
+            margin: 20px 0;
+            font-size: 20px;
+            font-weight: bold;
+            overflow: hidden;
+            white-space: nowrap;
+            box-shadow: 0 0 10px #FFFF00;
+        }
+
+        .marquee span {
+            display: inline-block;
+            padding-left: 100%;
+            animation: marquee 15s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        #player-container {
+            background: linear-gradient(45deg, #FF00FF, #00FFFF, #FFFF00, #FF00FF);
+            background-size: 400% 400%;
+            animation: gradient 3s ease infinite;
+            border: 5px ridge #FFD700;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 5px 5px 15px #000;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        #current-episode {
+            font-size: 24px;
+            color: #000;
+            background: #FFFF00;
+            padding: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border: 3px double #000;
+        }
+
+        .rainbow-button {
+            font-size: 20px;
+            font-weight: bold;
+            padding: 15px 30px;
+            margin: 10px;
+            border: 3px outset #FFD700;
+            background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+            color: #FFF;
+            text-shadow: 2px 2px 0px #000;
+            cursor: pointer;
+            font-family: "Impact", "Arial Black", "Franklin Gothic Bold", sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .rainbow-button:active {
+            border-style: inset;
+        }
+
+        .gif-decoration {
+            margin: 20px 0;
+        }
+
+        .episode-table {
+            width: 100%;
+            border: 3px solid #FF00FF;
+            background: #000;
+            margin: 20px 0;
+        }
+
+        .episode-table th {
+            background: linear-gradient(90deg, #FF0000, #FFFF00);
+            color: #000;
+            padding: 10px;
+            font-size: 20px;
+            text-transform: uppercase;
+        }
+
+        .episode-table td {
+            border: 1px solid #00FF00;
+            padding: 10px;
+            background: #000033;
+            color: #00FF00;
+            font-family: "Courier New", monospace;
+        }
+
+        .episode-table tr:hover td {
+            background: #FF00FF;
+            color: #FFFF00;
+            cursor: pointer;
+        }
+
+        .spinning-disc {
+            display: inline-block;
+            animation: spin 2s linear infinite;
+            font-size: 30px;
+            margin: 0 10px;
+        }
+
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .under-construction {
+            background: #FFFF00;
+            color: #000;
+            padding: 5px 20px;
+            margin: 20px 0;
+            font-weight: bold;
+            display: inline-block;
+            transform: skew(-20deg);
+        }
+
+        .visitor-counter {
+            background: #000;
+            color: #00FF00;
+            border: 2px solid #00FF00;
+            padding: 10px;
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+            margin: 20px 0;
+            display: inline-block;
+        }
+
+        /* Animated fire text */
+        @keyframes fire {
+            0% { text-shadow: 0 -2px 4px #FF0000, 0 -4px 8px #FF7F00, 0 -6px 12px #FFFF00; }
+            50% { text-shadow: 0 -1px 3px #FF0000, 0 -3px 6px #FF7F00, 0 -5px 10px #FFFF00; }
+            100% { text-shadow: 0 -2px 4px #FF0000, 0 -4px 8px #FF7F00, 0 -6px 12px #FFFF00; }
+        }
+
+        .fire-text {
+            animation: fire 0.5s infinite;
+        }
+
+        .webring {
+            margin: 30px 0;
+            padding: 20px;
+            background: #000;
+            border: 3px ridge #FFD700;
+        }
+
+        /* Merch section styles */
+        .merch-section {
+            margin: 40px 0;
+            padding: 20px;
+            background: linear-gradient(45deg, #FF1493, #00CED1);
+            border: 5px ridge #FFD700;
+            animation: gradient 5s ease infinite;
+        }
+
+        .merch-title {
+            font-size: 36px;
+            color: #FFFF00;
+            text-shadow: 3px 3px 0px #FF00FF;
+            margin-bottom: 20px;
+            animation: blink 2s infinite;
+        }
+
+        .merch-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .merch-item {
+            background: #000;
+            border: 3px solid #00FF00;
+            padding: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 300px;
+        }
+
+        .merch-item:hover {
+            background: #FF00FF;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px #FFFF00;
+        }
+
+        .merch-item img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid #FFD700;
+            margin-bottom: 10px;
+        }
+
+        .merch-item h3 {
+            color: #00FF00;
+            font-size: 18px;
+            margin: 10px 0;
+            text-transform: uppercase;
+        }
+
+        .merch-item .price {
+            color: #FFFF00;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 2px 2px 0px #FF0000;
+        }
+
+        .sold-out {
+            color: #FF0000;
+            font-weight: bold;
+            animation: blink 0.5s infinite;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .modal-content {
+            background: linear-gradient(45deg, #FF00FF, #00FFFF);
+            margin: 5% auto;
+            padding: 0;
+            border: 5px ridge #FFD700;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 0 30px #FFFF00;
+            animation: gradient 3s ease infinite;
+            position: relative;
+        }
+
+        .modal-header {
+            background: #000;
+            color: #FFFF00;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-bottom: 3px solid #FFD700;
+        }
+
+        .modal-body {
+            background: #000033;
+            padding: 20px;
+            color: #00FF00;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+
+        .close-modal {
+            color: #FF0000;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            animation: blink 1s infinite;
+        }
+
+        .close-modal:hover {
+            color: #FFFF00;
+            transform: scale(1.2);
+        }
+
+        .tracklist {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .track-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: #000;
+            border: 1px solid #00FF00;
+            font-family: "Courier New", monospace;
+        }
+
+        .track-item:hover {
+            background: #00FF00;
+            color: #000;
+            box-shadow: 0 0 10px #00FF00;
+        }
+
+        .track-number {
+            color: #FFD700;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .track-artist {
+            color: #FF00FF;
+        }
+
+        .no-tracklist {
+            text-align: center;
+            color: #FFFF00;
+            font-size: 18px;
+            padding: 20px;
+        }
+
+        .tracklist-btn {
+            background: linear-gradient(45deg, #00FF00, #00FFFF);
+            color: #000;
+            border: 2px solid #FFD700;
+            padding: 5px 10px;
+            margin-left: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .tracklist-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #FFFF00;
+        }
+
+        .loading-tracklist {
+            text-align: center;
+            color: #FFFF00;
+            font-size: 20px;
+            padding: 40px;
+        }
+
+        .loading-tracklist .spinning-disc {
+            font-size: 40px;
+            display: block;
+            margin: 20px auto;
+        }
+
+        /* Mobile modal styles */
+        @media (max-width: 768px) {
+            .modal-content {
+                width: 95%;
+                margin: 2% auto;
+            }
+
+            .modal-header {
+                font-size: 16px;
+                padding: 12px;
+            }
+
+            .track-item {
+                padding: 8px;
+                font-size: 14px;
+            }
+
+            .tracklist-btn {
+                font-size: 10px;
+                padding: 4px 8px;
+            }
+        }
+
+        /* Bitcoin tip section styles */
+        .tip-section {
+            margin: 40px 0;
+            padding: 20px;
+            background: linear-gradient(45deg, #FF6600, #FFD700);
+            border: 5px ridge #FFA500;
+            animation: gradient 4s ease infinite;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tip-section::before {
+            content: "₿";
+            position: absolute;
+            font-size: 200px;
+            opacity: 0.1;
+            right: -50px;
+            top: -50px;
+            animation: spin 20s linear infinite;
+        }
+
+        .tip-title {
+            font-size: 36px;
+            color: #000;
+            text-shadow: 3px 3px 0px #FFFF00;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        .bitcoin-address {
+            background: #000;
+            color: #00FF00;
+            font-family: "Courier New", monospace;
+            padding: 15px;
+            margin: 20px auto;
+            border: 3px solid #00FF00;
+            font-size: 14px;
+            word-break: break-all;
+            max-width: 600px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .bitcoin-address:hover {
+            background: #00FF00;
+            color: #000;
+            box-shadow: 0 0 20px #00FF00;
+        }
+
+        .copy-btn {
+            background: #FFD700;
+            color: #000;
+            border: 2px solid #000;
+            padding: 5px 15px;
+            margin-top: 10px;
+            cursor: pointer;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .copy-btn:hover {
+            background: #FFA500;
+            transform: scale(1.1);
+        }
+
+        .bitcoin-qr {
+            margin: 20px auto;
+            padding: 10px;
+            background: #FFF;
+            border: 5px solid #FFD700;
+            display: inline-block;
+            animation: pulse 3s infinite;
+        }
+
+        .tip-amounts {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+
+        .tip-amount-btn {
+            background: linear-gradient(45deg, #FFD700, #FFA500);
+            color: #000;
+            border: 3px outset #FF6600;
+            padding: 10px 20px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            animation: pulse 2s infinite;
+        }
+
+        .tip-amount-btn:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 15px #FFD700;
+        }
+
+        .tip-amount-btn:active {
+            border-style: inset;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Mobile styles for tip section */
+        @media (max-width: 768px) {
+            .tip-section {
+                margin: 20px 0;
+                padding: 15px;
+            }
+
+            .tip-title {
+                font-size: 24px;
+            }
+
+            .bitcoin-address {
+                font-size: 12px;
+                padding: 10px;
+            }
+
+            .tip-amounts {
+                gap: 10px;
+            }
+
+            .tip-amount-btn {
+                font-size: 14px;
+                padding: 8px 15px;
+            }
+
+            .tip-section::before {
+                font-size: 100px;
+                right: -25px;
+                top: -25px;
+            }
+        }
+
+        /* Mobile Responsive Styles */
+        @media (max-width: 768px) {
+            body {
+                padding: 5px;
+            }
+
+            h1 {
+                font-size: 28px;
+                margin: 10px 0;
+            }
+
+            .gif-decoration .spinning-disc {
+                font-size: 24px;
+                margin: 0 5px;
+            }
+
+            .marquee {
+                font-size: 16px;
+                padding: 8px;
+                margin: 10px 0;
+            }
+
+            .under-construction {
+                font-size: 14px;
+                padding: 3px 15px;
+                margin: 10px 0;
+            }
+
+            #player-container {
+                padding: 15px;
+                margin: 15px 0;
+            }
+
+            #current-episode {
+                font-size: 18px;
+                padding: 8px;
+                margin-bottom: 15px;
+            }
+
+            .rainbow-button {
+                font-size: 16px;
+                padding: 10px 20px;
+                margin: 5px auto;
+                width: 90%;
+                max-width: 300px;
+                display: block;
+                text-align: center;
+                line-height: 1.4;
+                white-space: normal;
+                font-family: "Impact", "Arial Black", "Franklin Gothic Bold", sans-serif;
+                text-shadow: 1px 1px 0px #000;
+                letter-spacing: 0.5px;
+            }
+
+            #start-radio {
+                font-size: 18px !important;
+                padding: 15px 25px !important;
+            }
+
+            h2 {
+                font-size: 24px;
+                margin-top: 20px;
+            }
+
+            /* Episode table mobile styles */
+            .episode-table {
+                font-size: 14px;
+            }
+
+            .episode-table th {
+                padding: 8px 5px;
+                font-size: 16px;
+            }
+
+            .episode-table td {
+                padding: 8px 5px;
+            }
+
+            .episode-table td:first-child {
+                width: 50px;
+            }
+
+            .episode-table td img {
+                width: 40px;
+                height: 40px;
+            }
+
+            .episode-table td span {
+                font-size: 30px !important;
+            }
+
+            /* Merch section mobile */
+            .merch-section {
+                margin: 20px 0;
+                padding: 15px;
+            }
+
+            .merch-title {
+                font-size: 24px;
+                margin-bottom: 15px;
+            }
+
+            .merch-grid {
+                grid-template-columns: 1fr;
+                gap: 15px;
+            }
+
+            .merch-item {
+                padding: 12px;
+            }
+
+            .merch-item h3 {
+                font-size: 16px;
+            }
+
+            .merch-item .price {
+                font-size: 20px;
+            }
+
+            .merch-item button {
+                width: 100%;
+                font-size: 14px !important;
+                padding: 10px !important;
+            }
+
+            /* Webring mobile */
+            .webring {
+                margin: 20px 0;
+                padding: 15px;
+                font-size: 14px;
+            }
+
+            .webring p:nth-child(2) {
+                font-size: 18px !important;
+            }
+
+            /* Visitor counter mobile */
+            .visitor-counter {
+                font-size: 12px;
+                padding: 8px;
+                margin: 15px 0;
+            }
+
+            /* Hide overflow on small screens */
+            .container {
+                overflow-x: hidden;
+            }
+
+            /* Adjust payment methods text */
+            .merch-section > div:last-child {
+                font-size: 14px;
+            }
+
+            .merch-section > div:last-child .spinning-disc {
+                font-size: 20px;
+            }
+        }
+
+        /* Extra small devices (phones in portrait) */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            .marquee span {
+                animation-duration: 10s;
+            }
+
+            .episode-table {
+                font-size: 12px;
+            }
+
+            .episode-table th:nth-child(2),
+            .episode-table td:nth-child(2) {
+                font-size: 12px;
+            }
+
+            /* Stack buttons vertically on very small screens */
+            #player-container {
+                text-align: center;
+            }
+
+            .rainbow-button {
+                display: block;
+                margin: 10px auto;
+                width: 90%;
+                font-size: 14px;
+                padding: 12px 15px;
+                line-height: 1.3;
+                white-space: normal;
+                text-align: center;
+                font-family: "Impact", "Arial Black", "Franklin Gothic Bold", sans-serif;
+                text-shadow: 1px 1px 0px #000;
+                letter-spacing: 0.5px;
+            }
+        }
+
+        /* Landscape mobile adjustments */
+        @media (max-width: 768px) and (orientation: landscape) {
+            h1 {
+                font-size: 24px;
+                margin: 5px 0;
+            }
+
+            .gif-decoration {
+                margin: 10px 0;
+            }
+
+            #player-container {
+                padding: 10px;
+                margin: 10px 0;
+            }
+
+            .merch-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* Prevent horizontal scroll */
+        html, body {
+            overflow-x: hidden;
+            max-width: 100%;
+        }
+
+        /* Cursor styles for interactive elements */
+        button, .rainbow-button, .tip-amount-btn, .copy-btn, .tracklist-btn, 
+        a, .close-modal, .episode-table tr, .merch-item, .bitcoin-address {
+            cursor: pointer !important;
+        }
+
+        input, textarea {
+            cursor: text !important;
+        }
+
+        /* Ensure cursor is always visible */
+        * {
+            cursor: inherit;
+        }
+
+        /* Ensure tables are scrollable on mobile */
+        @media (max-width: 768px) {
+            .episode-table {
+                display: block;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Tracklist Modal -->
+    <div id="tracklistModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <div id="modalTitle">TRACKLIST</div>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Tracklist content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="gif-decoration">
+            <span class="spinning-disc">💿</span>
+            <span class="spinning-disc">📻</span>
+            <span class="spinning-disc">🎵</span>
+        </div>
+
+        <h1 class="fire-text">☆ RADIO QUEBRADA ☆</h1>
+        
+        <div class="marquee">
+            <span>♪♫♪ WELCOME TO THE HOTTEST RADIO STATION ON THE WORLD WIDE WEB!!! ♪♫♪ NOW PLAYING THE FRESHEST BEATS!!! ♪♫♪ TELL YOUR FRIENDS!!! ♪♫♪</span>
+        </div>
+
+        <div class="under-construction">🚧 UNDER CONSTRUCTION 🚧</div>
+
+        <div id="player-container">
+            <div id="current-episode">🎧 NOW ON AIR 🎧</div>
+            <div id="player"></div>
+            <button class="rainbow-button" onclick="playRandomEpisode()">
+                🎲 SHUFFLE THAT BEAT! 🎲
+            </button>
+            <button id="start-radio" class="rainbow-button" style="background: linear-gradient(to right, #FF0000, #FFFF00); animation: pulse 1s infinite;">
+                🔊 CLICK HERE TO START THE RADIO! 🔊
+            </button>
+        </div>
+
+        <h2 style="color: #00FF00; text-shadow: 2px 2px 0px #FF00FF; margin-top: 30px;">
+            📼 LATEST EPISODES 📼
+        </h2>
+
+        <table class="episode-table" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>📸</th>
+                    <th>EPISODE NAME</th>
+                    <th>PLAY</th>
+                </tr>
+            </thead>
+            <tbody id="episodes-list">
+            </tbody>
+        </table>
+
+        <!-- Merch Section -->
+        <div class="merch-section">
+            <h2 class="merch-title">🛍️ EXCLUSIVE MERCH! 🛍️</h2>
+            <div class="marquee" style="background: #FFD700; color: #000;">
+                <span>💰 BUY NOW! LIMITED EDITION! WHILE SUPPLIES LAST! FREE SHIPPING ON ORDERS OVER $99! 💰</span>
+            </div>
+            
+            <div class="merch-grid">
+                <div class="merch-item">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150'%3E%3Crect width='200' height='150' fill='%23FF00FF'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-size='20' fill='%23FFFF00'%3EVINTAGE TEE%3C/text%3E%3C/svg%3E" alt="Vintage Tee">
+                    <h3>Radio Quebrada Vintage Tee</h3>
+                    <p class="price">$19.99</p>
+                    <p class="sold-out">COMING SOON</p>
+                </div>
+                
+                <div class="merch-item">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150'%3E%3Crect width='200' height='150' fill='%2300FFFF'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-size='20' fill='%23000'%3EHOODIE%3C/text%3E%3C/svg%3E" alt="Hoodie">
+                    <h3>Cyber Hoodie 3000</h3>
+                    <p class="price">$49.99</p>
+                    <p class="sold-out">COMING SOON</p>
+                </div>
+                
+                <div class="merch-item">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150'%3E%3Crect width='200' height='150' fill='%23FFFF00'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-size='20' fill='%23FF0000'%3ESTICKERS%3C/text%3E%3C/svg%3E" alt="Stickers">
+                    <h3>Holographic Sticker Pack</h3>
+                    <p class="price">$9.99</p>
+                    <p class="sold-out">COMING SOON</p>
+                </div>
+                
+                <div class="merch-item">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150'%3E%3Crect width='200' height='150' fill='%2300FF00'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-size='20' fill='%23000'%3ECASSETTE%3C/text%3E%3C/svg%3E" alt="Cassette">
+                    <h3>Limited Edition Cassette</h3>
+                    <p class="price">$14.99</p>
+                    <p class="sold-out">COMING SOON</p>
+                </div>
+                
+                <div class="merch-item">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150'%3E%3Crect width='200' height='150' fill='%23FF69B4'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-size='20' fill='%23FFF'%3EPOSTER%3C/text%3E%3C/svg%3E" alt="Poster">
+                    <h3>Neon Dreams Poster</h3>
+                    <p class="price">$24.99</p>
+                    <p class="sold-out">COMING SOON</p>
+                </div>
+                
+                <div class="merch-item">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150'%3E%3Crect width='200' height='150' fill='%238A2BE2'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' font-size='20' fill='%23FFF'%3EVINYL%3C/text%3E%3C/svg%3E" alt="Vinyl">
+                    <h3>Special Edition Vinyl</h3>
+                    <p class="price">$39.99</p>
+                    <p class="sold-out">COMING SOON</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <span class="spinning-disc">💳</span>
+                <span style="color: #00FF00; font-size: 18px;">WE ACCEPT: VISA, MASTERCARD, PAYPAL, BITCOIN, DOGECOIN!</span>
+                <span class="spinning-disc">💳</span>
+            </div>
+        </div>
+
+        <!-- Bitcoin Tip Section -->
+        <div class="tip-section">
+            <h2 class="tip-title">₿ TIP YOUR DJS! ₿</h2>
+            <div class="marquee" style="background: #000; color: #00FF00;">
+                <span>⚡ SUPPORT THE UNDERGROUND! ⚡ BITCOIN TIPS KEEP US SPINNING! ⚡ BE A CRYPTO PATRON! ⚡</span>
+            </div>
+            
+            <p style="font-size: 20px; color: #000; font-weight: bold;">
+                🎧 HELP KEEP RADIO QUEBRADA ON THE AIR! 🎧<br>
+                <small>Your Bitcoin tips go directly to our DJs!</small>
+            </p>
+
+            <div class="bitcoin-address" id="bitcoin-address" onclick="copyAddress()">
+                <strong>BITCOIN ADDRESS:</strong><br>
+                bc1q063g9xpxaky6vls0gg4vuja8v8dhdw2m5hzuhhs6s58rqkuwlmzsrgcxxt
+            </div>
+
+            <div class="bitcoin-qr">
+                <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=bitcoin:bc1q063g9xpxaky6vls0gg4vuja8v8dhdw2m5hzuhhs6s58rqkuwlmzsrgcxxt&bgcolor=FFFFFF&color=000000" alt="Bitcoin QR Code" style="display: block;">
+            </div>
+            
+            <div style="text-align: center;">
+                <button class="copy-btn" onclick="copyAddress()">
+                    📋 COPY ADDRESS
+                </button>
+            </div>
+
+            <p style="color: #000; font-weight: bold; margin-top: 20px; text-align: center;">
+                <span class="spinning-disc">💎</span>
+                EVERY SATOSHI COUNTS!
+                <span class="spinning-disc">💎</span>
+            </p>
+        </div>
+
+        <div class="webring">
+            <p style="color: #FFFF00;">This site is part of the</p>
+            <p style="font-size: 24px; color: #00FF00;">☆ COOL RADIO WEBRING ☆</p>
+            <p>
+                <a href="#" style="color: #00FFFF;">← PREVIOUS</a> | 
+                <a href="#" style="color: #FF00FF;">RANDOM</a> | 
+                <a href="#" style="color: #00FFFF;">NEXT →</a>
+            </p>
+        </div>
+
+        <div class="visitor-counter">
+            VISITOR #<span id="counter">031337</span> SINCE 1995
+        </div>
+
+        <p style="color: #00FF00; font-family: 'Courier New', monospace;">
+            Best viewed in Netscape Navigator 3.0 at 800x600<br>
+            <img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="Netscape Now!" style="border: 0;">
+        </p>
+    </div>
+
+    <script>
+        let episodes = [];
+        let currentEpisode = null;
+        let allEpisodes = [];
+        let hasStarted = false;
+
+        // Fetch all episodes from Mixcloud API
+        async function fetchAllEpisodes() {
+            const username = 'radioquebrada'; // lowercase to match API
+            let url = `https://api.mixcloud.com/${username}/cloudcasts/`;
+            let hasMore = true;
+            
+            // Show loading message
+            document.getElementById('episodes-list').innerHTML = `
+                <tr>
+                    <td colspan="3" style="color: #FFFF00; text-align: center;">
+                        <span class="spinning-disc">💿</span>
+                        LOADING ALL EPISODES FROM THE CYBERSPACE...
+                        <span class="spinning-disc">💿</span>
+                    </td>
+                </tr>
+            `;
+
+            try {
+                while (hasMore) {
+                    const response = await fetch(url);
+                    const data = await response.json();
+                    
+                    // Add episodes from this page
+                    if (data.data && data.data.length > 0) {
+                        const pageEpisodes = data.data.map(episode => ({
+                            title: episode.name,
+                            url: episode.url,
+                            key: episode.key,
+                            created: new Date(episode.created_time),
+                            dateStr: new Date(episode.created_time).toLocaleDateString(),
+                            imageUrl: episode.pictures?.large || episode.pictures?.medium || episode.pictures?.small || episode.pictures?.thumbnail || ''
+                        }));
+                        
+                        // Log first episode to check structure
+                        if (allEpisodes.length === 0 && pageEpisodes.length > 0) {
+                            console.log('First episode data:', data.data[0]);
+                            console.log('Extracted image URL:', pageEpisodes[0].imageUrl);
+                        }
+                        
+                        allEpisodes = allEpisodes.concat(pageEpisodes);
+                    }
+                    
+                    // Check if there's a next page
+                    if (data.paging && data.paging.next) {
+                        url = data.paging.next;
+                    } else {
+                        hasMore = false;
+                    }
+                }
+                
+                // Sort by date (newest first)
+                allEpisodes.sort((a, b) => b.created - a.created);
+                
+                // Update episodes array
+                episodes = allEpisodes;
+                
+                console.log(`🎵 LOADED ${episodes.length} TOTAL EPISODES! 🎵`);
+                
+                displayEpisodes();
+                
+                return episodes; // Return episodes for promise chaining
+                
+            } catch (error) {
+                console.error('Error fetching episodes:', error);
+                document.getElementById('episodes-list').innerHTML = `
+                    <tr>
+                        <td colspan="3" style="color: #FF0000; text-align: center;">
+                            ⚠️ ERROR LOADING EPISODES! CHECK YOUR INTERNET CONNECTION! ⚠️
+                        </td>
+                    </tr>
+                `;
+                return []; // Return empty array on error
+            }
+        }
+
+        function displayEpisodes() {
+            const list = document.getElementById('episodes-list');
+            
+            // Show total count
+            const totalCount = document.createElement('tr');
+            totalCount.innerHTML = `
+                <td colspan="3" style="background: #FF00FF; color: #000; font-weight: bold; text-align: center;">
+                    🎉 ${episodes.length} TOTAL EPISODES LOADED! 🎉
+                </td>
+            `;
+            
+            list.innerHTML = episodes.map((episode, index) => {
+                // Create image HTML with error handling
+                let imageHtml;
+                if (episode.imageUrl) {
+                    imageHtml = `<img src="${episode.imageUrl}" alt="${episode.title}" 
+                        style="width: 60px; height: 60px; object-fit: cover; border: 2px solid #FFD700; box-shadow: 0 0 5px #00FF00;"
+                        onerror="this.onerror=null; this.parentElement.innerHTML='<span style=\\'font-size: 40px;\\'>🎵</span>';">`;
+                } else {
+                    imageHtml = '<span style="font-size: 40px;">🎵</span>';
+                }
+                
+                return `
+                    <tr>
+                        <td style="padding: 5px;" onclick="playEpisode(${index})">
+                            ${imageHtml}
+                        </td>
+                        <td onclick="playEpisode(${index})">${episode.title}<br><small style="color: #888;">${episode.dateStr}</small></td>
+                        <td style="color: #FFFF00; font-weight: bold;">
+                            <span onclick="playEpisode(${index})" style="cursor: pointer;">▶ PLAY</span>
+                            <button class="tracklist-btn" onclick="showTracklist('${episode.key}', '${episode.title.replace(/'/g, "\\'")}')">
+                                📜 TRACKS
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+            
+            // Add total count at the top
+            list.insertAdjacentHTML('afterbegin', totalCount.outerHTML);
+        }
+
+        function playEpisode(index) {
+            const episode = episodes[index];
+            if (episode) {
+                currentEpisode = episode;
+                document.getElementById('current-episode').innerHTML = `🎧 NOW ON AIR: ${episode.title} 🎧`;
+                
+                // Hide start button once playing
+                const startBtn = document.getElementById('start-radio');
+                if (startBtn) {
+                    startBtn.style.display = 'none';
+                }
+                hasStarted = true;
+                
+                // Create iframe with autoplay parameter
+                const iframe = document.createElement('iframe');
+                iframe.width = '100%';
+                iframe.height = '120';
+                // Add autoplay=1 parameter to the embed URL
+                iframe.src = `https://www.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=${encodeURIComponent(episode.url)}`;
+                iframe.frameBorder = '0';
+                iframe.allow = 'autoplay';
+                
+                const playerDiv = document.getElementById('player');
+                playerDiv.innerHTML = '';
+                playerDiv.appendChild(iframe);
+            }
+        }
+
+        function playRandomEpisode() {
+            if (episodes.length > 0) {
+                const randomIndex = Math.floor(Math.random() * episodes.length);
+                playEpisode(randomIndex);
+            }
+        }
+
+        // Initialize on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            // Start loading episodes
+            fetchAllEpisodes().then(() => {
+                // Check if we should autoplay
+                if (episodes.length > 0) {
+                    // Show the start button prominently if autoplay might be blocked
+                    const startBtn = document.getElementById('start-radio');
+                    if (startBtn) {
+                        startBtn.style.fontSize = '24px';
+                        startBtn.style.padding = '20px 40px';
+                        startBtn.innerHTML = '🎵 CLICK TO START RADIO! 🎵<br><small>AUTOPLAY READY!</small>';
+                    }
+                    
+                    // Try autoplay after a small delay
+                    setTimeout(() => {
+                        playRandomEpisode();
+                    }, 100);
+                }
+            });
+            
+            // Setup start button
+            const startBtn = document.getElementById('start-radio');
+            startBtn.addEventListener('click', () => {
+                if (episodes.length > 0) {
+                    playRandomEpisode();
+                } else {
+                    // If episodes not loaded yet, wait and try again
+                    startBtn.textContent = '⏳ LOADING... PLEASE WAIT! ⏳';
+                    const checkInterval = setInterval(() => {
+                        if (episodes.length > 0) {
+                            clearInterval(checkInterval);
+                            playRandomEpisode();
+                        }
+                    }, 500);
+                }
+            });
+        });
+
+        // Animated visitor counter
+        setInterval(() => {
+            const counter = document.getElementById('counter');
+            const current = parseInt(counter.textContent);
+            counter.textContent = String(current + Math.floor(Math.random() * 5)).padStart(6, '0');
+        }, 5000);
+        
+        // Add click handlers for merch items
+        document.addEventListener('click', (e) => {
+            if (e.target.matches('.merch-item button')) {
+                // Check if item is sold out
+                const merchItem = e.target.closest('.merch-item');
+                if (merchItem.querySelector('.sold-out')) {
+                    alert('😭 SORRY! THIS ITEM IS SOLD OUT! CHECK BACK LATER! 😭');
+                } else {
+                    const itemName = merchItem.querySelector('h3').textContent;
+                    const price = merchItem.querySelector('.price').textContent;
+                    alert(`🛒 ADDED TO CART! 🛒\n\n${itemName}\nPrice: ${price}\n\n✨ THANKS FOR YOUR ORDER! ✨`);
+                    
+                    // Add a fun animation
+                    merchItem.style.transform = 'scale(1.2) rotate(5deg)';
+                    setTimeout(() => {
+                        merchItem.style.transform = '';
+                    }, 300);
+                }
+            }
+        });
+        
+        // Bitcoin tip functions
+        function copyAddress() {
+            const addressText = 'bc1q063g9xpxaky6vls0gg4vuja8v8dhdw2m5hzuhhs6s58rqkuwlmzsrgcxxt';
+            
+            // Try modern clipboard API first
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(addressText).then(() => {
+                    showCopySuccess();
+                }).catch(() => {
+                    fallbackCopy(addressText);
+                });
+            } else {
+                fallbackCopy(addressText);
+            }
+        }
+        
+        function fallbackCopy(text) {
+            // Fallback for older browsers
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showCopySuccess();
+            } catch (err) {
+                alert('Please copy the address manually: ' + text);
+            }
+            document.body.removeChild(textArea);
+        }
+        
+        function showCopySuccess() {
+            const btn = document.querySelector('.copy-btn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '✅ COPIED!';
+            btn.style.background = '#00FF00';
+            
+            setTimeout(() => {
+                btn.innerHTML = originalText;
+                btn.style.background = '#FFD700';
+            }, 2000);
+        }
+        
+        // Modal functions
+        function showTracklist(episodeKey, episodeTitle) {
+            const modal = document.getElementById('tracklistModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            // Update modal title
+            modalTitle.innerHTML = `🎵 TRACKLIST: ${episodeTitle} 🎵`;
+            
+            // Show loading state
+            modalBody.innerHTML = `
+                <div class="loading-tracklist">
+                    <span class="spinning-disc">💿</span>
+                    LOADING TRACKLIST FROM THE MATRIX...
+                </div>
+            `;
+            
+            // Show modal
+            modal.style.display = 'block';
+            
+            // Fetch tracklist from Mixcloud API
+            fetchTracklist(episodeKey);
+        }
+        
+        function closeModal() {
+            const modal = document.getElementById('tracklistModal');
+            modal.style.display = 'none';
+        }
+        
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('tracklistModal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+        
+        async function fetchTracklist(episodeKey) {
+            const modalBody = document.getElementById('modalBody');
+            
+            try {
+                // Try to fetch tracklist from the dedicated sections endpoint
+                const sectionsResponse = await fetch(`https://api.mixcloud.com${episodeKey}sections/`);
+                
+                if (sectionsResponse.ok) {
+                    const sectionsData = await sectionsResponse.json();
+                    console.log('Sections API response:', sectionsData);
+                    
+                    if (sectionsData.data && sectionsData.data.length > 0) {
+                        let tracklistHtml = '<ul class="tracklist">';
+                        
+                        sectionsData.data.forEach((track, index) => {
+                            const trackNumber = index + 1;
+                            const artistName = track.track?.artist?.name || track.artist?.name || track.artist || 'Unknown Artist';
+                            const trackName = track.track?.name || track.name || 'Unknown Track';
+                            const startTime = formatTime(track.start_time);
+                            
+                            tracklistHtml += `
+                                <li class="track-item">
+                                    <span class="track-number">${trackNumber}.</span>
+                                    <strong>${trackName}</strong>
+                                    <span class="track-artist">by ${artistName}</span>
+                                    <small style="float: right; color: #888;">${startTime}</small>
+                                </li>
+                            `;
+                        });
+                        
+                        tracklistHtml += '</ul>';
+                        modalBody.innerHTML = tracklistHtml;
+                        return;
+                    }
+                }
+                
+                // Fallback: try the main episode endpoint
+                const response = await fetch(`https://api.mixcloud.com${episodeKey}`);
+                const data = await response.json();
+                
+                console.log('Main API response:', data);
+                
+                // Check if sections (tracklist) exists in main response
+                if (data.sections && data.sections.length > 0) {
+                    let tracklistHtml = '<ul class="tracklist">';
+                    
+                    data.sections.forEach((track, index) => {
+                        const trackNumber = index + 1;
+                        const artistName = track.track?.artist?.name || track.artist?.name || track.artist || 'Unknown Artist';
+                        const trackName = track.track?.name || track.name || 'Unknown Track';
+                        const startTime = formatTime(track.start_time);
+                        
+                        tracklistHtml += `
+                            <li class="track-item">
+                                <span class="track-number">${trackNumber}.</span>
+                                <strong>${trackName}</strong>
+                                <span class="track-artist">by ${artistName}</span>
+                                <small style="float: right; color: #888;">${startTime}</small>
+                            </li>
+                        `;
+                    });
+                    
+                    tracklistHtml += '</ul>';
+                    modalBody.innerHTML = tracklistHtml;
+                } else if (data.tags && data.tags.length > 0) {
+                    // Show tags as basic track info
+                    let tracklistHtml = '<ul class="tracklist">';
+                    tracklistHtml += '<li class="track-item" style="background: #333; color: #FFD700;"><strong>🏷️ TAGS FROM THIS MIX:</strong></li>';
+                    
+                    data.tags.forEach((tag, index) => {
+                        tracklistHtml += `
+                            <li class="track-item">
+                                <span class="track-number">#</span>
+                                <strong>${tag.name}</strong>
+                            </li>
+                        `;
+                    });
+                    
+                    tracklistHtml += '</ul>';
+                    modalBody.innerHTML = tracklistHtml;
+                } else {
+                    // No tracklist available - show available info
+                    modalBody.innerHTML = `
+                        <div class="no-tracklist">
+                            <span class="spinning-disc">📻</span>
+                            <p>NO DETAILED TRACKLIST AVAILABLE!</p>
+                            <p style="font-size: 14px; color: #888;">This mix doesn't have track-by-track breakdown.</p>
+                            <div style="margin-top: 20px; padding: 15px; background: #222; border: 1px solid #444;">
+                                <p style="color: #FFD700; font-weight: bold;">📊 MIX INFO:</p>
+                                <p style="font-size: 14px;">🎧 Play Count: ${data.play_count?.toLocaleString() || 'N/A'}</p>
+                                <p style="font-size: 14px;">💕 Favorites: ${data.favorite_count?.toLocaleString() || 'N/A'}</p>
+                                <p style="font-size: 14px;">💬 Comments: ${data.comment_count?.toLocaleString() || 'N/A'}</p>
+                                <p style="font-size: 14px;">👂 Listeners: ${data.listener_count?.toLocaleString() || 'N/A'}</p>
+                                <p style="font-size: 14px;">📅 Created: ${new Date(data.created_time).toLocaleDateString()}</p>
+                            </div>
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error('Error fetching tracklist:', error);
+                modalBody.innerHTML = `
+                    <div class="no-tracklist" style="color: #FF0000;">
+                        <span class="spinning-disc">⚠️</span>
+                        <p>ERROR LOADING TRACKLIST!</p>
+                        <p style="font-size: 14px;">Network error: ${error.message}</p>
+                        <p style="font-size: 12px; color: #666; margin-top: 10px;">
+                            Try checking the browser console for more details.
+                        </p>
+                    </div>
+                `;
+            }
+        }
+        
+        function formatTime(seconds) {
+            if (!seconds) return '0:00';
+            const minutes = Math.floor(seconds / 60);
+            const secs = seconds % 60;
+            return `${minutes}:${secs.toString().padStart(2, '0')}`;
+        }
+    </script>
+</body>
+</html>
