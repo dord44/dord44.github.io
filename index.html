@@ -160,6 +160,93 @@
             border: 3px double #000;
         }
 
+        /* Main page tracklist */
+        #main-tracklist {
+            background: #000033;
+            border: 3px solid #00FF00;
+            margin: 20px 0;
+            padding: 15px;
+            display: none;
+        }
+
+        #main-tracklist.visible {
+            display: block;
+        }
+
+        .tracklist-header {
+            background: linear-gradient(90deg, #FF0000, #FFFF00);
+            color: #000;
+            padding: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .mini-tracklist {
+            max-height: 300px;
+            overflow-y: auto;
+            border: 1px solid #444;
+            background: #000;
+        }
+
+        .mini-track-item {
+            padding: 8px;
+            border-bottom: 1px solid #333;
+            font-family: "Courier New", monospace;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+
+        .mini-track-number {
+            color: #FFD700;
+            font-weight: bold;
+            margin-right: 10px;
+            min-width: 25px;
+            display: inline-block;
+        }
+
+        .mini-track-artist {
+            color: #00FF00;
+        }
+
+        .mini-track-title {
+            color: #00FFFF;
+            font-weight: bold;
+        }
+
+        .mini-track-time {
+            color: #888;
+            font-size: 12px;
+            float: right;
+        }
+
+        .tracklist-controls {
+            text-align: center;
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #444;
+        }
+
+        .mini-button {
+            background: linear-gradient(45deg, #00FF00, #00FFFF);
+            color: #000;
+            border: 2px solid #FFD700;
+            padding: 8px 15px;
+            margin: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 12px;
+            text-transform: uppercase;
+            display: inline-block;
+        }
+
+        .mini-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px #FFFF00;
+        }
+
         .rainbow-button {
             font-size: 20px;
             font-weight: bold;
@@ -901,7 +988,24 @@
 
         <div id="player-container">
             <div id="current-episode">🎧 NOW ON AIR 🎧</div>
+            
             <div id="player"></div>
+            
+            <!-- Main Page Tracklist -->
+            <div id="main-tracklist">
+                <div class="tracklist-header">📜 CURRENT MIX TRACKLIST 📜</div>
+                <div class="mini-tracklist" id="mini-tracklist-content">
+                    <div style="text-align: center; color: #888; padding: 20px;">
+                        Start playing a mix to see the tracklist here!
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Tracklist Toggle Button (always visible) -->
+            <div id="tracklist-toggle-container" style="text-align: center; margin: 15px 0; display: none;">
+                <button class="mini-button" onclick="toggleMainTracklist()" id="tracklist-toggle-btn">🔽 HIDE TRACKLIST</button>
+            </div>
+            
             <button class="rainbow-button" onclick="playRandomEpisode()">
                 🎲 SHUFFLE THAT BEAT! 🎲
             </button>
@@ -1095,8 +1199,190 @@
         let hasStarted = false;
         let displayedCount = 0;
         const EPISODES_PER_PAGE = 10;
+        
+        // Track display variables
+        let currentTracklist = [];
+        let currentTrackIndex = 0;
+        let isTracklistVisible = false;
 
-        // Fetch all episodes from Mixcloud API
+        // Track display functions
+        function loadTracklistForCurrentEpisode() {
+            if (!currentEpisode) return;
+            
+            console.log('🎵 Loading tracklist for current episode:', currentEpisode.title);
+            
+            // Check for local tracklist first
+            const localTracklist = getLocalTracklist(currentEpisode.title);
+            if (localTracklist) {
+                console.log('✅ Found local tracklist!');
+                currentTracklist = localTracklist;
+                displayMainPageTracklist();
+                return;
+            }
+            
+            // Fallback to API tracklist
+            fetchTracklistForMainPage(currentEpisode.key, currentEpisode.title);
+        }
+        
+        function displayMainPageTracklist() {
+            const container = document.getElementById('mini-tracklist-content');
+            const toggleContainer = document.getElementById('tracklist-toggle-container');
+            
+            if (!currentTracklist || currentTracklist.length === 0) {
+                container.innerHTML = '<div style="text-align: center; color: #888; padding: 20px;">No tracklist available for this mix</div>';
+                return;
+            }
+            
+            let html = '';
+            currentTracklist.forEach((track, index) => {
+                html += `
+                    <div class="mini-track-item" data-track-index="${index}">
+                        <span class="mini-track-number">${track.pos || index + 1}.</span>
+                        <span class="mini-track-title">${escapeHtml(track.title || track.name || 'Unknown Track')}</span>
+                        <span class="mini-track-artist">by ${escapeHtml(track.artist || 'Unknown Artist')}</span>
+                        <span class="mini-track-time">${track.start || '--:--'}</span>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+            document.getElementById('main-tracklist').classList.add('visible');
+            
+            // Show the toggle button container
+            if (toggleContainer) {
+                toggleContainer.style.display = 'block';
+            }
+            
+            isTracklistVisible = true;
+        }
+        
+        function startTrackTimer() {
+            if (trackTimer) clearInterval(trackTimer);
+            
+            trackStartTime = Date.now();
+            currentTrackIndex = 0;
+            
+            trackTimer = setInterval(() => {
+                updateCurrentTrack();
+            }, 1000);
+            
+            updateCurrentTrack();
+        }
+        
+        function updateCurrentTrack() {
+            if (!currentTracklist || currentTracklist.length === 0) return;
+            
+            const elapsedSeconds = Math.floor((Date.now() - trackStartTime) / 1000);
+            
+            // Find current track based on elapsed time
+            let newTrackIndex = 0;
+            for (let i = 0; i < currentTracklist.length; i++) {
+                const track = currentTracklist[i];
+                if (track.startTimeSeconds && elapsedSeconds >= track.startTimeSeconds) {
+                    newTrackIndex = i;
+                } else {
+                    break;
+                }
+            }
+            
+            // Update if track changed
+            if (newTrackIndex !== currentTrackIndex) {
+                currentTrackIndex = newTrackIndex;
+                updateTrackDisplay();
+                updateTracklistHighlight();
+            }
+        }
+        
+        function updateTrackDisplay() {
+            const track = currentTracklist[currentTrackIndex];
+            if (!track) return;
+            
+            document.getElementById('track-title').textContent = track.title || track.name || 'Unknown Track';
+            document.getElementById('track-artist').textContent = `by ${track.artist || 'Unknown Artist'}`;
+            document.getElementById('current-track').classList.add('visible');
+        }
+        
+        function updateTracklistHighlight() {
+            // Remove previous highlight
+            document.querySelectorAll('.mini-track-item').forEach(item => {
+                item.classList.remove('current-playing');
+            });
+            
+            // Add highlight to current track
+            const currentItem = document.querySelector(`[data-track-index="${currentTrackIndex}"]`);
+            if (currentItem) {
+                currentItem.classList.add('current-playing');
+                currentItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+        }
+        
+        function toggleCurrentTrack() {
+            const currentTrack = document.getElementById('current-track');
+            const toggleBtn = currentTrack.querySelector('.track-toggle-btn');
+            const showBtn = document.getElementById('show-track-btn');
+            
+            if (currentTrack.classList.contains('visible')) {
+                // Hide the current track display
+                currentTrack.classList.remove('visible');
+                if (showBtn) showBtn.style.display = 'inline-block';
+            } else {
+                // Show the current track display
+                currentTrack.classList.add('visible');
+                if (showBtn) showBtn.style.display = 'none';
+            }
+        }
+        
+        function showCurrentTrack() {
+            const currentTrack = document.getElementById('current-track');
+            const showBtn = document.getElementById('show-track-btn');
+            
+            currentTrack.classList.add('visible');
+            showBtn.style.display = 'none';
+        }
+        
+        function toggleMainTracklist() {
+            const tracklist = document.getElementById('main-tracklist');
+            const toggleBtn = document.getElementById('tracklist-toggle-btn');
+            
+            if (tracklist.classList.contains('visible')) {
+                // Hide the tracklist
+                tracklist.classList.remove('visible');
+                isTracklistVisible = false;
+                if (toggleBtn) {
+                    toggleBtn.innerHTML = '🔍 SHOW TRACKLIST';
+                }
+            } else {
+                // Show the tracklist
+                tracklist.classList.add('visible');
+                isTracklistVisible = true;
+                if (toggleBtn) {
+                    toggleBtn.innerHTML = '🔽 HIDE TRACKLIST';
+                }
+            }
+        }
+        
+        async function fetchTracklistForMainPage(episodeKey, episodeTitle) {
+            try {
+                // Try to get tracklist from API (simplified version)
+                const response = await fetch(`https://api.mixcloud.com${episodeKey}`);
+                const data = await response.json();
+                
+                if (data.sections && data.sections.length > 0) {
+                    currentTracklist = data.sections.map((track, index) => ({
+                        pos: index + 1,
+                        title: track.track?.name || track.name || 'Unknown Track',
+                        artist: track.track?.artist?.name || track.artist?.name || 'Unknown Artist',
+                        start: formatTime(track.start_time),
+                        startTimeSeconds: track.start_time
+                    }));
+                    
+                    displayMainPageTracklist();
+                    startTrackTimer();
+                }
+            } catch (error) {
+                console.log('Could not load API tracklist for main page:', error);
+            }
+        }
         async function fetchAllEpisodes() {
             const username = 'radioquebrada'; // lowercase to match API
             let url = `https://api.mixcloud.com/${username}/cloudcasts/`;
@@ -1287,6 +1573,16 @@
                 const playerDiv = document.getElementById('player');
                 playerDiv.innerHTML = '';
                 playerDiv.appendChild(iframe);
+                
+                // Load tracklist for this episode
+                loadTracklistForCurrentEpisode();
+                
+                // Show track display after a short delay
+                setTimeout(() => {
+                    if (currentTracklist.length > 0) {
+                        document.getElementById('current-track').classList.add('visible');
+                    }
+                }, 2000);
             }
         }
 
