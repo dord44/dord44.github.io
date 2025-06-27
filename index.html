@@ -1039,10 +1039,62 @@
     </div>
 
     <script>
+        // Local tracklist data for specific episodes
+        const localTracklists = {
+            'rq-24': [
+                {pos: 1, start: '00:00:07', end: '00:00:49', artist: 'Charlotte Adigéry, Bolis Pupul', title: 'Bel DEEWEE', label: 'DEEWEE'},
+                {pos: 2, start: '00:00:49', end: '00:03:39', artist: 'Laima', title: 'Home', label: 'DEEWEE'},
+                {pos: 3, start: '00:03:39', end: '00:09:18', artist: 'Tomoko Aran', title: 'ji.re.n.ma (Nijuugosainoyuuutsu) [DILEMMA]', label: 'WM Japan'},
+                {pos: 4, start: '00:09:18', end: '00:14:08', artist: 'Michael O\'Mahony', title: 'Talkbox', label: '33 33'},
+                {pos: 5, start: '00:14:09', end: '00:21:39', artist: '7 Samurai', title: 'Shake It Up (Extended 12" Version)', label: 'Favorite'},
+                {pos: 6, start: '00:21:39', end: '00:30:00', artist: 'Die Verboten', title: 'White Islands', label: 'DEEWEE'},
+                {pos: 7, start: '00:32:52', end: '00:37:47', artist: 'Ghia', title: 'Jump In The Water', label: 'N/A'},
+                {pos: 8, start: '00:37:47', end: '00:43:06', artist: 'Mark Barrott', title: 'Galileo', label: 'International Feel Recordings'},
+                {pos: 9, start: '00:43:06', end: '00:45:56', artist: 'The Sprout House Band', title: 'Spanish Flowers', label: 'Universal Music Australia Pty. Ltd.'},
+                {pos: 10, start: '00:46:02', end: '00:50:21', artist: 'Lemon Jelly', title: 'Soft', label: 'XL Recordings'},
+                {pos: 11, start: '00:50:21', end: '00:52:52', artist: 'El Michels Affair, Lee Fields, The Shacks', title: 'Tearz feat. Lee Fields & The Shacks', label: 'El Michels Affair, Lee Fields, The Shacks'},
+                {pos: 12, start: '00:52:52', end: '00:57:12', artist: 'Dub Mentor', title: 'Guns of Brixton (l\'été chinois)', label: 'EnT-T'},
+                {pos: 13, start: '00:57:12', end: '01:03:04', artist: 'Funki Porcini', title: 'Six Minutes in Manchester', label: 'Porcine Product'},
+                {pos: 14, start: '01:03:04', end: '01:06:31', artist: 'Parallel Dance Ensemble', title: 'Juices', label: 'Permanent Vacation'},
+                {pos: 15, start: '01:06:31', end: '01:09:48', artist: 'Weval', title: 'Dreaming', label: 'Technicolour'},
+                {pos: 16, start: '01:10:03', end: '01:11:12', artist: 'Prom Night', title: 'Heat 84 (Original Mix)', label: 'Prom Night Records'},
+                {pos: 17, start: '01:15:24', end: '01:17:54', artist: 'Malik Djoudi', title: 'Sous garantie', label: 'Wagram Music / Cinq 7'},
+                {pos: 18, start: '01:17:54', end: '01:22:56', artist: 'Charlotte Adigéry, Bolis Pupul', title: 'Reappropriate', label: 'Charlotte Adigéry, Bolis Pupul'},
+                {pos: 19, start: '01:22:56', end: '01:25:48', artist: 'Daniel Haaksman', title: 'Surto De Amor (ARN4L2 Remix)', label: 'Man Recordings // Man Recordings UG'},
+                {pos: 20, start: '01:26:35', end: '01:31:43', artist: 'Asa Moto', title: 'Connexion à Liège', label: 'DEEWEE'},
+                {pos: 21, start: '01:31:44', end: '01:36:03', artist: 'Black Marble', title: 'A Great Design', label: 'N/A'},
+                {pos: 22, start: '01:36:03', end: '01:38:54', artist: 'Aphex Twin', title: 'IZ-US', label: 'Warp'},
+                {pos: 23, start: '01:38:55', end: '01:47:02', artist: 'Octo Octa', title: 'Come Here, Let\'s Commune', label: 'T4T LUV NRG'},
+                {pos: 24, start: '01:47:02', end: '01:51:35', artist: 'Rhode & Brown', title: 'No Anthems (System Olympia Remix)', label: 'Permanent Vacation'},
+                {pos: 25, start: '01:56:34', end: '02:00:47', artist: 'Carlos Niño & Friends', title: 'Flutestargate', label: 'International Anthem'},
+                {pos: 26, start: '02:00:47', end: '02:04:58', artist: 'Blossom Dearie', title: 'I Walk a Little Faster', label: '2013 Playtime'}
+            ]
+        };
+
+        // Function to get local tracklist by episode identifier
+        function getLocalTracklist(episodeTitle) {
+            // Try to match episode title to local tracklist
+            const lowerTitle = episodeTitle.toLowerCase();
+            
+            // Look for episode 24 indicators
+            if (lowerTitle.includes('24') || lowerTitle.includes('episode 24') || lowerTitle.includes('rq 24')) {
+                return localTracklists['rq-24'];
+            }
+            
+            // Add more episode matching logic here as needed
+            // if (lowerTitle.includes('25')) {
+            //     return localTracklists['rq-25'];
+            // }
+            
+            return null;
+        }
+
         let episodes = [];
         let currentEpisode = null;
         let allEpisodes = [];
         let hasStarted = false;
+        let displayedCount = 0;
+        const EPISODES_PER_PAGE = 10;
 
         // Fetch all episodes from Mixcloud API
         async function fetchAllEpisodes() {
@@ -1100,6 +1152,9 @@
                 // Update episodes array
                 episodes = allEpisodes;
                 
+                // Initialize displayed count
+                displayedCount = 0;
+                
                 console.log(`🎵 LOADED ${episodes.length} TOTAL EPISODES! 🎵`);
                 
                 displayEpisodes();
@@ -1122,15 +1177,20 @@
         function displayEpisodes() {
             const list = document.getElementById('episodes-list');
             
+            // Show initial episodes (first EPISODES_PER_PAGE)
+            const episodesToShow = allEpisodes.slice(0, displayedCount + EPISODES_PER_PAGE);
+            displayedCount = episodesToShow.length;
+            
             // Show total count
             const totalCount = document.createElement('tr');
             totalCount.innerHTML = `
                 <td colspan="3" style="background: #FF00FF; color: #000; font-weight: bold; text-align: center;">
-                    🎉 ${episodes.length} TOTAL EPISODES LOADED! 🎉
+                    🎉 SHOWING ${displayedCount} OF ${allEpisodes.length} TOTAL EPISODES! 🎉
                 </td>
             `;
             
-            list.innerHTML = episodes.map((episode, index) => {
+            // Generate episode rows
+            const episodeRows = episodesToShow.map((episode, index) => {
                 // Create image HTML with error handling
                 let imageHtml;
                 if (episode.imageUrl) {
@@ -1157,8 +1217,49 @@
                 `;
             }).join('');
             
-            // Add total count at the top
-            list.insertAdjacentHTML('afterbegin', totalCount.outerHTML);
+            // Set the HTML content
+            list.innerHTML = totalCount.outerHTML + episodeRows;
+            
+            // Add "Show More" button if there are more episodes to display
+            if (displayedCount < allEpisodes.length) {
+                const showMoreRow = document.createElement('tr');
+                showMoreRow.innerHTML = `
+                    <td colspan="3" style="padding: 20px; text-align: center; background: linear-gradient(45deg, #00FF00, #00FFFF); border: 3px solid #FFD700;">
+                        <button onclick="showMoreEpisodes()" class="rainbow-button" style="font-size: 18px; padding: 15px 30px; background: linear-gradient(45deg, #FF6600, #FFD700); animation: pulse 2s infinite;">
+                            📻 SHOW MORE EPISODES (${allEpisodes.length - displayedCount} REMAINING) 📻
+                        </button>
+                    </td>
+                `;
+                list.appendChild(showMoreRow);
+            } else if (allEpisodes.length > EPISODES_PER_PAGE) {
+                // Show "All episodes loaded" message
+                const allLoadedRow = document.createElement('tr');
+                allLoadedRow.innerHTML = `
+                    <td colspan="3" style="padding: 15px; text-align: center; background: #333; color: #00FF00; font-weight: bold;">
+                        ✅ ALL ${allEpisodes.length} EPISODES LOADED! ✅
+                    </td>
+                `;
+                list.appendChild(allLoadedRow);
+            }
+            
+            // Update episodes array reference for playback
+            episodes = allEpisodes;
+        }
+        
+        function showMoreEpisodes() {
+            // Show loading state
+            const showMoreBtn = document.querySelector('button[onclick="showMoreEpisodes()"]');
+            if (showMoreBtn) {
+                showMoreBtn.innerHTML = '⏳ LOADING ALL REMAINING EPISODES... ⏳';
+                showMoreBtn.disabled = true;
+            }
+            
+            // Small delay for visual feedback
+            setTimeout(() => {
+                // Set displayed count to show ALL episodes
+                displayedCount = allEpisodes.length;
+                displayEpisodes();
+            }, 500);
         }
 
         function playEpisode(index) {
@@ -1328,8 +1429,8 @@
             // Show modal
             modal.style.display = 'block';
             
-            // Fetch tracklist from Mixcloud API
-            fetchTracklist(episodeKey);
+            // Fetch tracklist from local data or Mixcloud API
+            fetchTracklist(episodeKey, episodeTitle);
         }
         
         function closeModal() {
@@ -1345,117 +1446,253 @@
             }
         }
         
-        async function fetchTracklist(episodeKey) {
+        async function fetchTracklist(episodeKey, episodeTitle) {
             const modalBody = document.getElementById('modalBody');
             
             try {
-                // Try to fetch tracklist from the dedicated sections endpoint
-                const sectionsResponse = await fetch(`https://api.mixcloud.com${episodeKey}sections/`);
+                console.log('🎵 Fetching tracklist for:', episodeKey, 'Title:', episodeTitle);
                 
-                if (sectionsResponse.ok) {
-                    const sectionsData = await sectionsResponse.json();
-                    console.log('Sections API response:', sectionsData);
-                    
-                    if (sectionsData.data && sectionsData.data.length > 0) {
-                        let tracklistHtml = '<ul class="tracklist">';
+                // First, check if we have local tracklist data
+                const localTracklist = getLocalTracklist(episodeTitle);
+                if (localTracklist) {
+                    console.log('✅ Found local tracklist data!', localTracklist.length, 'tracks');
+                    displayLocalTracklist(localTracklist, modalBody, episodeTitle);
+                    return;
+                }
+                
+                console.log('📡 No local tracklist found, trying Mixcloud API...');
+                
+                // First, try to get the main episode data
+                const mainResponse = await fetch(`https://api.mixcloud.com${episodeKey}`);
+                if (!mainResponse.ok) {
+                    throw new Error(`Main API request failed: ${mainResponse.status}`);
+                }
+                
+                const mainData = await mainResponse.json();
+                console.log('📊 Main episode data:', mainData);
+                
+                // Try multiple approaches to get tracklist data
+                let tracklistFound = false;
+                
+                // Method 1: Check if sections exist in main response
+                if (mainData.sections && mainData.sections.length > 0) {
+                    console.log('✅ Found sections in main data:', mainData.sections.length);
+                    displayTracklist(mainData.sections, modalBody);
+                    tracklistFound = true;
+                }
+                
+                // Method 2: Try dedicated sections endpoint
+                if (!tracklistFound) {
+                    try {
+                        const sectionsUrl = `https://api.mixcloud.com${episodeKey}sections/`;
+                        console.log('📡 Trying sections endpoint:', sectionsUrl);
                         
-                        sectionsData.data.forEach((track, index) => {
-                            const trackNumber = index + 1;
-                            const artistName = track.track?.artist?.name || track.artist?.name || track.artist || 'Unknown Artist';
-                            const trackName = track.track?.name || track.name || 'Unknown Track';
-                            const startTime = formatTime(track.start_time);
+                        const sectionsResponse = await fetch(sectionsUrl);
+                        if (sectionsResponse.ok) {
+                            const sectionsData = await sectionsResponse.json();
+                            console.log('📋 Sections endpoint response:', sectionsData);
                             
-                            tracklistHtml += `
-                                <li class="track-item">
-                                    <span class="track-number">${trackNumber}.</span>
-                                    <strong>${trackName}</strong>
-                                    <span class="track-artist">by ${artistName}</span>
-                                    <small style="float: right; color: #888;">${startTime}</small>
-                                </li>
-                            `;
-                        });
-                        
-                        tracklistHtml += '</ul>';
-                        modalBody.innerHTML = tracklistHtml;
-                        return;
+                            if (sectionsData.data && sectionsData.data.length > 0) {
+                                console.log('✅ Found tracklist in sections endpoint:', sectionsData.data.length);
+                                displayTracklist(sectionsData.data, modalBody);
+                                tracklistFound = true;
+                            }
+                        } else {
+                            console.log('❌ Sections endpoint failed:', sectionsResponse.status);
+                        }
+                    } catch (sectionsError) {
+                        console.log('❌ Sections endpoint error:', sectionsError);
                     }
                 }
                 
-                // Fallback: try the main episode endpoint
-                const response = await fetch(`https://api.mixcloud.com${episodeKey}`);
-                const data = await response.json();
-                
-                console.log('Main API response:', data);
-                
-                // Check if sections (tracklist) exists in main response
-                if (data.sections && data.sections.length > 0) {
-                    let tracklistHtml = '<ul class="tracklist">';
-                    
-                    data.sections.forEach((track, index) => {
-                        const trackNumber = index + 1;
-                        const artistName = track.track?.artist?.name || track.artist?.name || track.artist || 'Unknown Artist';
-                        const trackName = track.track?.name || track.name || 'Unknown Track';
-                        const startTime = formatTime(track.start_time);
-                        
-                        tracklistHtml += `
-                            <li class="track-item">
-                                <span class="track-number">${trackNumber}.</span>
-                                <strong>${trackName}</strong>
-                                <span class="track-artist">by ${artistName}</span>
-                                <small style="float: right; color: #888;">${startTime}</small>
-                            </li>
-                        `;
-                    });
-                    
-                    tracklistHtml += '</ul>';
-                    modalBody.innerHTML = tracklistHtml;
-                } else if (data.tags && data.tags.length > 0) {
-                    // Show tags as basic track info
-                    let tracklistHtml = '<ul class="tracklist">';
-                    tracklistHtml += '<li class="track-item" style="background: #333; color: #FFD700;"><strong>🏷️ TAGS FROM THIS MIX:</strong></li>';
-                    
-                    data.tags.forEach((tag, index) => {
-                        tracklistHtml += `
-                            <li class="track-item">
-                                <span class="track-number">#</span>
-                                <strong>${tag.name}</strong>
-                            </li>
-                        `;
-                    });
-                    
-                    tracklistHtml += '</ul>';
-                    modalBody.innerHTML = tracklistHtml;
-                } else {
-                    // No tracklist available - show available info
-                    modalBody.innerHTML = `
-                        <div class="no-tracklist">
-                            <span class="spinning-disc">📻</span>
-                            <p>NO DETAILED TRACKLIST AVAILABLE!</p>
-                            <p style="font-size: 14px; color: #888;">This mix doesn't have track-by-track breakdown.</p>
-                            <div style="margin-top: 20px; padding: 15px; background: #222; border: 1px solid #444;">
-                                <p style="color: #FFD700; font-weight: bold;">📊 MIX INFO:</p>
-                                <p style="font-size: 14px;">🎧 Play Count: ${data.play_count?.toLocaleString() || 'N/A'}</p>
-                                <p style="font-size: 14px;">💕 Favorites: ${data.favorite_count?.toLocaleString() || 'N/A'}</p>
-                                <p style="font-size: 14px;">💬 Comments: ${data.comment_count?.toLocaleString() || 'N/A'}</p>
-                                <p style="font-size: 14px;">👂 Listeners: ${data.listener_count?.toLocaleString() || 'N/A'}</p>
-                                <p style="font-size: 14px;">📅 Created: ${new Date(data.created_time).toLocaleDateString()}</p>
-                            </div>
-                        </div>
-                    `;
+                // Method 3: Try to extract from description or other fields
+                if (!tracklistFound && mainData.description) {
+                    console.log('🔍 Checking description for tracklist...');
+                    const descriptionTracklist = parseTracklistFromDescription(mainData.description);
+                    if (descriptionTracklist.length > 0) {
+                        console.log('✅ Found tracklist in description:', descriptionTracklist.length);
+                        displayTracklistFromDescription(descriptionTracklist, modalBody);
+                        tracklistFound = true;
+                    }
                 }
+                
+                // Method 4: Check if there are any related tracks or similar data
+                if (!tracklistFound && mainData.related) {
+                    console.log('🔍 Checking related data...');
+                    // Sometimes related tracks might give us clues about the content
+                }
+                
+                // If no tracklist found, show episode info and tags
+                if (!tracklistFound) {
+                    console.log('⚠️ No tracklist found, showing episode info');
+                    displayEpisodeInfo(mainData, modalBody);
+                }
+                
             } catch (error) {
-                console.error('Error fetching tracklist:', error);
+                console.error('💥 Error fetching tracklist:', error);
                 modalBody.innerHTML = `
                     <div class="no-tracklist" style="color: #FF0000;">
                         <span class="spinning-disc">⚠️</span>
                         <p>ERROR LOADING TRACKLIST!</p>
                         <p style="font-size: 14px;">Network error: ${error.message}</p>
                         <p style="font-size: 12px; color: #666; margin-top: 10px;">
-                            Try checking the browser console for more details.
+                            This could be due to CORS restrictions or API limits.
                         </p>
+                        <div style="margin-top: 15px; padding: 10px; background: #333; border: 1px solid #555;">
+                            <p style="color: #FFD700; font-size: 12px;">🔧 TROUBLESHOOTING:</p>
+                            <p style="font-size: 11px; color: #AAA;">
+                                • Check browser console for detailed errors<br>
+                                • Try refreshing the page<br>
+                                • Some mixes may not have detailed tracklists
+                            </p>
+                        </div>
                     </div>
                 `;
             }
+        }
+        
+        function displayLocalTracklist(tracks, modalBody, episodeTitle) {
+            let tracklistHtml = '<ul class="tracklist">';
+            tracklistHtml += '<li class="track-item" style="background: #333; color: #FFD700;"><strong>🎵 LOCAL TRACKLIST:</strong></li>';
+            
+            tracks.forEach((track) => {
+                tracklistHtml += `
+                    <li class="track-item">
+                        <span class="track-number">${track.pos}.</span>
+                        <strong>${escapeHtml(track.title)}</strong>
+                        <span class="track-artist">by ${escapeHtml(track.artist)}</span>
+                        <small style="float: right; color: #888;">${track.start} - ${track.end}</small>
+                        <br><small style="color: #0AF; font-size: 11px;">📀 ${escapeHtml(track.label)}</small>
+                    </li>
+                `;
+            });
+            
+            tracklistHtml += '</ul>';
+            tracklistHtml += '<div style="margin-top: 20px; text-align: center; color: #00FF00; font-size: 12px;">✅ PREMIUM TRACKLIST LOADED FROM LOCAL DATABASE</div>';
+            tracklistHtml += '<div style="text-align: center; color: #FFD700; font-size: 11px; margin-top: 5px;">📊 Complete with timestamps and record labels!</div>';
+            modalBody.innerHTML = tracklistHtml;
+        }
+        
+        function displayTracklist(sections, modalBody) {
+            let tracklistHtml = '<ul class="tracklist">';
+            tracklistHtml += '<li class="track-item" style="background: #333; color: #FFD700;"><strong>🎵 TRACKLIST:</strong></li>';
+            
+            sections.forEach((track, index) => {
+                const trackNumber = index + 1;
+                
+                // Try different ways to get artist and track name
+                let artistName = 'Unknown Artist';
+                let trackName = 'Unknown Track';
+                
+                if (track.track) {
+                    artistName = track.track.artist?.name || track.track.artist || artistName;
+                    trackName = track.track.name || trackName;
+                } else {
+                    artistName = track.artist?.name || track.artist || artistName;
+                    trackName = track.name || track.track_name || trackName;
+                }
+                
+                const startTime = formatTime(track.start_time);
+                
+                tracklistHtml += `
+                    <li class="track-item">
+                        <span class="track-number">${trackNumber}.</span>
+                        <strong>${escapeHtml(trackName)}</strong>
+                        <span class="track-artist">by ${escapeHtml(artistName)}</span>
+                        <small style="float: right; color: #888;">${startTime}</small>
+                    </li>
+                `;
+            });
+            
+            tracklistHtml += '</ul>';
+            tracklistHtml += '<div style="margin-top: 20px; text-align: center; color: #00FF00; font-size: 12px;">✅ TRACKLIST LOADED FROM MIXCLOUD API</div>';
+            modalBody.innerHTML = tracklistHtml;
+        }
+        
+        function parseTracklistFromDescription(description) {
+            // Try to parse tracklist from description text
+            const tracks = [];
+            const lines = description.split('\n');
+            
+            for (const line of lines) {
+                // Look for patterns like "Artist - Track" or "1. Artist - Track"
+                const trackMatch = line.match(/^(\d+\.?\s*)?(.+?)\s*[-–—]\s*(.+)$/);
+                if (trackMatch) {
+                    tracks.push({
+                        artist: trackMatch[2].trim(),
+                        name: trackMatch[3].trim()
+                    });
+                }
+            }
+            
+            return tracks;
+        }
+        
+        function displayTracklistFromDescription(tracks, modalBody) {
+            let tracklistHtml = '<ul class="tracklist">';
+            tracklistHtml += '<li class="track-item" style="background: #333; color: #FFD700;"><strong>🎵 TRACKLIST (FROM DESCRIPTION):</strong></li>';
+            
+            tracks.forEach((track, index) => {
+                const trackNumber = index + 1;
+                tracklistHtml += `
+                    <li class="track-item">
+                        <span class="track-number">${trackNumber}.</span>
+                        <strong>${escapeHtml(track.name)}</strong>
+                        <span class="track-artist">by ${escapeHtml(track.artist)}</span>
+                    </li>
+                `;
+            });
+            
+            tracklistHtml += '</ul>';
+            tracklistHtml += '<div style="margin-top: 20px; text-align: center; color: #FFFF00; font-size: 12px;">📝 TRACKLIST PARSED FROM DESCRIPTION</div>';
+            modalBody.innerHTML = tracklistHtml;
+        }
+        
+        function displayEpisodeInfo(data, modalBody) {
+            let infoHtml = '<div class="no-tracklist">';
+            infoHtml += '<span class="spinning-disc">📻</span>';
+            infoHtml += '<p>NO DETAILED TRACKLIST AVAILABLE!</p>';
+            infoHtml += '<p style="font-size: 14px; color: #888;">This mix doesn\'t have track-by-track breakdown.</p>';
+            
+            // Show episode info
+            infoHtml += '<div style="margin-top: 20px; padding: 15px; background: #222; border: 1px solid #444;">';
+            infoHtml += '<p style="color: #FFD700; font-weight: bold;">📊 MIX INFO:</p>';
+            infoHtml += `<p style="font-size: 14px;">🎧 Play Count: ${data.play_count?.toLocaleString() || 'N/A'}</p>`;
+            infoHtml += `<p style="font-size: 14px;">💕 Favorites: ${data.favorite_count?.toLocaleString() || 'N/A'}</p>`;
+            infoHtml += `<p style="font-size: 14px;">💬 Comments: ${data.comment_count?.toLocaleString() || 'N/A'}</p>`;
+            infoHtml += `<p style="font-size: 14px;">👂 Listeners: ${data.listener_count?.toLocaleString() || 'N/A'}</p>`;
+            infoHtml += `<p style="font-size: 14px;">📅 Created: ${new Date(data.created_time).toLocaleDateString()}</p>`;
+            infoHtml += `<p style="font-size: 14px;">⏱️ Duration: ${formatTime(data.audio_length)}</p>`;
+            infoHtml += '</div>';
+            
+            // Show tags if available
+            if (data.tags && data.tags.length > 0) {
+                infoHtml += '<div style="margin-top: 15px; padding: 15px; background: #112; border: 1px solid #444;">';
+                infoHtml += '<p style="color: #FFD700; font-weight: bold;">🏷️ TAGS:</p>';
+                infoHtml += '<div style="display: flex; flex-wrap: wrap; gap: 5px; margin-top: 10px;">';
+                data.tags.forEach(tag => {
+                    infoHtml += `<span style="background: #444; color: #00FF00; padding: 3px 8px; border-radius: 3px; font-size: 12px;">${escapeHtml(tag.name)}</span>`;
+                });
+                infoHtml += '</div>';
+                infoHtml += '</div>';
+            }
+            
+            // Show description if available
+            if (data.description) {
+                infoHtml += '<div style="margin-top: 15px; padding: 15px; background: #112; border: 1px solid #444;">';
+                infoHtml += '<p style="color: #FFD700; font-weight: bold;">📝 DESCRIPTION:</p>';
+                infoHtml += `<p style="font-size: 12px; color: #CCC; max-height: 100px; overflow-y: auto;">${escapeHtml(data.description.substring(0, 500))}${data.description.length > 500 ? '...' : ''}</p>`;
+                infoHtml += '</div>';
+            }
+            
+            infoHtml += '</div>';
+            modalBody.innerHTML = infoHtml;
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
         }
         
         function formatTime(seconds) {
