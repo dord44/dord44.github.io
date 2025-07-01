@@ -1198,38 +1198,26 @@
         function handleTidalClick(artist, title, event) {
             event.preventDefault();
             
+            // Since we don't have specific track IDs, we'll use Tidal's search 
+            // but format it to match their browse structure better
             const searchQuery = encodeURIComponent(`${artist} ${title}`);
             
-            // Primary: Try direct track search
-            const tidalSearchUrl = `https://tidal.com/browse/search?q=${searchQuery}`;
+            // Use Tidal's browse search format (more reliable than basic search)
+            // This mimics the structure: https://tidal.com/browse/track/ID
+            // But uses search since we don't have track IDs
+            const tidalUrl = `https://tidal.com/browse/search/tracks?q=${searchQuery}`;
             
-            // Fallback: Main Tidal page if search fails
-            const tidalMainUrl = 'https://tidal.com';
+            // Alternative fallback to general browse
+            const fallbackUrl = `https://tidal.com/browse/search?q=${searchQuery}`;
             
-            // Open Tidal search
-            const tidalWindow = window.open('', '_blank');
-            
-            // Try to navigate to search, with fallback handling
+            // Open Tidal with the track-specific search
             try {
-                tidalWindow.location = tidalSearchUrl;
-                console.log(`🎵 Opening Tidal search for: ${artist} - ${title}`);
-                
-                // Optional: Check if search loaded successfully after a delay
-                setTimeout(() => {
-                    try {
-                        // If window is still open but has error, redirect to main page
-                        if (tidalWindow && !tidalWindow.closed) {
-                            // This is a basic fallback - could be enhanced with more specific error detection
-                            console.log('✅ Tidal search opened successfully');
-                        }
-                    } catch (e) {
-                        console.log('⚠️ Tidal search may have failed, user can navigate manually');
-                    }
-                }, 2000);
-                
+                window.open(tidalUrl, '_blank', 'noopener');
+                console.log(`🎵 Opening Tidal track search for: ${artist} - ${title}`);
+                console.log(`🔗 URL: ${tidalUrl}`);
             } catch (error) {
-                console.log('⚠️ Tidal search failed, redirecting to main page');
-                tidalWindow.location = tidalMainUrl;
+                console.log('⚠️ Primary Tidal URL failed, trying fallback');
+                window.open(fallbackUrl, '_blank', 'noopener');
             }
         }
         
@@ -1257,7 +1245,7 @@
                             <path fill="#629aa0" d="M0 19h9l4-14H4L0 19zm15 0h9l-4-14h-9l4 14z"/>
                         </svg>
                     </a>
-                    <a href="${tidalUrl}" target="_blank" rel="noopener" title="Listen to '${artist} - ${title}' on Tidal" 
+                    <a href="${tidalUrl}" target="_blank" rel="noopener" title="Find '${artist} - ${title}' on Tidal" 
                        style="display: inline-block; margin-right: 6px; text-decoration: none; opacity: 0.8; transition: opacity 0.2s;" 
                        onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'"
                        onclick="handleTidalClick('${artist}', '${title}', event)">
