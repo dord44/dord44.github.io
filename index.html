@@ -1196,14 +1196,1441 @@
         
         // Smart Tidal link handler
         
-        // Database of known Tidal track IDs
+                // Comprehensive Radio Quebrada Tidal Track Database
+        // Format: 'Artist - Title': 'tidal_track_id'
+        // Leave empty string '' for tracks not yet found on Tidal
         const knownTidalTracks = {
-            // Format: "Artist - Title": "track_id"
-            "Opez - Balera De Mar": "98156344", // Example from your URL
-            "Tommy Guerrero - Thoughts of Tomorrow": "", // Would need to be found
-            "L'Eclair - Taishi-Koto, Pt. 1": "", // Would need to be found
-            // Add more tracks as you discover their Tidal IDs
+            "Opez - Balera De Mar": "98156344", // ✅ Confirmed working
+            "*D* Ivan - Fire (Extended Dub Edit)": "", // 📝 TODO: Find Tidal ID
+            "1900 - Den minsta av segrar": "", // 📝 TODO: Find Tidal ID
+            "20-2-Life - Da Muzik": "", // 📝 TODO: Find Tidal ID
+            "24-Carat Black - Skeleton Coast": "", // 📝 TODO: Find Tidal ID
+            "40 Thieves - Automagic": "", // 📝 TODO: Find Tidal ID
+            "40 Thieves - Don\": "", // 📝 TODO: Find Tidal ID
+            "5EGA - A Couple of Cigarettes to the Moon": "", // 📝 TODO: Find Tidal ID
+            "7 Samurai - Shake It Up (Extended 12" Version)": "", // 📝 TODO: Find Tidal ID
+            "77:78 - Chilli (Flying Mojito Bros Refrito)": "", // 📝 TODO: Find Tidal ID
+            "79.5 - Feel Like Dancin\": "", // 📝 TODO: Find Tidal ID
+            "808 State - Pacific 202": "", // 📝 TODO: Find Tidal ID
+            "808 State - Tokyo Tokyo": "", // 📝 TODO: Find Tidal ID
+            "8Ball & MJG - Comin\": "", // 📝 TODO: Find Tidal ID
+            "A Certain Ratio - Out From Under (Emperor Machine Extended Rework)": "", // 📝 TODO: Find Tidal ID
+            "AMANTES DEL FUTURO - Cumbia Rosa": "", // 📝 TODO: Find Tidal ID
+            "Aaron Broomfield - I\": "", // 📝 TODO: Find Tidal ID
+            "Abel Lima - Corre Riba, Corre Baxo": "", // 📝 TODO: Find Tidal ID
+            "Abou Diarra - Koya Blues": "", // 📝 TODO: Find Tidal ID
+            "Acid Arab, Cem Yildiz - Stil": "", // 📝 TODO: Find Tidal ID
+            "Acud, Beatmörtelz - Verbrennungsmotor (Arutani Remix)": "", // 📝 TODO: Find Tidal ID
+            "Adaye - Turn It Up (Original Mix)": "", // 📝 TODO: Find Tidal ID
+            "Admas - Samba Shegitu": "", // 📝 TODO: Find Tidal ID
+            "Admas - Wed Enate": "", // 📝 TODO: Find Tidal ID
+            "Admiral Bailey - Bad Man Gun": "", // 📝 TODO: Find Tidal ID
+            "Adrian Quesada - Alberto\": "", // 📝 TODO: Find Tidal ID
+            "African Head Charge - Microdosing": "", // 📝 TODO: Find Tidal ID
+            "Afriqua - Soul Correction-25705": "", // 📝 TODO: Find Tidal ID
+            "Afrodesia, Mystic Jungle, Whodamanny - Deep Down In Zanzibar": "", // 📝 TODO: Find Tidal ID
+            "Afrolectric - African Soul": "", // 📝 TODO: Find Tidal ID
+            "Agar Agar - Lost Dog": "", // 📝 TODO: Find Tidal ID
+            "Agar Agar - Lunatic Fights Jungle": "", // 📝 TODO: Find Tidal ID
+            "Ahmed Malek - Autopsie d\": "", // 📝 TODO: Find Tidal ID
+            "Ahmed Malek - Casbah": "", // 📝 TODO: Find Tidal ID
+            "Aili - Fashion (Kasper Bjørke Remix)": "", // 📝 TODO: Find Tidal ID
+            "Aili, Transistorcake - Pari Pari (Shubostar Remix)": "", // 📝 TODO: Find Tidal ID
+            "Aili, Transistorcake - ふつう": "", // 📝 TODO: Find Tidal ID
+            "Air - All I Need (feat. Beth Hirsch)": "", // 📝 TODO: Find Tidal ID
+            "Air - Radian": "", // 📝 TODO: Find Tidal ID
+            "Air - Surfing on a Rocket": "", // 📝 TODO: Find Tidal ID
+            "Akalé Wubé - Gentlemen de Camp Yabassi": "", // 📝 TODO: Find Tidal ID
+            "Akasha - Love Philtre Magick": "", // 📝 TODO: Find Tidal ID
+            "Alain Kan - Nadine, Jimmy et moi": "", // 📝 TODO: Find Tidal ID
+            "Alain Péters - Complainte de Satan (1ère figure)": "", // 📝 TODO: Find Tidal ID
+            "Alberta - Feu de bois": "", // 📝 TODO: Find Tidal ID
+            "Aldous Harding - What If Birds Aren\": "", // 📝 TODO: Find Tidal ID
+            "Alek Lee - Sfarot (Dub) (Dub)": "", // 📝 TODO: Find Tidal ID
+            "Aleksi Perälä - FI3AC2259190": "", // 📝 TODO: Find Tidal ID
+            "Alex Figueira - Aprende": "", // 📝 TODO: Find Tidal ID
+            "Alex Haas, Bill Laswell - Principia": "", // 📝 TODO: Find Tidal ID
+            "Alex Kassian - Leave Your Life (Lonely Hearts Mix) (Lonely Hearts Mix)": "", // 📝 TODO: Find Tidal ID
+            "Alex Reece - Chill Pill (2015 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "Alex Reece - Pulp Fiction": "", // 📝 TODO: Find Tidal ID
+            "Alex Serra, FEATHERED SUN - Luna (Feathered Sun Remix)": "", // 📝 TODO: Find Tidal ID
+            "Alle - Den rette vej": "", // 📝 TODO: Find Tidal ID
+            "Alle - En Film": "", // 📝 TODO: Find Tidal ID
+            "Alle - Og synthesizer": "", // 📝 TODO: Find Tidal ID
+            "Altin Gün - Cips Kola Kilit": "", // 📝 TODO: Find Tidal ID
+            "Altin Gün - Kısasa Kısas": "", // 📝 TODO: Find Tidal ID
+            "Altın Gün - Kesik Çayır": "", // 📝 TODO: Find Tidal ID
+            "Altın Gün - Su Sızıyor (Remix)": "", // 📝 TODO: Find Tidal ID
+            "Amanaz - Khala My Friend": "", // 📝 TODO: Find Tidal ID
+            "Amanda Lear - Look At Her Dancing (Originale)": "", // 📝 TODO: Find Tidal ID
+            "Amp Fiddler, Raphael Saadiq - Take It (ft. Raphael Saadiq)": "", // 📝 TODO: Find Tidal ID
+            "Analog Players Society - Let the Music Play (Version)": "", // 📝 TODO: Find Tidal ID
+            "Anchorsong - Butterflies": "", // 📝 TODO: Find Tidal ID
+            "Anchorsong - The Blacksmith": "", // 📝 TODO: Find Tidal ID
+            "Andre Bratten - Aegis (Original Mix)": "", // 📝 TODO: Find Tidal ID
+            "Andrea Seki, Youth - Mas Ushal": "", // 📝 TODO: Find Tidal ID
+            "Andrew Ashong, Theo Parrish - Flowers": "", // 📝 TODO: Find Tidal ID
+            "Angelica Garcia - Juanita": "", // 📝 TODO: Find Tidal ID
+            "Angelo Badalamenti - Twin Peaks Theme (Instrumental)": "", // 📝 TODO: Find Tidal ID
+            "Anna Homler and Steve Moshier - Gu She\": "", // 📝 TODO: Find Tidal ID
+            "Annabouboula - Don\": "", // 📝 TODO: Find Tidal ID
+            "Anthony Naples - I Don\": "", // 📝 TODO: Find Tidal ID
+            "Anthony Naples - Strobe": "", // 📝 TODO: Find Tidal ID
+            "Antonin - Antonino": "", // 📝 TODO: Find Tidal ID
+            "Antonin - Ça fait du bien (Voilaaa Remix)": "", // 📝 TODO: Find Tidal ID
+            "Aphex Twin - Alberto Balsalm": "", // 📝 TODO: Find Tidal ID
+            "Aphex Twin - Analogue Bubblebath": "", // 📝 TODO: Find Tidal ID
+            "Aphex Twin - Delphium": "", // 📝 TODO: Find Tidal ID
+            "Aphex Twin - Hedphelym": "", // 📝 TODO: Find Tidal ID
+            "Aphex Twin - Heliosphan": "", // 📝 TODO: Find Tidal ID
+            "Aphex Twin - IZ-US": "", // 📝 TODO: Find Tidal ID
+            "Aphex Twin - Jynweythek": "", // 📝 TODO: Find Tidal ID
+            "Aphex Twin - Pulsewidth": "", // 📝 TODO: Find Tidal ID
+            "Aphex Twin - Xtal": "", // 📝 TODO: Find Tidal ID
+            "Aphex Twin - syro u473t8+e [141.98][piezoluminescence mix]": "", // 📝 TODO: Find Tidal ID
+            "Apparat - Not A Number": "", // 📝 TODO: Find Tidal ID
+            "Aron Ottignon - Waterfalls": "", // 📝 TODO: Find Tidal ID
+            "Arthur Lyman - Taboo Tu": "", // 📝 TODO: Find Tidal ID
+            "Arthur Russell - Another Thought (This Is how We Walk On The Moon) - Orange Mountain Music": "", // 📝 TODO: Find Tidal ID
+            "Arto Lindsay & The Ambitious Lovers - Let\": "", // 📝 TODO: Find Tidal ID
+            "Asa Moto - Connexion à Liège": "", // 📝 TODO: Find Tidal ID
+            "Asa Moto - In My Body": "", // 📝 TODO: Find Tidal ID
+            "Asa Moto - Make Me Prada": "", // 📝 TODO: Find Tidal ID
+            "Asha Puthli - Space Talk": "", // 📝 TODO: Find Tidal ID
+            "Asha Puthli - Space Talk (Dimitri From Paris Spacer Dub)": "", // 📝 TODO: Find Tidal ID
+            "Asha Puthli - The Devil Is Loose": "", // 📝 TODO: Find Tidal ID
+            "Ashra - 77 Slightly Delayed": "", // 📝 TODO: Find Tidal ID
+            "Asm0deus - Analog Infinity": "", // 📝 TODO: Find Tidal ID
+            "Ata Kak - Yemmpa Aba": "", // 📝 TODO: Find Tidal ID
+            "Atmosfear - Invasion": "", // 📝 TODO: Find Tidal ID
+            "AtomTM - Around the World (Long Version) (Bonus Track)": "", // 📝 TODO: Find Tidal ID
+            "Audio Junkies - Aspects of Rhythm": "", // 📝 TODO: Find Tidal ID
+            "Augustus Pablo - AP Special": "", // 📝 TODO: Find Tidal ID
+            "Aurélie Saada - Pistache au Dôme": "", // 📝 TODO: Find Tidal ID
+            "Autarkic - Ha\": "", // 📝 TODO: Find Tidal ID
+            "Autarkic - Treble Rebel": "", // 📝 TODO: Find Tidal ID
+            "Aviador Dro - Nuclear Si": "", // 📝 TODO: Find Tidal ID
+            "Avishag Cohen Rodrigues - Sham Ey Sham": "", // 📝 TODO: Find Tidal ID
+            "Awanto 3 feat. Jungle By Night - Baila Con Paula": "", // 📝 TODO: Find Tidal ID
+            "Ayala (It), Abrao - A Mente Delira (Musumeci Remix)": "", // 📝 TODO: Find Tidal ID
+            "Ayyuka - Yukadans": "", // 📝 TODO: Find Tidal ID
+            "Bacao Rhythm & Steel Band - Jungle Fever": "", // 📝 TODO: Find Tidal ID
+            "Bad Tango - Techtangle": "", // 📝 TODO: Find Tidal ID
+            "Baden Powell - Sarava": "", // 📝 TODO: Find Tidal ID
+            "Badge Epoch - Egyptian Licorice": "", // 📝 TODO: Find Tidal ID
+            "Bahama Soul Club - Muévelo Papi feat. Olvido Ruiz": "", // 📝 TODO: Find Tidal ID
+            "Bahama Soul Club - Tiki Suite Pt. 3 - In The Night feat. Anna Luca": "", // 📝 TODO: Find Tidal ID
+            "Bahama Soul Club - Tropicana Flight feat. Sexto Sentido": "", // 📝 TODO: Find Tidal ID
+            "Balkan Beat Box - Adir Adirim (Nickodemus Remix)": "", // 📝 TODO: Find Tidal ID
+            "Balladur - Jalan": "", // 📝 TODO: Find Tidal ID
+            "Barbara & Ernie - Listen to Your Heart": "", // 📝 TODO: Find Tidal ID
+            "Barry Walker - Ediacaran Moonrise": "", // 📝 TODO: Find Tidal ID
+            "Bass Trooperz - L\": "", // 📝 TODO: Find Tidal ID
+            "Bat For Lashes - Daniel": "", // 📝 TODO: Find Tidal ID
+            "Battery Cremil - Lan Mou Raid": "", // 📝 TODO: Find Tidal ID
+            "Baxter Dury - Miami (Parrot And Cocker Too Remix)": "", // 📝 TODO: Find Tidal ID
+            "Be Svendsen - Andromeda": "", // 📝 TODO: Find Tidal ID
+            "Beak> - Life Goes On": "", // 📝 TODO: Find Tidal ID
+            "Beastie Boys - Eugene\": "", // 📝 TODO: Find Tidal ID
+            "Bedouin Burger, Zeid Hamdan, Lynn Adib - Nomad": "", // 📝 TODO: Find Tidal ID
+            "Bee Gees - How Deep Is Your Love (Serban Mix)": "", // 📝 TODO: Find Tidal ID
+            "Belgrado - Boixar": "", // 📝 TODO: Find Tidal ID
+            "Belle and Sebastian - The Boy with the Arab Strap": "", // 📝 TODO: Find Tidal ID
+            "Benji Vaughan - Alternative Facts": "", // 📝 TODO: Find Tidal ID
+            "Benji Vaughan - Blackbox": "", // 📝 TODO: Find Tidal ID
+            "Benji Vaughan - Harmonique": "", // 📝 TODO: Find Tidal ID
+            "Benji Vaughan - Pandora\": "", // 📝 TODO: Find Tidal ID
+            "Beranek - Dra Te Hælvete (Todd Terje Acid Remix)": "", // 📝 TODO: Find Tidal ID
+            "Bernard Fèvre, Black Devil Disco Club - Foxy Spleen": "", // 📝 TODO: Find Tidal ID
+            "Bernard Fèvre, Black Devil Disco Club - Odyssée": "", // 📝 TODO: Find Tidal ID
+            "Bessa Simons - Sii Nana": "", // 📝 TODO: Find Tidal ID
+            "Beverly Glenn-Copeland - Sunset Village (Blood Orange Remix)": "", // 📝 TODO: Find Tidal ID
+            "Big Bud - Persian Blues": "", // 📝 TODO: Find Tidal ID
+            "Big Bud - Runaway (Backwards Dub)": "", // 📝 TODO: Find Tidal ID
+            "Bill Evans - Baubles, Bangles and Beads (Duo)": "", // 📝 TODO: Find Tidal ID
+            "Bill Evans Trio - Time Remembered (Live)": "", // 📝 TODO: Find Tidal ID
+            "Bill Withers - Lovely Day": "", // 📝 TODO: Find Tidal ID
+            "Bisou - Rose": "", // 📝 TODO: Find Tidal ID
+            "Bjørn Torske - Langt Fra Afrika": "", // 📝 TODO: Find Tidal ID
+            "Black Devil Disco Club, Nancy Sinatra, Grovesnor - To Ardent (Grovesnor Remix)": "", // 📝 TODO: Find Tidal ID
+            "Black Marble - A Great Design": "", // 📝 TODO: Find Tidal ID
+            "Black Moth Super Rainbow - Snail Garden": "", // 📝 TODO: Find Tidal ID
+            "Black Moth Super Rainbow - The Primary Color Movement": "", // 📝 TODO: Find Tidal ID
+            "Black Spuma, Lauer, Fabrizio Mammarella - Skettino": "", // 📝 TODO: Find Tidal ID
+            "Black Sugar - La Camita (78)": "", // 📝 TODO: Find Tidal ID
+            "Black Uhuru - Big Spliff": "", // 📝 TODO: Find Tidal ID
+            "Blaue Blume & Trentemøller - Lovable (Trentemøller Remix)": "", // 📝 TODO: Find Tidal ID
+            "Blaze Foley - Clay Pigeons": "", // 📝 TODO: Find Tidal ID
+            "Blick Bassy - Mama": "", // 📝 TODO: Find Tidal ID
+            "Blick Bassy - Wap Do Wap": "", // 📝 TODO: Find Tidal ID
+            "Blossom Dearie - I Walk a Little Faster": "", // 📝 TODO: Find Tidal ID
+            "Blue Soul feat. Marissa Guzman - Summer Trip": "", // 📝 TODO: Find Tidal ID
+            "Blundetto - La chapelle": "", // 📝 TODO: Find Tidal ID
+            "Boards of Canada - Aquarius": "", // 📝 TODO: Find Tidal ID
+            "Bobbi Humphrey - Uno Esta": "", // 📝 TODO: Find Tidal ID
+            "Bolis Pupul - Moon Theme (ε)": "", // 📝 TODO: Find Tidal ID
+            "Bon Voyage Organisation - Nocturne 305": "", // 📝 TODO: Find Tidal ID
+            "Booka Shade - Fragile Things": "", // 📝 TODO: Find Tidal ID
+            "Boozoo Bajou - Moanin\": "", // 📝 TODO: Find Tidal ID
+            "Boozoo Bajou - Same Sun (Instrumental) (Instrumental)": "", // 📝 TODO: Find Tidal ID
+            "Born At Midnite - Hawt Heart (Instrumental)": "", // 📝 TODO: Find Tidal ID
+            "Boulderhead - Bread Butter Noodles Spice": "", // 📝 TODO: Find Tidal ID
+            "Boy Azooga, Mikey Young - Face Behind Her Cigarette (Mikey Young Remix)": "", // 📝 TODO: Find Tidal ID
+            "Boy Harsher, LUCY (Cooper B. Handy) - Autonomy (Ft. Lucy - Cooper B. Handy)": "", // 📝 TODO: Find Tidal ID
+            "Brazilian Girls - Balla Balla": "", // 📝 TODO: Find Tidal ID
+            "Brazilian Girls - Long (Album Version)": "", // 📝 TODO: Find Tidal ID
+            "Brian Bennett - Ocean Glide": "", // 📝 TODO: Find Tidal ID
+            "Brian Bennett - Shuttlecraft": "", // 📝 TODO: Find Tidal ID
+            "Brian Eno, David Byrne - Regiment (2006 Digital Remaster)": "", // 📝 TODO: Find Tidal ID
+            "Brigitte Bardot - Harley Davidson": "", // 📝 TODO: Find Tidal ID
+            "Brigitte Fontaine - Brigitte": "", // 📝 TODO: Find Tidal ID
+            "Bruce Haack - Blow Job": "", // 📝 TODO: Find Tidal ID
+            "Bruce Haack - When Mothers of Salem": "", // 📝 TODO: Find Tidal ID
+            "Buddy Miles - Down By The River": "", // 📝 TODO: Find Tidal ID
+            "Bugseed - Crisis Management": "", // 📝 TODO: Find Tidal ID
+            "Bugseed - Tear Loose": "", // 📝 TODO: Find Tidal ID
+            "Bugz in the Attic - Losalamitoslatinfunklovesong (Re-Work)": "", // 📝 TODO: Find Tidal ID
+            "Bullion - Heaven Is Over": "", // 📝 TODO: Find Tidal ID
+            "Bullion - O Vermona": "", // 📝 TODO: Find Tidal ID
+            "Buscabulla - Sono": "", // 📝 TODO: Find Tidal ID
+            "Buttering Trio - Fall Into Abyss (Ibiza)": "", // 📝 TODO: Find Tidal ID
+            "C.A.R. - Große Trommel": "", // 📝 TODO: Find Tidal ID
+            "C.A.R. - Idle Eyes": "", // 📝 TODO: Find Tidal ID
+            "C.A.R. - Osaka Highway (feat. Max Loderbauer)": "", // 📝 TODO: Find Tidal ID
+            "C.A.R. - To See a World in a Plum (feat. Pegelia Gold)": "", // 📝 TODO: Find Tidal ID
+            "C.A.R. - YOGA IN KARACHI": "", // 📝 TODO: Find Tidal ID
+            "CAN - I Want More": "", // 📝 TODO: Find Tidal ID
+            "CAN - Vitamin C": "", // 📝 TODO: Find Tidal ID
+            "CHATON - Férié": "", // 📝 TODO: Find Tidal ID
+            "COMA feat. Dillon - The Wind": "", // 📝 TODO: Find Tidal ID
+            "CX KiDTRONiK - Black Girl White Girl (Instrumental)": "", // 📝 TODO: Find Tidal ID
+            "Cabo Verde Band - Bo Terra Cabo Verde": "", // 📝 TODO: Find Tidal ID
+            "Calexico - El Picador": "", // 📝 TODO: Find Tidal ID
+            "Calibre - Breather": "", // 📝 TODO: Find Tidal ID
+            "Calibre - Heat": "", // 📝 TODO: Find Tidal ID
+            "Calypso Rose - Calypso Blues": "", // 📝 TODO: Find Tidal ID
+            "Camille Bénâtre - Les miroirs dans la boue": "", // 📝 TODO: Find Tidal ID
+            "Campbell, Mallinder, Benge - Influx": "", // 📝 TODO: Find Tidal ID
+            "Can - Hunters And Collectors": "", // 📝 TODO: Find Tidal ID
+            "Capablanca & T. Keeler - No Hay Dub": "", // 📝 TODO: Find Tidal ID
+            "Captain Hook - Let There Be Light (Bluetech remix)": "", // 📝 TODO: Find Tidal ID
+            "Captain Planet, Zuzuka Poderosa, Raphael Futura - Moqueca (DJ Tahira Remix)": "", // 📝 TODO: Find Tidal ID
+            "Caribou - Never Come Back (Four Tet Remix)": "", // 📝 TODO: Find Tidal ID
+            "Caribou - Sunny\": "", // 📝 TODO: Find Tidal ID
+            "Carlos Niño & Friends - Flutestargate": "", // 📝 TODO: Find Tidal ID
+            "Carlton and The Shoes - Never Give Your Heart Away": "", // 📝 TODO: Find Tidal ID
+            "Cassiano - Onda": "", // 📝 TODO: Find Tidal ID
+            "Cee ElAssaad - Cosmic Fusion": "", // 📝 TODO: Find Tidal ID
+            "Center of The Universe - Bellydance With A Stranger": "", // 📝 TODO: Find Tidal ID
+            "Cesar Camargo Mariano - Futebol de Bar": "", // 📝 TODO: Find Tidal ID
+            "Cesaria Evora - Bia lulucha": "", // 📝 TODO: Find Tidal ID
+            "Chancha Vía Circuito - Ilaló (Baiuca Remix)": "", // 📝 TODO: Find Tidal ID
+            "Chancha Vía Circuito - Tarocchi": "", // 📝 TODO: Find Tidal ID
+            "Chancha Vía Circuito, El Búho - Tail Ends": "", // 📝 TODO: Find Tidal ID
+            "Chapelier Fou - Horses": "", // 📝 TODO: Find Tidal ID
+            "Charlie Megira - The Girl Who Was Frightened of Ashtrays": "", // 📝 TODO: Find Tidal ID
+            "Charlotte Adigéry - 1,618": "", // 📝 TODO: Find Tidal ID
+            "Charlotte Adigéry, Bolis Pupul - Bel DEEWEE": "", // 📝 TODO: Find Tidal ID
+            "Charlotte Adigéry, Bolis Pupul - Ich Mwen (with Christiane Adigéry)": "", // 📝 TODO: Find Tidal ID
+            "Charlotte Adigéry, Bolis Pupul - Reappropriate": "", // 📝 TODO: Find Tidal ID
+            "Charlotte Gainsbourg - Bombs Away (You Man Remix)": "", // 📝 TODO: Find Tidal ID
+            "Chateau - Feelings": "", // 📝 TODO: Find Tidal ID
+            "Cheshire - Sailors Delight": "", // 📝 TODO: Find Tidal ID
+            "Chicano Batman - Black Lipstick": "", // 📝 TODO: Find Tidal ID
+            "Chick Corea - Turkish Woman At The Baths": "", // 📝 TODO: Find Tidal ID
+            "Chimpo - Double Dutch": "", // 📝 TODO: Find Tidal ID
+            "Chinese Man - Eight y cinco": "", // 📝 TODO: Find Tidal ID
+            "Chloé feat. Ben Shemie - Recall": "", // 📝 TODO: Find Tidal ID
+            "Chocolate Dice - Make Me Feel": "", // 📝 TODO: Find Tidal ID
+            "Chris Joss - Tune Down": "", // 📝 TODO: Find Tidal ID
+            "Chris Joss - You\": "", // 📝 TODO: Find Tidal ID
+            "Chris Rea - Nothing to Fear": "", // 📝 TODO: Find Tidal ID
+            "Christoph El Truento - Another Scorcher": "", // 📝 TODO: Find Tidal ID
+            "Christophe - Aline": "", // 📝 TODO: Find Tidal ID
+            "Chromeo - You\": "", // 📝 TODO: Find Tidal ID
+            "Chuck Berry - Oh Louisiana": "", // 📝 TODO: Find Tidal ID
+            "Cignol - Teatoaster": "", // 📝 TODO: Find Tidal ID
+            "Circuitry - Make You Wanna Dance": "", // 📝 TODO: Find Tidal ID
+            "Clara Rockmore, Nadia Reisenberg - Nocturne in C-Sharp Minor, B. 49 (Arr. for Theremin & Piano)": "", // 📝 TODO: Find Tidal ID
+            "Claude Fontaine - Love The Way You Love": "", // 📝 TODO: Find Tidal ID
+            "Claude Rodap - Hiwa": "", // 📝 TODO: Find Tidal ID
+            "Coast to Coast - Paula Marie": "", // 📝 TODO: Find Tidal ID
+            "Cochemea - Tukaria": "", // 📝 TODO: Find Tidal ID
+            "Coco Bryce - Sun": "", // 📝 TODO: Find Tidal ID
+            "Codek - Tam Tam": "", // 📝 TODO: Find Tidal ID
+            "Colourbox - Looks Like We\": "", // 📝 TODO: Find Tidal ID
+            "Computer Madness - Traveling To The Planet Rock": "", // 📝 TODO: Find Tidal ID
+            "Concept Neuf - The Path (Sorito Edit)": "", // 📝 TODO: Find Tidal ID
+            "Condry Ziqubu - Gorilla Man": "", // 📝 TODO: Find Tidal ID
+            "Connan Mockasin - Forever Dolphin Love": "", // 📝 TODO: Find Tidal ID
+            "Contraband - Who Killed Franklin (Texas Chainsaw Massacre Mix)": "", // 📝 TODO: Find Tidal ID
+            "Coobe - Alata": "", // 📝 TODO: Find Tidal ID
+            "Cosmic Trigger - Nectar": "", // 📝 TODO: Find Tidal ID
+            "Coubo - GoodWays": "", // 📝 TODO: Find Tidal ID
+            "Cymande - Bra": "", // 📝 TODO: Find Tidal ID
+            "D.K. - Marimba Theme": "", // 📝 TODO: Find Tidal ID
+            "DARKSIDE - SLAU": "", // 📝 TODO: Find Tidal ID
+            "DE-TÜ - Roadblock": "", // 📝 TODO: Find Tidal ID
+            "DJ Cirofox - Moments": "", // 📝 TODO: Find Tidal ID
+            "DJ Danifox - Criança": "", // 📝 TODO: Find Tidal ID
+            "DJ Danifox - Gentleman": "", // 📝 TODO: Find Tidal ID
+            "DJ Harshit Shah,DJ MHD IND,Bappi Lahiri,Salma Agha - Jeena Bhi Kya Koi Jeena Hai - Jhankar Beats": "", // 📝 TODO: Find Tidal ID
+            "DJ Jigüe - Ferminia": "", // 📝 TODO: Find Tidal ID
+            "DJ Nigga Fox - 5 Violinos": "", // 📝 TODO: Find Tidal ID
+            "DJ Nigga Fox - Agua Morna": "", // 📝 TODO: Find Tidal ID
+            "DJ Pippi, Willie Graff - Piel a Piel (Islandman Remix)": "", // 📝 TODO: Find Tidal ID
+            "DJ Shadow - Organ Donor": "", // 📝 TODO: Find Tidal ID
+            "Daedelus - Tidal Waves Uprising": "", // 📝 TODO: Find Tidal ID
+            "Dafuniks - Musical Gymnastics": "", // 📝 TODO: Find Tidal ID
+            "Damu The Fudgemunk - Bright Side - REMIX": "", // 📝 TODO: Find Tidal ID
+            "Damu The Fudgemunk - Bright Side Og (Instrumental)": "", // 📝 TODO: Find Tidal ID
+            "Damu The Fudgemunk - Tea Thyme": "", // 📝 TODO: Find Tidal ID
+            "Dandy - Rudy, a Message to You": "", // 📝 TODO: Find Tidal ID
+            "Daniel Haaksman - Surto De Amor (ARN4L2 Remix)": "", // 📝 TODO: Find Tidal ID
+            "Daniel Humair - Le Cyclope": "", // 📝 TODO: Find Tidal ID
+            "Daniel Lanois - Carla": "", // 📝 TODO: Find Tidal ID
+            "Daniel Lanois - Frozen": "", // 📝 TODO: Find Tidal ID
+            "Daniel Monaco - Medicine (Short Version)": "", // 📝 TODO: Find Tidal ID
+            "Daniel Monaco, MC Matsui - Swimming With Dolphins (イルカと海へ)": "", // 📝 TODO: Find Tidal ID
+            "Daniel Monaco, Ma Spaventi - Welltaken": "", // 📝 TODO: Find Tidal ID
+            "DanielT., Eiko Hara - Windy Lady (Turbotito Remix)": "", // 📝 TODO: Find Tidal ID
+            "Danny Stewart and His Islanders - Hula Blues": "", // 📝 TODO: Find Tidal ID
+            "Darco - Ketnla Pwad": "", // 📝 TODO: Find Tidal ID
+            "Data - Data Plata": "", // 📝 TODO: Find Tidal ID
+            "David Axelrod - Holy Thursday": "", // 📝 TODO: Find Tidal ID
+            "David Bowie - Golden Years": "", // 📝 TODO: Find Tidal ID
+            "David Harks, Mudd - Susta (Emperor Machine Lovers Dub)": "", // 📝 TODO: Find Tidal ID
+            "David Lynch - Ghost of Love": "", // 📝 TODO: Find Tidal ID
+            "Dawn Penn - You Don\": "", // 📝 TODO: Find Tidal ID
+            "De La Soul - I Be Blowin\": "", // 📝 TODO: Find Tidal ID
+            "Dean Martin, Julie London - Sway (The Rip-Off Artist Remix)": "", // 📝 TODO: Find Tidal ID
+            "Death In Vegas - Twist & Crawl (Full Version)": "", // 📝 TODO: Find Tidal ID
+            "Debukas - Golden MInd": "", // 📝 TODO: Find Tidal ID
+            "Dee Nasty - Erotic Boogie": "", // 📝 TODO: Find Tidal ID
+            "Degiheugi - Forever": "", // 📝 TODO: Find Tidal ID
+            "Delonte Rivers - Cosmic Frequencies": "", // 📝 TODO: Find Tidal ID
+            "Demi Riquísimo - Tagine Machine": "", // 📝 TODO: Find Tidal ID
+            "Dennis Coffey - Theme from Enter the Dragon": "", // 📝 TODO: Find Tidal ID
+            "Dennis Parker - Like An Eagle": "", // 📝 TODO: Find Tidal ID
+            "Der Dritte Raum - Swing Bop (Acid Pauli\": "", // 📝 TODO: Find Tidal ID
+            "Derya Yıldırım & Grup Şimşek - The Trip": "", // 📝 TODO: Find Tidal ID
+            "Desire - Dangerous Drug": "", // 📝 TODO: Find Tidal ID
+            "Desireless - Voyage Voyage": "", // 📝 TODO: Find Tidal ID
+            "Desmond Dekker, The Aces - 007 (Shanty Town)": "", // 📝 TODO: Find Tidal ID
+            "Dezron Douglas, Brandee Younger - The Creator Has a Master Plan": "", // 📝 TODO: Find Tidal ID
+            "Dharma - Sad Crabs (Extended Mix)": "", // 📝 TODO: Find Tidal ID
+            "Dicky Trisco - Discoteca (Original Mix)": "", // 📝 TODO: Find Tidal ID
+            "Die Verboten - Aquarius": "", // 📝 TODO: Find Tidal ID
+            "Die Verboten - White Islands": "", // 📝 TODO: Find Tidal ID
+            "Dijf Sanders - Seven Fridays A Day": "", // 📝 TODO: Find Tidal ID
+            "Diskay - Source": "", // 📝 TODO: Find Tidal ID
+            "Diskjokke - 1987": "", // 📝 TODO: Find Tidal ID
+            "Dj Python - Chalet": "", // 📝 TODO: Find Tidal ID
+            "Django Django - Don\": "", // 📝 TODO: Find Tidal ID
+            "Domenique Dumont - Faux savage": "", // 📝 TODO: Find Tidal ID
+            "Domenique Dumont - L\": "", // 📝 TODO: Find Tidal ID
+            "Domenique Dumont - La bataille de neige": "", // 📝 TODO: Find Tidal ID
+            "Domenique Dumont - Ono mambo haiku": "", // 📝 TODO: Find Tidal ID
+            "Don Cherry - Brown Rice": "", // 📝 TODO: Find Tidal ID
+            "Don Cherry, Don Cherry, Don Cherry, Tommy Koverhult, Tommy Goldman, Maffy Falay, Tage Siven, Okay Temiz - Utopia and Visions": "", // 📝 TODO: Find Tidal ID
+            "Donald Byrd - Dominoes": "", // 📝 TODO: Find Tidal ID
+            "Donald’s House, Lipelis - VGF (DUB)": "", // 📝 TODO: Find Tidal ID
+            "Donato Dozzy featuring Anna Caragnano - Parola (Rework)": "", // 📝 TODO: Find Tidal ID
+            "Donovan - Get Thy Bearings": "", // 📝 TODO: Find Tidal ID
+            "Doof - Skunked on Planet Dub": "", // 📝 TODO: Find Tidal ID
+            "Douaa - Haditouni (Habibi Funk 015)": "", // 📝 TODO: Find Tidal ID
+            "Double - Rangoon Moon": "", // 📝 TODO: Find Tidal ID
+            "Doukkali - Je suis jaloux": "", // 📝 TODO: Find Tidal ID
+            "Dr. Dre - Forgot About Dre": "", // 📝 TODO: Find Tidal ID
+            "Dry Cleaning - Anna Calls From The Arctic": "", // 📝 TODO: Find Tidal ID
+            "Dub Mentor - Guns of Brixton (l\": "", // 📝 TODO: Find Tidal ID
+            "Dub Mentor - Love Etc.": "", // 📝 TODO: Find Tidal ID
+            "Dude Energy - Renee Running": "", // 📝 TODO: Find Tidal ID
+            "Dummy - Nine Clean Nails": "", // 📝 TODO: Find Tidal ID
+            "Duran Duran - The Chauffeur (2009 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "Dylan Henner - With Her First Ever Steps She Walked To Me and She Was So Happy": "", // 📝 TODO: Find Tidal ID
+            "EL Shab 3rab - law kan": "", // 📝 TODO: Find Tidal ID
+            "EMS Synthi 100, Soulwax - Movement 3": "", // 📝 TODO: Find Tidal ID
+            "ESG - Insane (Tambourine Mix)": "", // 📝 TODO: Find Tidal ID
+            "Earl Sixteen, The Co-Operators - Facts To Dub": "", // 📝 TODO: Find Tidal ID
+            "East Coast Love Affair - I Can\": "", // 📝 TODO: Find Tidal ID
+            "Eat Static - Fistful of Snakes": "", // 📝 TODO: Find Tidal ID
+            "Eat Static - Salon Kitty": "", // 📝 TODO: Find Tidal ID
+            "Eddie C - Dubbing Into Darkness": "", // 📝 TODO: Find Tidal ID
+            "Edu Requejo - Solo Lo Soñé": "", // 📝 TODO: Find Tidal ID
+            "El Michels Affair - Enfant": "", // 📝 TODO: Find Tidal ID
+            "El Michels Affair - Last Blast": "", // 📝 TODO: Find Tidal ID
+            "El Michels Affair, Lee Fields, The Shacks - Tearz feat. Lee Fields & The Shacks": "", // 📝 TODO: Find Tidal ID
+            "El Michels Affair, Piya Malik - Idhar Udhar": "", // 📝 TODO: Find Tidal ID
+            "El Mozo REC - MEMORIAS BASEINSTRUMENTAL DE RAP DE USO LIBRE CON SAMPLE  El Mozo REC": "", // 📝 TODO: Find Tidal ID
+            "El Rego et Ses Commandos - E Nan Mian Nuku": "", // 📝 TODO: Find Tidal ID
+            "Electrelane - Love Builds Up": "", // 📝 TODO: Find Tidal ID
+            "Electric Light Orchestra - Showdown": "", // 📝 TODO: Find Tidal ID
+            "Electric Wire Hustle - Again": "", // 📝 TODO: Find Tidal ID
+            "Elektro Hafiz - Disko Hafıza": "", // 📝 TODO: Find Tidal ID
+            "Elias Mazian - Driving With No Purpose": "", // 📝 TODO: Find Tidal ID
+            "Elias Rahbani - Dance of Maria": "", // 📝 TODO: Find Tidal ID
+            "Emilia - Satan in Love": "", // 📝 TODO: Find Tidal ID
+            "Emma-Jean Thackray - Ley Lines": "", // 📝 TODO: Find Tidal ID
+            "Emmanuel Brun - La voix psychédélique": "", // 📝 TODO: Find Tidal ID
+            "Emmanuelle - Free Hifi Internet": "", // 📝 TODO: Find Tidal ID
+            "Emmanuelle - Italove": "", // 📝 TODO: Find Tidal ID
+            "Emmanuelle - L\": "", // 📝 TODO: Find Tidal ID
+            "Enon - Mikazuki": "", // 📝 TODO: Find Tidal ID
+            "Erasmo Carlos - Sábado Morto": "", // 📝 TODO: Find Tidal ID
+            "Erick Cosaque - Guadeloupe, île de mes amours": "", // 📝 TODO: Find Tidal ID
+            "Erlend Øye - Every Party Has A Winner And A Loser": "", // 📝 TODO: Find Tidal ID
+            "Ernest Ranglin - Felicia": "", // 📝 TODO: Find Tidal ID
+            "Ernest Ranglin - In The Rain": "", // 📝 TODO: Find Tidal ID
+            "Ernst Reijseger - Colla Parte": "", // 📝 TODO: Find Tidal ID
+            "Eros - Go for It": "", // 📝 TODO: Find Tidal ID
+            "Esbe - Darling (Remastered)": "", // 📝 TODO: Find Tidal ID
+            "Escape From New York - Fire In My Heart": "", // 📝 TODO: Find Tidal ID
+            "Esion Jim - Never-ending (Fock It Mix)": "", // 📝 TODO: Find Tidal ID
+            "Esmerine - A River Runs Through This City": "", // 📝 TODO: Find Tidal ID
+            "Eurythmics, Annie Lennox, Dave Stewart - There Must Be an Angel (Playing with My Heart)": "", // 📝 TODO: Find Tidal ID
+            "Eva Eva Eva - Argentina": "", // 📝 TODO: Find Tidal ID
+            "Evenings - Babe": "", // 📝 TODO: Find Tidal ID
+            "Explosions in the Sky - Your Hand In Mine (Remastered)": "", // 📝 TODO: Find Tidal ID
+            "Ezra - Garten meiner Fantasie": "", // 📝 TODO: Find Tidal ID
+            "F.S.Blumm, Nils Frahm - Desert Mule": "", // 📝 TODO: Find Tidal ID
+            "F.U.S.E., Richie Hawtin - Dimension Intrusion": "", // 📝 TODO: Find Tidal ID
+            "FROID DUB - Item by Item": "", // 📝 TODO: Find Tidal ID
+            "FUSE - Dimension Intrusion (Original Mix)": "", // 📝 TODO: Find Tidal ID
+            "Fabiana Cozza - Santa Bamba": "", // 📝 TODO: Find Tidal ID
+            "Fabulous/Arabia - Up to My Neck in S**T": "", // 📝 TODO: Find Tidal ID
+            "Facta - Mirage": "", // 📝 TODO: Find Tidal ID
+            "Fatboy Slim - Sunset (Bird of Prey)": "", // 📝 TODO: Find Tidal ID
+            "Fatboy Slim, Roland Clark - Sunset 303 (If You Believe)": "", // 📝 TODO: Find Tidal ID
+            "Felbm - Funicular": "", // 📝 TODO: Find Tidal ID
+            "Felipe Gordon - Self Love": "", // 📝 TODO: Find Tidal ID
+            "Felipe Gordon - The Punk Automata": "", // 📝 TODO: Find Tidal ID
+            "Fellini Felin - Breath Hold (Baldelli & Dionigi Remix) (Baldelli & Dionigi Remix)": "", // 📝 TODO: Find Tidal ID
+            "Fernanda Abreu - Você Pra Mim": "", // 📝 TODO: Find Tidal ID
+            "Feso Trombone - Beginning of the End": "", // 📝 TODO: Find Tidal ID
+            "Fila Brazillia - A Machine to Live In": "", // 📝 TODO: Find Tidal ID
+            "Fila Brazillia - Hush Hush": "", // 📝 TODO: Find Tidal ID
+            "Fila Brazillia - Romantic Adventure": "", // 📝 TODO: Find Tidal ID
+            "Fila Brazillia - Snakeskin Bib": "", // 📝 TODO: Find Tidal ID
+            "Fila Brazillia - Thatched Neon": "", // 📝 TODO: Find Tidal ID
+            "Fila Brazillia - The Rules": "", // 📝 TODO: Find Tidal ID
+            "Fila Brazillia - Uberboff": "", // 📝 TODO: Find Tidal ID
+            "Fishmans - Baby Blue": "", // 📝 TODO: Find Tidal ID
+            "Flamingo Pier - Find Your Way": "", // 📝 TODO: Find Tidal ID
+            "Flavien Berger - 666666": "", // 📝 TODO: Find Tidal ID
+            "Flavien Berger - Léviathan": "", // 📝 TODO: Find Tidal ID
+            "Flavien Berger - Maddy La Nuit": "", // 📝 TODO: Find Tidal ID
+            "Flavien Berger - intermezzo gro gro Jeanne": "", // 📝 TODO: Find Tidal ID
+            "Fleetwood Mac - Hypnotized": "", // 📝 TODO: Find Tidal ID
+            "Fleetwood Mac - Over & Over": "", // 📝 TODO: Find Tidal ID
+            "Floating Points - Falaise": "", // 📝 TODO: Find Tidal ID
+            "Floating Points - Myrtle Avenue": "", // 📝 TODO: Find Tidal ID
+            "Floating Points - Vacuum Boogie": "", // 📝 TODO: Find Tidal ID
+            "Floating Points, Pharoah Sanders - Movement 1": "", // 📝 TODO: Find Tidal ID
+            "Flock - A Thousand Miles Lost": "", // 📝 TODO: Find Tidal ID
+            "Footshooter, James Mollison - Cycles": "", // 📝 TODO: Find Tidal ID
+            "Forgotten Corner, Khidja - Tatooine Moons": "", // 📝 TODO: Find Tidal ID
+            "Four Tet - 0181": "", // 📝 TODO: Find Tidal ID
+            "Four Tet - Daughter": "", // 📝 TODO: Find Tidal ID
+            "Four Tet - Love Cry": "", // 📝 TODO: Find Tidal ID
+            "Four Tet - Lush": "", // 📝 TODO: Find Tidal ID
+            "Foxall - It\": "", // 📝 TODO: Find Tidal ID
+            "Franck Biyong - Kitty Village": "", // 📝 TODO: Find Tidal ID
+            "Frank Zappa - Blessed Relief": "", // 📝 TODO: Find Tidal ID
+            "François de Roubaix - Les grosses caisses (BOF "L\": "", // 📝 TODO: Find Tidal ID
+            "Frazey Ford - September Fields": "", // 📝 TODO: Find Tidal ID
+            "Fred Pallem, Le Sacre du Tympan - L\": "", // 📝 TODO: Find Tidal ID
+            "Frente Cumbiero - Cumbia del Asilo": "", // 📝 TODO: Find Tidal ID
+            "Freur - Doot Doot": "", // 📝 TODO: Find Tidal ID
+            "Frntz - Replay": "", // 📝 TODO: Find Tidal ID
+            "Fuga Ronto - Daydreams": "", // 📝 TODO: Find Tidal ID
+            "Fuga Ronto - L\": "", // 📝 TODO: Find Tidal ID
+            "Function - No Entiendes": "", // 📝 TODO: Find Tidal ID
+            "Funk Factory - Michael Urbaniak - Rien Ne Va Plus (2006 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "Funki Porcini - Six Minutes in Manchester": "", // 📝 TODO: Find Tidal ID
+            "Future Engineers - Echo Location (Original 12" Mix)": "", // 📝 TODO: Find Tidal ID
+            "G.C. Cameron - If I Love You (Instrumental)": "", // 📝 TODO: Find Tidal ID
+            "GODTET - Ensueño": "", // 📝 TODO: Find Tidal ID
+            "Gadji Celi - King Solo (Instrumental Version) (Instrumental Version)": "", // 📝 TODO: Find Tidal ID
+            "Ganavya - seal": "", // 📝 TODO: Find Tidal ID
+            "Gang - KKK.": "", // 📝 TODO: Find Tidal ID
+            "Gaudi - Ayahuasca Deep Fall": "", // 📝 TODO: Find Tidal ID
+            "Gaudi, Eraldo Bernocchi - Where Do Comets Come From ? (feat. Bill Laswell)": "", // 📝 TODO: Find Tidal ID
+            "Gaznevada - I.C. Love Affair (David Depino Edit)": "", // 📝 TODO: Find Tidal ID
+            "Gboyega Adelaja - Colourful Environment": "", // 📝 TODO: Find Tidal ID
+            "Gene Harris - Losalamitoslatinfunklovesong": "", // 📝 TODO: Find Tidal ID
+            "Gene Wilder - Pure Imagination (From "Willy Wonka & The Chocolate Factory" Soundtrack)": "", // 📝 TODO: Find Tidal ID
+            "General Ehi Duncan & The Africa Army Express featuring The Ibibio Horns - Africa (My No. 1) (Captain Planet Remix)": "", // 📝 TODO: Find Tidal ID
+            "Genesis P-Orridge with "Splinter Test" - A Debris ov Murder": "", // 📝 TODO: Find Tidal ID
+            "Geneva Jacuzzi - Love Caboose": "", // 📝 TODO: Find Tidal ID
+            "George McCrae - Rock Your Baby": "", // 📝 TODO: Find Tidal ID
+            "Georges Rey Ensemble - Papio (Kusht Edit)": "", // 📝 TODO: Find Tidal ID
+            "Gerry Read, DJ Koze - Highly Recommended": "", // 📝 TODO: Find Tidal ID
+            "Getdown Services - Cream Of The Crop": "", // 📝 TODO: Find Tidal ID
+            "Ghia - Don\": "", // 📝 TODO: Find Tidal ID
+            "Ghia - Jump In The Water": "", // 📝 TODO: Find Tidal ID
+            "Ghia - Message From The Other Side": "", // 📝 TODO: Find Tidal ID
+            "Ghia - September Garden (Instrumental)": "", // 📝 TODO: Find Tidal ID
+            "Gia Margaret - for Zoya in China": "", // 📝 TODO: Find Tidal ID
+            "Gigi Testa - Blue Ocean": "", // 📝 TODO: Find Tidal ID
+            "Gilbert O’Sullivan - Clair": "", // 📝 TODO: Find Tidal ID
+            "Gin Tonic Orchestra - La Couenne Rance": "", // 📝 TODO: Find Tidal ID
+            "Giorgio Moroder - Lord Release Me": "", // 📝 TODO: Find Tidal ID
+            "Girma Bèyènè, Akalé Wubé - Feqer Endè Krar (Yebèqagnal) (Yebèqagnal)": "", // 📝 TODO: Find Tidal ID
+            "Girma Bèyènè, Akalé Wubé - Muziqawi Silt": "", // 📝 TODO: Find Tidal ID
+            "Glass Beams - Mahal": "", // 📝 TODO: Find Tidal ID
+            "Glen Adams - A Beat For You": "", // 📝 TODO: Find Tidal ID
+            "Gnonnas Pedro - Yiri Yiri Boum": "", // 📝 TODO: Find Tidal ID
+            "Golden Bug - Bisco": "", // 📝 TODO: Find Tidal ID
+            "Gonjasufi - Sheep": "", // 📝 TODO: Find Tidal ID
+            "Grace Jones - Art Groupie": "", // 📝 TODO: Find Tidal ID
+            "Graham Mushnik - Octopus Dance": "", // 📝 TODO: Find Tidal ID
+            "Grandmaster Flash, The Furious Five - The Message": "", // 📝 TODO: Find Tidal ID
+            "Grateful Dead - Groove #2": "", // 📝 TODO: Find Tidal ID
+            "Gray - 300 Americans": "", // 📝 TODO: Find Tidal ID
+            "Gray - Sweetness Of The New": "", // 📝 TODO: Find Tidal ID
+            "Gray, UNKLE - New York City, Have Some Pity": "", // 📝 TODO: Find Tidal ID
+            "Greg Ashley - Legs Coca-Cola": "", // 📝 TODO: Find Tidal ID
+            "Gregory Isaacs - Night Nurse (Cottonbelly Remix)": "", // 📝 TODO: Find Tidal ID
+            "Gretchen Parlato, Lionel Loueke - Nonvignon": "", // 📝 TODO: Find Tidal ID
+            "Gruff Rhys - Arogldarth": "", // 📝 TODO: Find Tidal ID
+            "Gruff Rhys - Loan Your Loneliness (Luke Abbott Version)": "", // 📝 TODO: Find Tidal ID
+            "Gudrun Gut - The Land": "", // 📝 TODO: Find Tidal ID
+            "Guerilla Black, Beenie Man - Compton": "", // 📝 TODO: Find Tidal ID
+            "Guido & Maurizio De Angelis - Blue Song (#1 - Titoli)": "", // 📝 TODO: Find Tidal ID
+            "Gunn - Truscinski Duo - Ocean City": "", // 📝 TODO: Find Tidal ID
+            "Guru - Loungin\": "", // 📝 TODO: Find Tidal ID
+            "Guts - Voyaging Birds": "", // 📝 TODO: Find Tidal ID
+            "Guts, Leron Thomas - Man Funk": "", // 📝 TODO: Find Tidal ID
+            "Gwenifer Raymond - Eulogy for Dead French Composer": "", // 📝 TODO: Find Tidal ID
+            "Gypsy Fari - Chi-Town Reggae": "", // 📝 TODO: Find Tidal ID
+            "Gökçen Kaynatan - Madimak": "", // 📝 TODO: Find Tidal ID
+            "Gülden Karaböcek - Nem Kaldı (Remastered) (Remastered)": "", // 📝 TODO: Find Tidal ID
+            "HARIS HAMZA - Alabass": "", // 📝 TODO: Find Tidal ID
+            "Hakan Lidbo - Cuba Libre": "", // 📝 TODO: Find Tidal ID
+            "Hamid El Shaeri - Law Konty": "", // 📝 TODO: Find Tidal ID
+            "Hampshire & Foat - Coastal Drive": "", // 📝 TODO: Find Tidal ID
+            "Hannah Peel, National Theatre - Marconi\": "", // 📝 TODO: Find Tidal ID
+            "Haruomi Hosono - 最後の楽園": "", // 📝 TODO: Find Tidal ID
+            "Haruomi Hosono, The Yellow Magic Band - Tokyo Rush (2019 Remastering)": "", // 📝 TODO: Find Tidal ID
+            "Headache - That Thing with the Rabbit": "", // 📝 TODO: Find Tidal ID
+            "Headache - Truisms 4 Dummies": "", // 📝 TODO: Find Tidal ID
+            "Healing Potpourri - Fireworks": "", // 📝 TODO: Find Tidal ID
+            "Hedflux, Alex Delfont - Manifolds": "", // 📝 TODO: Find Tidal ID
+            "Hedflux, Alex Delfont - Opia": "", // 📝 TODO: Find Tidal ID
+            "Helado Negro - LFO (Lupe Finds Oliveros)": "", // 📝 TODO: Find Tidal ID
+            "Henri Texier - Le piroguier": "", // 📝 TODO: Find Tidal ID
+            "Herb Alpert - Rise (Album Version)": "", // 📝 TODO: Find Tidal ID
+            "Hermanos Gutiérrez - El Mar": "", // 📝 TODO: Find Tidal ID
+            "Hermanos Gutiérrez - Hermosa Drive": "", // 📝 TODO: Find Tidal ID
+            "Hermanos Gutiérrez - Hoy Como Ayer": "", // 📝 TODO: Find Tidal ID
+            "Hierophant - Need to Know (Bushmen Freefall Mix)": "", // 📝 TODO: Find Tidal ID
+            "Himuro Yoshiteru - The Ground": "", // 📝 TODO: Find Tidal ID
+            "Hitomitoi - DIVE": "", // 📝 TODO: Find Tidal ID
+            "Holy Fuck - Deleters": "", // 📝 TODO: Find Tidal ID
+            "Holy Fuck - Deleters (Palms Trax Remix)": "", // 📝 TODO: Find Tidal ID
+            "Honey Machine - Dooby Dooby": "", // 📝 TODO: Find Tidal ID
+            "Honk - Hum Drums": "", // 📝 TODO: Find Tidal ID
+            "Honk - Lopez": "", // 📝 TODO: Find Tidal ID
+            "Hope Sandoval and the Warm Inventions - On the Low": "", // 📝 TODO: Find Tidal ID
+            "Horace Andy - I Don\": "", // 📝 TODO: Find Tidal ID
+            "Horace Andy - Zion Dub": "", // 📝 TODO: Find Tidal ID
+            "Houston & Dorsey - Ebb Tide": "", // 📝 TODO: Find Tidal ID
+            "Hypnagog - Virtuous Reality": "", // 📝 TODO: Find Tidal ID
+            "I Monster - Daydream in Blue": "", // 📝 TODO: Find Tidal ID
+            "IMLÉ - Peacach": "", // 📝 TODO: Find Tidal ID
+            "Ian Pooley - Venasque": "", // 📝 TODO: Find Tidal ID
+            "Iban Montoro, Jazzman Wax - After Work (Re-Edit)": "", // 📝 TODO: Find Tidal ID
+            "Ibibio Sound Machine - Afo Ken Doko Mien": "", // 📝 TODO: Find Tidal ID
+            "Ibu Selva - Sila": "", // 📝 TODO: Find Tidal ID
+            "Ichisan - Disuko (Dub)": "", // 📝 TODO: Find Tidal ID
+            "Ichisan - Hotel Jama (Harpsichord Version [Mixed])": "", // 📝 TODO: Find Tidal ID
+            "Ichisan - Megla (Alternative Version) (Alternative Version)": "", // 📝 TODO: Find Tidal ID
+            "Ichisan, Nakova - Jupi": "", // 📝 TODO: Find Tidal ID
+            "Idjut Boys - One for Kenny": "", // 📝 TODO: Find Tidal ID
+            "Iggy Pop - La vie en rose": "", // 📝 TODO: Find Tidal ID
+            "Il Est Vilaine - Night in Carnac": "", // 📝 TODO: Find Tidal ID
+            "Ilija Rudman - Dub 4 Love (Secret Weapon Mix)": "", // 📝 TODO: Find Tidal ID
+            "Imagination - Body Talk (Frankie Knuckles Remix)": "", // 📝 TODO: Find Tidal ID
+            "Ini Kamoze - World-A-Music (World A Music)": "", // 📝 TODO: Find Tidal ID
+            "Inspiration - Do It (Mix)": "", // 📝 TODO: Find Tidal ID
+            "International Music System - Mojave": "", // 📝 TODO: Find Tidal ID
+            "Interstellar Funk - Prototype": "", // 📝 TODO: Find Tidal ID
+            "Iration Steppas - Kilimanjaro": "", // 📝 TODO: Find Tidal ID
+            "Irma Thomas - Anyone Who Knows What Love Is (Will Understand)": "", // 📝 TODO: Find Tidal ID
+            "Isaac Hayes - Hyperbolicsyllabicsesquedalymistic": "", // 📝 TODO: Find Tidal ID
+            "Isao Tomita - Suite Bergamasque: Clair de Lune, No. 3": "", // 📝 TODO: Find Tidal ID
+            "Ishmael Ensemble, Dubkasm, Rider Shafique - Reasons (Dub Mix)": "", // 📝 TODO: Find Tidal ID
+            "Ishmael Ensemble, Sandunes - Visions of Light (Sandunes Version)": "", // 📝 TODO: Find Tidal ID
+            "Ismael Rivera Y Sus Cachimbos - El Niche (Remastered 2024)": "", // 📝 TODO: Find Tidal ID
+            "Ivan - Fotonovela (Chapter II) (Remasterizado 2025)": "", // 📝 TODO: Find Tidal ID
+            "Ivan Lins - Baby Blue": "", // 📝 TODO: Find Tidal ID
+            "Izumi Kobayashi - Coffee Rumba": "", // 📝 TODO: Find Tidal ID
+            "Izumi Kobayashi - Lazy Love": "", // 📝 TODO: Find Tidal ID
+            "J Lloyd - Apocalypse": "", // 📝 TODO: Find Tidal ID
+            "J.P.M. & Co - Baby Topless": "", // 📝 TODO: Find Tidal ID
+            "JB Dunckel, Jonathan Fitoussi - Iris": "", // 📝 TODO: Find Tidal ID
+            "Jacco Gardner - Levania": "", // 📝 TODO: Find Tidal ID
+            "Jackie Mittoo - Drum Song": "", // 📝 TODO: Find Tidal ID
+            "Jacob Gurevitsch - In Search Of Lost Time (Danilo Braca Remix)": "", // 📝 TODO: Find Tidal ID
+            "Jacqueline Taïeb - 7:00 AM (2023 Remastered Version)": "", // 📝 TODO: Find Tidal ID
+            "Jaga Jazzist - Oban (Todd Terje Remix)": "", // 📝 TODO: Find Tidal ID
+            "James Alexander Bright - Cool Cool (ECLA Beautiful Dub)": "", // 📝 TODO: Find Tidal ID
+            "James Blake - Love What Happened Here": "", // 📝 TODO: Find Tidal ID
+            "James Holden - Four Ways Down The Valley": "", // 📝 TODO: Find Tidal ID
+            "James Shinra - Flexion": "", // 📝 TODO: Find Tidal ID
+            "Jamie xx - All Under One Roof Raving": "", // 📝 TODO: Find Tidal ID
+            "Jamie xx - LET\": "", // 📝 TODO: Find Tidal ID
+            "Jamie xx feat. MC Moose - Gosh": "", // 📝 TODO: Find Tidal ID
+            "Jan Hammer Group - Don\": "", // 📝 TODO: Find Tidal ID
+            "Jane Weaver - Don\": "", // 📝 TODO: Find Tidal ID
+            "Japanese Telecom - Nipponese Robots": "", // 📝 TODO: Find Tidal ID
+            "Jay Glass Dubs - The Sweetest Dub": "", // 📝 TODO: Find Tidal ID
+            "Jean Jacques Perrey - E.V.A.": "", // 📝 TODO: Find Tidal ID
+            "Jean-Claude Vannier - La horse (Bande originale du film "La horse")": "", // 📝 TODO: Find Tidal ID
+            "Jean-Luc Ponty - Plastic Idols": "", // 📝 TODO: Find Tidal ID
+            "Jeanne Cherhal - Albin De La Simone - Ces Mots Stupides": "", // 📝 TODO: Find Tidal ID
+            "Jeff Parker - Freakadelic": "", // 📝 TODO: Find Tidal ID
+            "Jefferson Airplane - White Rabbit (Live at the Monterey International Pop Festival, Saturday, June 17, 1967)": "", // 📝 TODO: Find Tidal ID
+            "Jeffrey Silverstein - Trip Sitter": "", // 📝 TODO: Find Tidal ID
+            "Jerome Derradji - Bass Is the Place": "", // 📝 TODO: Find Tidal ID
+            "Jerskin Fendrix - Victoria (From "Poor Things"/Score)": "", // 📝 TODO: Find Tidal ID
+            "Jessica Persée - Li sem": "", // 📝 TODO: Find Tidal ID
+            "Jessica Pratt - Life Is": "", // 📝 TODO: Find Tidal ID
+            "Jimi Hendrix - Pali Gap": "", // 📝 TODO: Find Tidal ID
+            "Jimi Tenor - Tropical Eel": "", // 📝 TODO: Find Tidal ID
+            "Jimi Tenor, Freestyle Man - Forgotten Planet Awakens": "", // 📝 TODO: Find Tidal ID
+            "Jitwam - Opendoors": "", // 📝 TODO: Find Tidal ID
+            "Joaquín Cornejo - Las Frutas (feat. Alex Serra)": "", // 📝 TODO: Find Tidal ID
+            "Joaquín Cornejo - Shadow (feat. Wabi Sabi)": "", // 📝 TODO: Find Tidal ID
+            "Joaquín Cornejo - Soul in My Bones": "", // 📝 TODO: Find Tidal ID
+            "Joaquín Cornejo, Felipe Cornejo - Aire": "", // 📝 TODO: Find Tidal ID
+            "Joe Armon-Jones - Wrong Side of the Rhodes": "", // 📝 TODO: Find Tidal ID
+            "Joe Lee Wilson - Sittin\": "", // 📝 TODO: Find Tidal ID
+            "Joe Wong - Dreams Wash Away (Instrumental)": "", // 📝 TODO: Find Tidal ID
+            "John Carroll Kirby - Repettos for you my Lord": "", // 📝 TODO: Find Tidal ID
+            "John Fahey - Sunflower River Blues (Album Version)": "", // 📝 TODO: Find Tidal ID
+            "John Frusciante - Breathiac": "", // 📝 TODO: Find Tidal ID
+            "John Prine - How Lucky (2020 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "John Talabot - Sunshine": "", // 📝 TODO: Find Tidal ID
+            "John Travolta, Olivia Newton-John - Baby It\": "", // 📝 TODO: Find Tidal ID
+            "John Wizards, Nzaramba Jean Thierry (ras magic) - Rwangaguhunga": "", // 📝 TODO: Find Tidal ID
+            "Johnny Clarke - Soul & Inspiration": "", // 📝 TODO: Find Tidal ID
+            "Jona Lewie - You\": "", // 📝 TODO: Find Tidal ID
+            "Jonathan Wilson - Desert Raven": "", // 📝 TODO: Find Tidal ID
+            "Jonny Greenwood - House of Woodcock": "", // 📝 TODO: Find Tidal ID
+            "Josefin Öhrn, The Liberation - Rushing Through My Mind (Mang Dynasty Extended Version)": "", // 📝 TODO: Find Tidal ID
+            "Josh Johnson - Free Mechanical": "", // 📝 TODO: Find Tidal ID
+            "José González - Remain": "", // 📝 TODO: Find Tidal ID
+            "José Mauro - Obnoxious": "", // 📝 TODO: Find Tidal ID
+            "Joy Orbison - in drink": "", // 📝 TODO: Find Tidal ID
+            "João Donato - A Rã": "", // 📝 TODO: Find Tidal ID
+            "Julian Cope - Sunspots": "", // 📝 TODO: Find Tidal ID
+            "Jung Hoon Hee - Fog": "", // 📝 TODO: Find Tidal ID
+            "Jungle Fire - La Kossa (JKriv Elektrikossa Dub)": "", // 📝 TODO: Find Tidal ID
+            "Jura Soundsystem - Udaberri Blues": "", // 📝 TODO: Find Tidal ID
+            "K-LONE - Shimmer": "", // 📝 TODO: Find Tidal ID
+            "K. Leimer - Entr\": "", // 📝 TODO: Find Tidal ID
+            "KASSAV - Wonderful": "", // 📝 TODO: Find Tidal ID
+            "KAYTRANADA feat. BADBADNOTGOOD - WEIGHT OFF": "", // 📝 TODO: Find Tidal ID
+            "KCIDY - Les gens heureux dansent": "", // 📝 TODO: Find Tidal ID
+            "KETA RA - Usagi": "", // 📝 TODO: Find Tidal ID
+            "KIWA - Fracture": "", // 📝 TODO: Find Tidal ID
+            "Kalabrese - Explore Yourself": "", // 📝 TODO: Find Tidal ID
+            "Kalabrese - Kevin Und Sandra": "", // 📝 TODO: Find Tidal ID
+            "Kalabrese - Let the Good Times Roll Feat. A.C. Kupper": "", // 📝 TODO: Find Tidal ID
+            "Kalabrese - Spidergalaxy": "", // 📝 TODO: Find Tidal ID
+            "Kamasi Washington - Street Fighter Mas": "", // 📝 TODO: Find Tidal ID
+            "Kanot - Turbulens": "", // 📝 TODO: Find Tidal ID
+            "Kaoru Inoue - Karyobinga": "", // 📝 TODO: Find Tidal ID
+            "Karate Boogaloo - All Aboard": "", // 📝 TODO: Find Tidal ID
+            "Karen y los Remedios - Canario": "", // 📝 TODO: Find Tidal ID
+            "Karin Krog - Meaning of Love": "", // 📝 TODO: Find Tidal ID
+            "Karl Hector & The Malcouns - Kingdom of D\": "", // 📝 TODO: Find Tidal ID
+            "Kelis - Flashback": "", // 📝 TODO: Find Tidal ID
+            "Ken@Work - Saxo Disco": "", // 📝 TODO: Find Tidal ID
+            "Khadija Al Hanafi - Slime Patrol": "", // 📝 TODO: Find Tidal ID
+            "Khotin - 3 pz": "", // 📝 TODO: Find Tidal ID
+            "Khotin - Frog Fractions": "", // 📝 TODO: Find Tidal ID
+            "Khotin - Unlimited <3": "", // 📝 TODO: Find Tidal ID
+            "Khruangbin - Time (You and I)": "", // 📝 TODO: Find Tidal ID
+            "Kikagaku Moyo - Green Sugar": "", // 📝 TODO: Find Tidal ID
+            "Kikagaku Moyo - Kodama": "", // 📝 TODO: Find Tidal ID
+            "Kikagaku Moyo - Kogarashi": "", // 📝 TODO: Find Tidal ID
+            "King Kong - Dirty City Rainy Day": "", // 📝 TODO: Find Tidal ID
+            "King Krule - Bleak Bake": "", // 📝 TODO: Find Tidal ID
+            "King So So - Disco In The Sky": "", // 📝 TODO: Find Tidal ID
+            "King Somalia - Monkey\": "", // 📝 TODO: Find Tidal ID
+            "King Sporty - Safari": "", // 📝 TODO: Find Tidal ID
+            "King Tubby - Middle East Dub": "", // 📝 TODO: Find Tidal ID
+            "Klaus Schulze - Weird Caravan (Remastered 2017)": "", // 📝 TODO: Find Tidal ID
+            "Klein & MBO - The MBO Theme (Warrior Remix)": "", // 📝 TODO: Find Tidal ID
+            "Kokoroko - Abusey Junction": "", // 📝 TODO: Find Tidal ID
+            "Kokoroko - Adwa": "", // 📝 TODO: Find Tidal ID
+            "Kondi Band - Yeanoh (Powe Handa Blingabe)": "", // 📝 TODO: Find Tidal ID
+            "Kornél Kovács - Atlas Dubb": "", // 📝 TODO: Find Tidal ID
+            "Kourosh Yaghmaei - Aabere Shab": "", // 📝 TODO: Find Tidal ID
+            "Kourosh Yaghmaei - Baroona": "", // 📝 TODO: Find Tidal ID
+            "Kourosh Yaghmaei - Havar Havar": "", // 📝 TODO: Find Tidal ID
+            "Kourosh Yaghmaei - Kei Toe Miayee": "", // 📝 TODO: Find Tidal ID
+            "Kourosh Yaghmaei - Khaar": "", // 📝 TODO: Find Tidal ID
+            "Kourosh Yaghmaei - Leila": "", // 📝 TODO: Find Tidal ID
+            "Kourosh Yaghmaei - Saraabe Toe": "", // 📝 TODO: Find Tidal ID
+            "Koxbox - Statement": "", // 📝 TODO: Find Tidal ID
+            "Kraftwerk - Neonlicht (2009 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "Kraftwerk - Radioactivity (2009 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "Kruder & Dorfmeister - High Noon": "", // 📝 TODO: Find Tidal ID
+            "Kunterweiß, KataHaifisch - Blumenkohlblamage": "", // 📝 TODO: Find Tidal ID
+            "Kusht - Square Kids (Y/O Remix)": "", // 📝 TODO: Find Tidal ID
+            "Köyhät Ritarit - Teddykarhujen huviretki - Teddybears Picnic": "", // 📝 TODO: Find Tidal ID
+            "LA Priest - What Do You See": "", // 📝 TODO: Find Tidal ID
+            "LCD Soundsystem - Losing My Edge": "", // 📝 TODO: Find Tidal ID
+            "LCSM (Likwid Continual Space Motion) featuring Oliver Night & Natalie May - Bubbler": "", // 📝 TODO: Find Tidal ID
+            "LEISURE - Mesmerised (Sumac Dub Remix)": "", // 📝 TODO: Find Tidal ID
+            "LP Giobbi - Can\": "", // 📝 TODO: Find Tidal ID
+            "LTJ Bukem - Constellation": "", // 📝 TODO: Find Tidal ID
+            "La Bionda - I Wanna Be Your Lover": "", // 📝 TODO: Find Tidal ID
+            "La Fine Equipe - Gateau russe (feat. Blanka)": "", // 📝 TODO: Find Tidal ID
+            "La marche bleue, Flavien Berger - ballroom": "", // 📝 TODO: Find Tidal ID
+            "Labelle - L\": "", // 📝 TODO: Find Tidal ID
+            "Lael Neale - Blue Vein": "", // 📝 TODO: Find Tidal ID
+            "Laima - Home": "", // 📝 TODO: Find Tidal ID
+            "Lambeth Community Youth Steelband - Jamaica Farewell": "", // 📝 TODO: Find Tidal ID
+            "Larry Heard - Summertime Breeze": "", // 📝 TODO: Find Tidal ID
+            "Lass - Massamba": "", // 📝 TODO: Find Tidal ID
+            "Laurel Halo - Breath": "", // 📝 TODO: Find Tidal ID
+            "Lawne - Selva": "", // 📝 TODO: Find Tidal ID
+            "Layo & Bushwacka! - Sleepy Language": "", // 📝 TODO: Find Tidal ID
+            "Led By Elvis - Take Time": "", // 📝 TODO: Find Tidal ID
+            "Lee Tracy, Isaac Manning - Foxy Lady": "", // 📝 TODO: Find Tidal ID
+            "Leftfield - Melt": "", // 📝 TODO: Find Tidal ID
+            "Lemon Jelly - In The Bath": "", // 📝 TODO: Find Tidal ID
+            "Lemon Jelly - Soft": "", // 📝 TODO: Find Tidal ID
+            "Lena Platonos - Liqueur Ruby (Red Axes Remix)": "", // 📝 TODO: Find Tidal ID
+            "Lenny Kravitz - It Ain\": "", // 📝 TODO: Find Tidal ID
+            "Les Big Byrd - Curved Light": "", // 📝 TODO: Find Tidal ID
+            "Les Paul & His Trio - My Isle Of Golden Dreams": "", // 📝 TODO: Find Tidal ID
+            "Les Paul - Swiss Woodpecker": "", // 📝 TODO: Find Tidal ID
+            "Liane And The Boheme Bar Trio - Would I Love You? (English) S.k. Russell/h. Spina; Airdrome Music/spina Music": "", // 📝 TODO: Find Tidal ID
+            "Linear Movement - Way Out of Living": "", // 📝 TODO: Find Tidal ID
+            "Lionel Belmondo, Stéphane Belmondo, Eric Legnini, Laurent Fickelson, Thomas Bramerie, Dré Pallemaerts - Bird Song": "", // 📝 TODO: Find Tidal ID
+            "Little Simz - Heart on Fire": "", // 📝 TODO: Find Tidal ID
+            "Lobe - November (edit)": "", // 📝 TODO: Find Tidal ID
+            "Locussolus - Hung Man": "", // 📝 TODO: Find Tidal ID
+            "Locussolus - Zombie Sex Dream (Instrumental)": "", // 📝 TODO: Find Tidal ID
+            "Loopdrop - Triciclo": "", // 📝 TODO: Find Tidal ID
+            "Lord Echo - In Your Life (Lisa Tomlins Version)": "", // 📝 TODO: Find Tidal ID
+            "Los Destellos, Enrique Delgado - La China Maria": "", // 📝 TODO: Find Tidal ID
+            "Los Pakines - Fue una Mentira": "", // 📝 TODO: Find Tidal ID
+            "Los Prisioneros - Estrechez De Corazón": "", // 📝 TODO: Find Tidal ID
+            "Lou Reed - Walk On the Wild Side": "", // 📝 TODO: Find Tidal ID
+            "Love Comedy - Bank B": "", // 📝 TODO: Find Tidal ID
+            "Lucho Gavilanes - El Tequilazo/Canelazo": "", // 📝 TODO: Find Tidal ID
+            "Ludovico Einaudi - Una Mattina": "", // 📝 TODO: Find Tidal ID
+            "Luiz Bonfa - Dance No. 5": "", // 📝 TODO: Find Tidal ID
+            "Luiz Melodia - Mistério da raça": "", // 📝 TODO: Find Tidal ID
+            "Luke Vibert - I Love Acid": "", // 📝 TODO: Find Tidal ID
+            "Luke Vibert - Juxtafication": "", // 📝 TODO: Find Tidal ID
+            "Luke Vibert - Nonce Tarter": "", // 📝 TODO: Find Tidal ID
+            "Luminodisco - Diavolo di un Disco": "", // 📝 TODO: Find Tidal ID
+            "Léonie Pernet - Butterfly (Malik Djoudi Remix)": "", // 📝 TODO: Find Tidal ID
+            "M.RUX - Die polnische Gitarre": "", // 📝 TODO: Find Tidal ID
+            "MEUTE - Miss You": "", // 📝 TODO: Find Tidal ID
+            "MEZERG - Blue Pink Jam": "", // 📝 TODO: Find Tidal ID
+            "MEZERG - Sitting on a Log": "", // 📝 TODO: Find Tidal ID
+            "MINYO CRUSADERS - といちん節": "", // 📝 TODO: Find Tidal ID
+            "Maalem Mahmoud Guinia - Mimoun Marhaba": "", // 📝 TODO: Find Tidal ID
+            "Machinedrum - Spectrum Sequence": "", // 📝 TODO: Find Tidal ID
+            "Madlib - Road Of The Lonely Ones": "", // 📝 TODO: Find Tidal ID
+            "Madvillain, Madlib, MF Doom - Accordion": "", // 📝 TODO: Find Tidal ID
+            "Magic In Threes - Chupa Cabra (Fouk Remix)": "", // 📝 TODO: Find Tidal ID
+            "Magic Source - Saturn Moon Dive": "", // 📝 TODO: Find Tidal ID
+            "Magic Words - Kissy Kiss": "", // 📝 TODO: Find Tidal ID
+            "Magnetic Ensemble - Dancing Alone (feat. Jeanne Added)": "", // 📝 TODO: Find Tidal ID
+            "Malik Djoudi - Sous garantie": "", // 📝 TODO: Find Tidal ID
+            "Malphino - Ají de Malphino": "", // 📝 TODO: Find Tidal ID
+            "Mamacita, Persona RS - Tu Amor": "", // 📝 TODO: Find Tidal ID
+            "Mamman Sani - Five Hundred Miles": "", // 📝 TODO: Find Tidal ID
+            "Manabu Nagayama, Soichi Terada - Low Tension (1991 Original Version)": "", // 📝 TODO: Find Tidal ID
+            "Manic Focus - Flossin\": "", // 📝 TODO: Find Tidal ID
+            "Mano Le Tough - No Road Without a Turn": "", // 📝 TODO: Find Tidal ID
+            "Manu Dibango - Bessoka (Version courte) (Version courte)": "", // 📝 TODO: Find Tidal ID
+            "Marc Ribot y Los Cubanos - Fiesta En El Solar": "", // 📝 TODO: Find Tidal ID
+            "Marcel - Voyeur of Life": "", // 📝 TODO: Find Tidal ID
+            "Marcia Griffiths - Feel Like Jumping": "", // 📝 TODO: Find Tidal ID
+            "Marcia Griffiths - Here I Am Baby": "", // 📝 TODO: Find Tidal ID
+            "Marcos Resende, Index - Nergal": "", // 📝 TODO: Find Tidal ID
+            "Marcy Luarks & Classic Touch - Electric Murder": "", // 📝 TODO: Find Tidal ID
+            "Mari Kaneko - GET TO PARADISE": "", // 📝 TODO: Find Tidal ID
+            "Mariah - そこから……": "", // 📝 TODO: Find Tidal ID
+            "Marie Davidson - La chambre intérieure": "", // 📝 TODO: Find Tidal ID
+            "Marie Davidson - So Right (John Talabot Pressure Dub Remix)": "", // 📝 TODO: Find Tidal ID
+            "Mark Barrott - Bush Society": "", // 📝 TODO: Find Tidal ID
+            "Mark Barrott - Formentera Headspace Blues (Pts. 1 & 2)": "", // 📝 TODO: Find Tidal ID
+            "Mark Barrott - Galileo": "", // 📝 TODO: Find Tidal ID
+            "Mark Paul Norton, Born74 - Blue Bayou": "", // 📝 TODO: Find Tidal ID
+            "Marta, Tricky - When It\": "", // 📝 TODO: Find Tidal ID
+            "Martin Glass - Okinawa Fantasia": "", // 📝 TODO: Find Tidal ID
+            "Marvin Gaye - "T" Plays It Cool (From "Trouble Man" Soundtrack)": "", // 📝 TODO: Find Tidal ID
+            "Marvin Gaye - A Funky Space Reincarnation (Album Version)": "", // 📝 TODO: Find Tidal ID
+            "Marvin Gaye - Inner City Blues (Make Me Wanna Holler)": "", // 📝 TODO: Find Tidal ID
+            "Marvin Gaye - Mercy Mercy Me (The Ecology)": "", // 📝 TODO: Find Tidal ID
+            "Masahiko Sato - Belladoona": "", // 📝 TODO: Find Tidal ID
+            "Masomenos - …QUATRE…": "", // 📝 TODO: Find Tidal ID
+            "Massive Attack - Wire (Leaping Dub)": "", // 📝 TODO: Find Tidal ID
+            "Massive Attack, Roots Manuva - Dead Editors": "", // 📝 TODO: Find Tidal ID
+            "Master Margherita - Kaldaf Funk (Saz Mix)": "", // 📝 TODO: Find Tidal ID
+            "Master Margherita - Seven Semitones (Percussion Mix)": "", // 📝 TODO: Find Tidal ID
+            "Masumi Hara - Your Dream": "", // 📝 TODO: Find Tidal ID
+            "Mato - Alive (Dub)": "", // 📝 TODO: Find Tidal ID
+            "Mato - Summer Madness Dub (LP Version)": "", // 📝 TODO: Find Tidal ID
+            "Matthew Dear - Hikers Y": "", // 📝 TODO: Find Tidal ID
+            "Matthew Halsall - Triangles in the Sky": "", // 📝 TODO: Find Tidal ID
+            "Max Roach - January V (Album Version)": "", // 📝 TODO: Find Tidal ID
+            "Me and My Friends - You Read My Mind": "", // 📝 TODO: Find Tidal ID
+            "Meatraffle - Lambeth Walk (Gaudi & Don Letts remix)": "", // 📝 TODO: Find Tidal ID
+            "Melvin Sparks - Got the Blues?": "", // 📝 TODO: Find Tidal ID
+            "Men From The Nile, Roy Davis Jr., Jay Juniel featuring Peven Everett - Watch Them Come (Jazzanova Remix)": "", // 📝 TODO: Find Tidal ID
+            "Men I Trust - Girl (2025)": "", // 📝 TODO: Find Tidal ID
+            "Mermaid Chunky - chaperone": "", // 📝 TODO: Find Tidal ID
+            "Metamatics - Beautiful Mutations": "", // 📝 TODO: Find Tidal ID
+            "Metro Area - Caught Up": "", // 📝 TODO: Find Tidal ID
+            "Metro Area - Piña": "", // 📝 TODO: Find Tidal ID
+            "Metro Area - Rmm Special Dub": "", // 📝 TODO: Find Tidal ID
+            "Metronomy, Naima Bock, Joshua Idehen - With Balance": "", // 📝 TODO: Find Tidal ID
+            "Metronomy, Pan Amsterdam - Nice Town": "", // 📝 TODO: Find Tidal ID
+            "Michael Prophet - Body Fusion": "", // 📝 TODO: Find Tidal ID
+            "Microlith - Remember Members": "", // 📝 TODO: Find Tidal ID
+            "Middle Sky Boom, Eliezer - Bias Boys (Middle Sky Boom Remix) (Middle Sky Boom Remix)": "", // 📝 TODO: Find Tidal ID
+            "Miike Snow - Animal": "", // 📝 TODO: Find Tidal ID
+            "Mildlife - Automatic (Live from South Channel Island)": "", // 📝 TODO: Find Tidal ID
+            "Mildlife - Memory Palace": "", // 📝 TODO: Find Tidal ID
+            "Mildlife - Rare Air": "", // 📝 TODO: Find Tidal ID
+            "Mildlife - Return To Centaurus": "", // 📝 TODO: Find Tidal ID
+            "Mildlife - The Magnificent Moon (Live from South Channel Island)": "", // 📝 TODO: Find Tidal ID
+            "Miles Davis - Nature Boy": "", // 📝 TODO: Find Tidal ID
+            "Mina - Perfetto Non So (2001 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "Minami Deutsch - Still Foggy": "", // 📝 TODO: Find Tidal ID
+            "Mind Gamers - Golden Boy (feat. Karl Lagerfeld) (feat. Karl Lagerfeld)": "", // 📝 TODO: Find Tidal ID
+            "Mind Lotion - Astro Girl": "", // 📝 TODO: Find Tidal ID
+            "Mind Lotion - Hotel Breakfast": "", // 📝 TODO: Find Tidal ID
+            "Mind Lotion - My Language": "", // 📝 TODO: Find Tidal ID
+            "Mindchatter - It\": "", // 📝 TODO: Find Tidal ID
+            "Mindy Meng Wang 王萌, Sui Zhen - I Don\": "", // 📝 TODO: Find Tidal ID
+            "Minimal Compact - Ready-Made Diary": "", // 📝 TODO: Find Tidal ID
+            "Minnie Riperton - Lovin\": "", // 📝 TODO: Find Tidal ID
+            "Minor Conflict - Glue": "", // 📝 TODO: Find Tidal ID
+            "Minor Conflict - Margate Sands": "", // 📝 TODO: Find Tidal ID
+            "Minor Science - Blue Deal": "", // 📝 TODO: Find Tidal ID
+            "Minoru Muraoka - Take Five": "", // 📝 TODO: Find Tidal ID
+            "Miracle Musical - Black Rainbows": "", // 📝 TODO: Find Tidal ID
+            "Missy Elliott - Hit \": "", // 📝 TODO: Find Tidal ID
+            "Mista Savona - Trumpet Interlude": "", // 📝 TODO: Find Tidal ID
+            "Mixmaster Morris, Jonah Sharp, Haruomi Hosono - Uchu Yuei (Swimming In Space)": "", // 📝 TODO: Find Tidal ID
+            "Moby feat. Debbie Harry - New York New York": "", // 📝 TODO: Find Tidal ID
+            "Mock & Toof - Sleeper": "", // 📝 TODO: Find Tidal ID
+            "Moin - Lift You": "", // 📝 TODO: Find Tidal ID
+            "Moin - Pockets": "", // 📝 TODO: Find Tidal ID
+            "Monde UFO - Vallée": "", // 📝 TODO: Find Tidal ID
+            "Mono/Poly - Dive Out": "", // 📝 TODO: Find Tidal ID
+            "Moon - The Fens": "", // 📝 TODO: Find Tidal ID
+            "Moon Duo - Lost Heads": "", // 📝 TODO: Find Tidal ID
+            "Morgan Geist - Feeling Is Mutual": "", // 📝 TODO: Find Tidal ID
+            "Mort Garson - Ode to an African Violet": "", // 📝 TODO: Find Tidal ID
+            "Mort Garson - Rhapsody in Green": "", // 📝 TODO: Find Tidal ID
+            "Motel Club - Danica": "", // 📝 TODO: Find Tidal ID
+            "Mounika. - 25h12": "", // 📝 TODO: Find Tidal ID
+            "Move D - Swarm Robot Love": "", // 📝 TODO: Find Tidal ID
+            "Mr Raoul K, Laolu - Sene Kela (Mr Raoul K & Laolu Version)": "", // 📝 TODO: Find Tidal ID
+            "Mr. Fingers - Mystery of Love": "", // 📝 TODO: Find Tidal ID
+            "Mr. Ho - 000 BABY": "", // 📝 TODO: Find Tidal ID
+            "Mr. Scruff - Fish": "", // 📝 TODO: Find Tidal ID
+            "Mulatu Astatke - Kulunmanqueleshi (Stereo Master)": "", // 📝 TODO: Find Tidal ID
+            "Mungolian Jetset - San Disco Speedhall": "", // 📝 TODO: Find Tidal ID
+            "Munir - Tuhan (Original Mix)": "", // 📝 TODO: Find Tidal ID
+            "Munk feat. Mona Lazette - Happiness Juice": "", // 📝 TODO: Find Tidal ID
+            "Muno - Marmara (Ulises Remix)": "", // 📝 TODO: Find Tidal ID
+            "MyMy - Fast Freeze": "", // 📝 TODO: Find Tidal ID
+            "N.O.I.A. - Stranger in a Strange Land (Club Mix)": "", // 📝 TODO: Find Tidal ID
+            "N.O.I.A. - True Love (Sexual Version)": "", // 📝 TODO: Find Tidal ID
+            "NEU! - Hallogallo": "", // 📝 TODO: Find Tidal ID
+            "NMR Digital - Fly Me To The Mon": "", // 📝 TODO: Find Tidal ID
+            "Nagat - Kol El Kalam": "", // 📝 TODO: Find Tidal ID
+            "Naked Eyes - Always Something There to Remind Me": "", // 📝 TODO: Find Tidal ID
+            "Nala Sinephro - Continuum 6": "", // 📝 TODO: Find Tidal ID
+            "Nala Sinephro - Space 2": "", // 📝 TODO: Find Tidal ID
+            "Nala Sinephro - Space 4": "", // 📝 TODO: Find Tidal ID
+            "Nanette - In the Heat of the Night": "", // 📝 TODO: Find Tidal ID
+            "Narumi Yasuda, Haruomi Hosono - 風の谷のナウシカ (2024 ver.)": "", // 📝 TODO: Find Tidal ID
+            "Nat Tate - Freed from Desire (Boca 45 Remix)": "", // 📝 TODO: Find Tidal ID
+            "New Build - Your Love (Tornado Wallace Remix)": "", // 📝 TODO: Find Tidal ID
+            "Nia Archives - Headz Gone West": "", // 📝 TODO: Find Tidal ID
+            "Nic Arizona - Floating the Flood (Autarkic Remix)": "", // 📝 TODO: Find Tidal ID
+            "Nice & Smooth - Funky For You": "", // 📝 TODO: Find Tidal ID
+            "Nice Biscuit - Space Dogs": "", // 📝 TODO: Find Tidal ID
+            "Nick Drake - From The Morning / Plaisir D\": "", // 📝 TODO: Find Tidal ID
+            "Nickodemus - Brookarest": "", // 📝 TODO: Find Tidal ID
+            "Nickodemus - Inmortales (Body Move) (The Spy from Cairo Remix)": "", // 📝 TODO: Find Tidal ID
+            "Nickodemus - Invisible Cities (Sol Power All-Stars Remix)": "", // 📝 TODO: Find Tidal ID
+            "Nickodemus - N\": "", // 📝 TODO: Find Tidal ID
+            "Nickodemus - Obeah Woman feat. Cole Williams (Kiko Navarro Afroterraneo Remix)": "", // 📝 TODO: Find Tidal ID
+            "Nicky Thomas - Let It Be": "", // 📝 TODO: Find Tidal ID
+            "Nico Mauskovic - A Big Brain": "", // 📝 TODO: Find Tidal ID
+            "Nightmares On Wax - Argha Noah": "", // 📝 TODO: Find Tidal ID
+            "Nightmares On Wax - Flip Ya Lid": "", // 📝 TODO: Find Tidal ID
+            "Nina Simone - Suzanne": "", // 📝 TODO: Find Tidal ID
+            "Nino Ferrer - Looking For You": "", // 📝 TODO: Find Tidal ID
+            "Nino Ferrer - The Garden": "", // 📝 TODO: Find Tidal ID
+            "Nitin Sawhney - What\": "", // 📝 TODO: Find Tidal ID
+            "Nora Dean - Ay Ay Ay Ay (Angle-Lala)": "", // 📝 TODO: Find Tidal ID
+            "Nosaj Thing - Fog": "", // 📝 TODO: Find Tidal ID
+            "Novalima - Santero (Los Chicos Altos Remix)": "", // 📝 TODO: Find Tidal ID
+            "Nu Genea - Howls (feat. Tony Allen)": "", // 📝 TODO: Find Tidal ID
+            "Nu Guinea - Ddoje Facce": "", // 📝 TODO: Find Tidal ID
+            "O.S.D.B., Andres Digital - Desde MTY (Peter del Rio Remix) (Peter del Rio Remix)": "", // 📝 TODO: Find Tidal ID
+            "OGRE YOU ASSHOLE - 新しい人": "", // 📝 TODO: Find Tidal ID
+            "OSSX - Split Wig": "", // 📝 TODO: Find Tidal ID
+            "Oceanvs Orientalis - Lanchi Biye": "", // 📝 TODO: Find Tidal ID
+            "Oceanvs Orientalis - Mercury": "", // 📝 TODO: Find Tidal ID
+            "Oceanvs Orientalis - Ministry Of Midnight": "", // 📝 TODO: Find Tidal ID
+            "Oceanvs Orientalis - Revenge of the Wankers": "", // 📝 TODO: Find Tidal ID
+            "Octo Octa - Come Here, Let\": "", // 📝 TODO: Find Tidal ID
+            "Old Gang Jah - Rasta": "", // 📝 TODO: Find Tidal ID
+            "Omid 16B - Falling (Two Lone Swordsmen Remix)": "", // 📝 TODO: Find Tidal ID
+            "Omni Trio - Lightning Tree": "", // 📝 TODO: Find Tidal ID
+            "Oni-Ki - Babybells": "", // 📝 TODO: Find Tidal ID
+            "Orbital - Belfast": "", // 📝 TODO: Find Tidal ID
+            "Orbital - Farenheit 303": "", // 📝 TODO: Find Tidal ID
+            "Orchestral Manoeuvres In The Dark - Crush": "", // 📝 TODO: Find Tidal ID
+            "Orchestre Tout Puissant Marcel Duchamp - Coagule": "", // 📝 TODO: Find Tidal ID
+            "Orchestre Tout Puissant Marcel Duchamp - Ils disent": "", // 📝 TODO: Find Tidal ID
+            "Orgone - Easin (Introlude)": "", // 📝 TODO: Find Tidal ID
+            "Orions Belte - how long is... cold pizza good for": "", // 📝 TODO: Find Tidal ID
+            "Orions Belte, Øyvind Blomstrøm - Let’s Watch the Grass Grow": "", // 📝 TODO: Find Tidal ID
+            "Os Malandros De Berlim - Ondas (Daniel Haaksman Edit)": "", // 📝 TODO: Find Tidal ID
+            "Ott - Sunshine And The Gaps To Partiality": "", // 📝 TODO: Find Tidal ID
+            "Oumou Sangaré - Yere Faga (Malik Djoudi Remix)": "", // 📝 TODO: Find Tidal ID
+            "Out Cold - All I Want (Ewan Pearson Dub Remix)": "", // 📝 TODO: Find Tidal ID
+            "Outkast - My Favorite Things": "", // 📝 TODO: Find Tidal ID
+            "Owiny Sigoma Band - Nabed Nade Ei Piny Ka (Rework) (Rework)": "", // 📝 TODO: Find Tidal ID
+            "PAINT - Ta Fardah (Instrumental)": "", // 📝 TODO: Find Tidal ID
+            "PFM - One & Only 2002 Rework": "", // 📝 TODO: Find Tidal ID
+            "PT Musik - Aplausos": "", // 📝 TODO: Find Tidal ID
+            "Paco de Lucía - Fiesta En Moguer": "", // 📝 TODO: Find Tidal ID
+            "Paco de Lucía - Rio Ancho": "", // 📝 TODO: Find Tidal ID
+            "Paco de Lucía - Rio Ancho (Instrumental / Remastered 2015)": "", // 📝 TODO: Find Tidal ID
+            "Pancho Acosta y Su Guitarra - Egyptian Reggae": "", // 📝 TODO: Find Tidal ID
+            "Pantha du Prince - Golden Galactic": "", // 📝 TODO: Find Tidal ID
+            "Paradis - Recto Verso (Le Colisée Remix)": "", // 📝 TODO: Find Tidal ID
+            "Parallel Dance Ensemble - Juices": "", // 📝 TODO: Find Tidal ID
+            "Parallel Dance Ensemble - Shopping Cart": "", // 📝 TODO: Find Tidal ID
+            "Patience Dabany - Sango Ya Mawa": "", // 📝 TODO: Find Tidal ID
+            "Patrick Cowley - Furlough": "", // 📝 TODO: Find Tidal ID
+            "Patrick Cowley - Hot Beach": "", // 📝 TODO: Find Tidal ID
+            "Patrick Cowley - Low Down Dirty Rhythm": "", // 📝 TODO: Find Tidal ID
+            "Patti Smith - Redondo Beach": "", // 📝 TODO: Find Tidal ID
+            "Paul Giovanni, Magnet - Willow\": "", // 📝 TODO: Find Tidal ID
+            "Paul Hardcastle - Apache Warrior": "", // 📝 TODO: Find Tidal ID
+            "Paul McCartney - Coming Up": "", // 📝 TODO: Find Tidal ID
+            "Paul Paul - Good Times (Vocal)": "", // 📝 TODO: Find Tidal ID
+            "Paul Simon - I Know What I Know": "", // 📝 TODO: Find Tidal ID
+            "Paula Tape - Body Nature": "", // 📝 TODO: Find Tidal ID
+            "Payfone - Paradise": "", // 📝 TODO: Find Tidal ID
+            "Payfone - Wild Butterfly": "", // 📝 TODO: Find Tidal ID
+            "Peaking Lights - Hey Sparrow": "", // 📝 TODO: Find Tidal ID
+            "Peaking Lights - Mirror in the Sky": "", // 📝 TODO: Find Tidal ID
+            "Pearl & The Oysters - Flowerland": "", // 📝 TODO: Find Tidal ID
+            "Pedro Ricardo - A Marcha Que o Monte Parou": "", // 📝 TODO: Find Tidal ID
+            "Pender Street Steppers - Our Time": "", // 📝 TODO: Find Tidal ID
+            "Perko, Huerco S. - Prang (feat. Huerco S.)": "", // 📝 TODO: Find Tidal ID
+            "Pete Rock, InI - Microphonist Wanderlust": "", // 📝 TODO: Find Tidal ID
+            "Peter Abdul - Don\": "", // 📝 TODO: Find Tidal ID
+            "Phil Trim - The Way I Do (Remasterizado)": "", // 📝 TODO: Find Tidal ID
+            "Phillipi & Rodrigo - Karma": "", // 📝 TODO: Find Tidal ID
+            "Photay - No Sass": "", // 📝 TODO: Find Tidal ID
+            "Piano Pianissimo, Classical Study Music, Exam Study Classical Music Orchestra - Bach\": "", // 📝 TODO: Find Tidal ID
+            "Piero Umiliani - Lady Magnolia (Remastered 2023) (Remastered 2023)": "", // 📝 TODO: Find Tidal ID
+            "Piero Umiliani - Nel Villaggio": "", // 📝 TODO: Find Tidal ID
+            "Pink Floyd - Obscured By Clouds": "", // 📝 TODO: Find Tidal ID
+            "Pink Floyd - On The Run (Live at Wembley 1974) [2023 Master]": "", // 📝 TODO: Find Tidal ID
+            "Pink Floyd - When You\": "", // 📝 TODO: Find Tidal ID
+            "Pink Floyd - Wot\": "", // 📝 TODO: Find Tidal ID
+            "Pino Presti - Funky Bump (Prod. by Pino Presti - 2024 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "Pinty - City Limits": "", // 📝 TODO: Find Tidal ID
+            "Piper - Summer Breeze": "", // 📝 TODO: Find Tidal ID
+            "Plaid - Shackbu": "", // 📝 TODO: Find Tidal ID
+            "Playing For Change - La Bamba": "", // 📝 TODO: Find Tidal ID
+            "Pleasure Planet - Alien (Alex Kassian\": "", // 📝 TODO: Find Tidal ID
+            "Pleasure Planet - Numbers": "", // 📝 TODO: Find Tidal ID
+            "Plustwo - Stop Fantasy (1983 Club Vinyl Mix)": "", // 📝 TODO: Find Tidal ID
+            "Poets of Thought - Jamming the Session": "", // 📝 TODO: Find Tidal ID
+            "Polynation - Muriatic (Album Version)": "", // 📝 TODO: Find Tidal ID
+            "Poolside - Do You Believe?": "", // 📝 TODO: Find Tidal ID
+            "Poolside - Next To You": "", // 📝 TODO: Find Tidal ID
+            "Populous - Alala": "", // 📝 TODO: Find Tidal ID
+            "Populous, Barda - Banda": "", // 📝 TODO: Find Tidal ID
+            "Populous, Lucia Manca - Roma (feat. Matilde Davoli)": "", // 📝 TODO: Find Tidal ID
+            "Portico Quartet - Pompidou": "", // 📝 TODO: Find Tidal ID
+            "Prado Paim, Daniel Haaksman - Engracia (Edit)": "", // 📝 TODO: Find Tidal ID
+            "Precious Bloom - Consequences": "", // 📝 TODO: Find Tidal ID
+            "Precious Bloom - Teka Teki Asmara": "", // 📝 TODO: Find Tidal ID
+            "Precious Bloom - Trip To The Bahamas": "", // 📝 TODO: Find Tidal ID
+            "Prince Fatty - The Beat Goes On (feat. Hollie Cook)": "", // 📝 TODO: Find Tidal ID
+            "Prins Thomas - Bobletekno (Bugge Wesseltoft Yamaha SK-15 Version)": "", // 📝 TODO: Find Tidal ID
+            "Project Pat - Choose U": "", // 📝 TODO: Find Tidal ID
+            "Prom Night - Heat 84 (Original Mix)": "", // 📝 TODO: Find Tidal ID
+            "Protek - I love to dance with you (The Nightlark Edit)": "", // 📝 TODO: Find Tidal ID
+            "Pulo NDJ - Un Jour": "", // 📝 TODO: Find Tidal ID
+            "Pépite - Les bateaux": "", // 📝 TODO: Find Tidal ID
+            "Quantic - Atlantic Oscillations": "", // 📝 TODO: Find Tidal ID
+            "Quantic - Incendium": "", // 📝 TODO: Find Tidal ID
+            "Quantic - La Reflexión": "", // 📝 TODO: Find Tidal ID
+            "Quantic - Orquídea (feat. Sly5thAve)": "", // 📝 TODO: Find Tidal ID
+            "Quantic - The 5th Exotic": "", // 📝 TODO: Find Tidal ID
+            "Quantic - Tierra Mama (feat. Nidia Góngora)": "", // 📝 TODO: Find Tidal ID
+            "Quantic, Denitia - Nowhere (Instrumental) (Instrumental)": "", // 📝 TODO: Find Tidal ID
+            "Quantic, Nidia Góngora - E Ye Ye (Edit) (Edit)": "", // 📝 TODO: Find Tidal ID
+            "Quantic, Nidia Góngora - Orozul": "", // 📝 TODO: Find Tidal ID
+            "Quiet Village - Too High To Move": "", // 📝 TODO: Find Tidal ID
+            "R 417 - Cosmo Cat": "", // 📝 TODO: Find Tidal ID
+            "R.L. Burnside - It\": "", // 📝 TODO: Find Tidal ID
+            "RAS - Shek Tamar": "", // 📝 TODO: Find Tidal ID
+            "RJ - Leo": "", // 📝 TODO: Find Tidal ID
+            "ROLROLROL - SURPRISE (with Jamie Woon)": "", // 📝 TODO: Find Tidal ID
+            "Rabito - Amarte Amarte una Vez": "", // 📝 TODO: Find Tidal ID
+            "Radioactive Man - Goodnight Morton": "", // 📝 TODO: Find Tidal ID
+            "Rah Band - Out on the Edge ": "", // 📝 TODO: Find Tidal ID
+            "Rakim - Uplift (Album Version (Explicit))": "", // 📝 TODO: Find Tidal ID
+            "Rakoon - Hoi An": "", // 📝 TODO: Find Tidal ID
+            "Rakoon - I Guess I\": "", // 📝 TODO: Find Tidal ID
+            "Rakoon, Reno - Burdub": "", // 📝 TODO: Find Tidal ID
+            "Ray Barbee - Ocra vs Jaba": "", // 📝 TODO: Find Tidal ID
+            "Ray Mang - Osea Island": "", // 📝 TODO: Find Tidal ID
+            "Ray Mang - Tattoo Me": "", // 📝 TODO: Find Tidal ID
+            "Raz & Afla - Check Yourself": "", // 📝 TODO: Find Tidal ID
+            "Raze De Soare - Vis Implinit (Original Mix)": "", // 📝 TODO: Find Tidal ID
+            "Red Axes - Cooked Banana": "", // 📝 TODO: Find Tidal ID
+            "Red Axes - Flawless": "", // 📝 TODO: Find Tidal ID
+            "Red Axes - Outside In (feat. Immersion)": "", // 📝 TODO: Find Tidal ID
+            "Redbear - Dusty Road": "", // 📝 TODO: Find Tidal ID
+            "René Costy & His Orchestra - Scrabble": "", // 📝 TODO: Find Tidal ID
+            "Resavoir - Clouds": "", // 📝 TODO: Find Tidal ID
+            "Reuben Vaun Smith - Trip on New Shores": "", // 📝 TODO: Find Tidal ID
+            "Rhode & Brown - Memory Palace (feat. DJ City)": "", // 📝 TODO: Find Tidal ID
+            "Rhode & Brown - No Anthems (System Olympia Remix)": "", // 📝 TODO: Find Tidal ID
+            "Richard H. Kirk - Hipnotic": "", // 📝 TODO: Find Tidal ID
+            "Richard de Bordeaux, Daniel Beretta - La drogue (BOF "Le Temps Fou" De Marcel Camus)": "", // 📝 TODO: Find Tidal ID
+            "Rim Kwaku Obeng - Sunkwa (Life First)": "", // 📝 TODO: Find Tidal ID
+            "Rita Lee, Roberto De Carvalho - Baila Comigo": "", // 📝 TODO: Find Tidal ID
+            "Rivard Gilles, SOCAN - Je reviens-16248": "", // 📝 TODO: Find Tidal ID
+            "River Yarra - Aorsom Wislhs": "", // 📝 TODO: Find Tidal ID
+            "Riz Ortolani - La Ragazza Dal Pigiama Giallo (Originale)": "", // 📝 TODO: Find Tidal ID
+            "Rodion & Local Suicide feat. Mz Sunday Luv - Owl & Wizzle (Original Mix)": "", // 📝 TODO: Find Tidal ID
+            "Roger 3000 - Vieux Félin": "", // 📝 TODO: Find Tidal ID
+            "Romain FX - 悲しみも越 Kanashimi Mo Koe (Instrumental Mix) (Instrumental Mix)": "", // 📝 TODO: Find Tidal ID
+            "Roman Flügel - Rules": "", // 📝 TODO: Find Tidal ID
+            "Roman Flügel - Sapphire": "", // 📝 TODO: Find Tidal ID
+            "Romare - Sunset": "", // 📝 TODO: Find Tidal ID
+            "Romare - The Blues (It Began in Africa) (It Began in Africa)": "", // 📝 TODO: Find Tidal ID
+            "Roni Size - It\": "", // 📝 TODO: Find Tidal ID
+            "Ronnie Foster - Mystic Brew": "", // 📝 TODO: Find Tidal ID
+            "Roots Radics, Mad Professor - Dub Glory (feat. Freddie McGregor) (Mad Professor Dub)": "", // 📝 TODO: Find Tidal ID
+            "Rose City Band - Mariposa": "", // 📝 TODO: Find Tidal ID
+            "Ross from Friends - Epiphany": "", // 📝 TODO: Find Tidal ID
+            "Ross from Friends - Life In A Mind": "", // 📝 TODO: Find Tidal ID
+            "Ross from Friends - XXX Olympiad": "", // 📝 TODO: Find Tidal ID
+            "Roy Harper - Hallucinating Light": "", // 📝 TODO: Find Tidal ID
+            "RoyGreen & Protone - Jazzypants": "", // 📝 TODO: Find Tidal ID
+            "Rufus Thomas - Sixty Minute Man (Album Version)": "", // 📝 TODO: Find Tidal ID
+            "Ruksby - Acid Kiss": "", // 📝 TODO: Find Tidal ID
+            "Rupa - Aaj Shanibar": "", // 📝 TODO: Find Tidal ID
+            "Ry Cooder - Theme from Southern Comfort": "", // 📝 TODO: Find Tidal ID
+            "Ryuichi Sakamoto - THOUSAND KNIVES (2016 リマスター)": "", // 📝 TODO: Find Tidal ID
+            "S.W. - Holy Spring (Original Mix)": "", // 📝 TODO: Find Tidal ID
+            "SANAM - Bell بل": "", // 📝 TODO: Find Tidal ID
+            "SAULT - Think About It": "", // 📝 TODO: Find Tidal ID
+            "STRIPPER - Consciousness Proliferation (Back 2 93)": "", // 📝 TODO: Find Tidal ID
+            "Sabina Sciubba - Cinema": "", // 📝 TODO: Find Tidal ID
+            "Saigon Soul Revival - Ai Thật Lòng Yêu Ai (Instrumental)": "", // 📝 TODO: Find Tidal ID
+            "Salamanda - Kiddo Caterpillar": "", // 📝 TODO: Find Tidal ID
+            "Salamanda - Sun Tickles": "", // 📝 TODO: Find Tidal ID
+            "Sam Media - Simple As Fuck": "", // 📝 TODO: Find Tidal ID
+            "Sam Ruffillo - Danza Organica (Musumeci Remix Hot Version)": "", // 📝 TODO: Find Tidal ID
+            "Samuel Blaser feat. Alex Wilson & Ira Coleman - Thoroughfare": "", // 📝 TODO: Find Tidal ID
+            "Sandii - ZOOT KOOK": "", // 📝 TODO: Find Tidal ID
+            "Santana - Aqua Marine": "", // 📝 TODO: Find Tidal ID
+            "Santana - Oye Como Va": "", // 📝 TODO: Find Tidal ID
+            "Santi & Tuğçe, Tuğçe Kurtiş - Punto Cero": "", // 📝 TODO: Find Tidal ID
+            "Sanullim - Don\": "", // 📝 TODO: Find Tidal ID
+            "Sauveur Mallia - All The Bass (Phoreski Mix)": "", // 📝 TODO: Find Tidal ID
+            "Sauveur Mallia - Double Polygone": "", // 📝 TODO: Find Tidal ID
+            "Savage - Don\": "", // 📝 TODO: Find Tidal ID
+            "Scan Man - Arabian": "", // 📝 TODO: Find Tidal ID
+            "Scott Gilmore - Horizon Line": "", // 📝 TODO: Find Tidal ID
+            "Scubba - Paradise City (Vibes Edition)": "", // 📝 TODO: Find Tidal ID
+            "Seiji, Lyric L - Loose Lips": "", // 📝 TODO: Find Tidal ID
+            "September - Stump": "", // 📝 TODO: Find Tidal ID
+            "Serge Gainsbourg - Aux armes et caetera": "", // 📝 TODO: Find Tidal ID
+            "Seu Jorge - Chega no Suingue": "", // 📝 TODO: Find Tidal ID
+            "Sevdaliza - Wallflower": "", // 📝 TODO: Find Tidal ID
+            "Shen - Istanbul": "", // 📝 TODO: Find Tidal ID
+            "Shen - The North Star": "", // 📝 TODO: Find Tidal ID
+            "Shida Shahabi - Pretty In Plums": "", // 📝 TODO: Find Tidal ID
+            "Shigeru Suzuki - NOVEMBER EYES": "", // 📝 TODO: Find Tidal ID
+            "Shigeru Suzuki - Passion Flower": "", // 📝 TODO: Find Tidal ID
+            "Shintaro Sakamoto - ナマで踊ろう": "", // 📝 TODO: Find Tidal ID
+            "Shintaro Sakamoto - 仮面をはずさないで": "", // 📝 TODO: Find Tidal ID
+            "Shira Small - Eternal Life": "", // 📝 TODO: Find Tidal ID
+            "Shit Robot - Simple Things (Work It Out) (Todd Terje Version)": "", // 📝 TODO: Find Tidal ID
+            "Shore Break - Everybody Cause Free": "", // 📝 TODO: Find Tidal ID
+            "Shuggie Otis - Ice Cold Daydream": "", // 📝 TODO: Find Tidal ID
+            "Shwamp - Ape In Love": "", // 📝 TODO: Find Tidal ID
+            "Shwamp - Jester": "", // 📝 TODO: Find Tidal ID
+            "Shwamp - Oscalated": "", // 📝 TODO: Find Tidal ID
+            "Shwamp - Who Are You": "", // 📝 TODO: Find Tidal ID
+            "Silver Apples - I Have Known Love": "", // 📝 TODO: Find Tidal ID
+            "Silver Mt. Zion - 13 Angels Standing Guard \": "", // 📝 TODO: Find Tidal ID
+            "Slim Whitman - Indian Love Call (1944 Version)": "", // 📝 TODO: Find Tidal ID
+            "Sly Dunbar - Sesame Street (2001 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "Sly5thAve, The ClubCasa Chamber Orchestra - Get Free": "", // 📝 TODO: Find Tidal ID
+            "Smallpeople - Beyond": "", // 📝 TODO: Find Tidal ID
+            "Smilk - Horsenball": "", // 📝 TODO: Find Tidal ID
+            "Sofia Kourtesis - La Perla": "", // 📝 TODO: Find Tidal ID
+            "Soichi Terada - Blinker": "", // 📝 TODO: Find Tidal ID
+            "Soichi Terada - Epoxy Lamp": "", // 📝 TODO: Find Tidal ID
+            "Soichi Terada - Runners": "", // 📝 TODO: Find Tidal ID
+            "Solo Banton - Arcade Addict": "", // 📝 TODO: Find Tidal ID
+            "Solo Moderna, Krage - Pongolongo": "", // 📝 TODO: Find Tidal ID
+            "Sonic Youth - Superstar": "", // 📝 TODO: Find Tidal ID
+            "Sonya Spence - Talk Love": "", // 📝 TODO: Find Tidal ID
+            "Sora - Revans": "", // 📝 TODO: Find Tidal ID
+            "Souleance - No Dancing": "", // 📝 TODO: Find Tidal ID
+            "Soulection - Fufu & Grits": "", // 📝 TODO: Find Tidal ID
+            "Soulwax - Missing Wires": "", // 📝 TODO: Find Tidal ID
+            "Sounds from the Ground - Snow (Zion Train Remix)": "", // 📝 TODO: Find Tidal ID
+            "Space - Running In The City": "", // 📝 TODO: Find Tidal ID
+            "Space Ghost - Deep (7" Mix)": "", // 📝 TODO: Find Tidal ID
+            "Space Ghost - Deep (Vibes Mix)": "", // 📝 TODO: Find Tidal ID
+            "Space Ghost - Dream Weaver": "", // 📝 TODO: Find Tidal ID
+            "Space Ghost - Emotional Healer (Back Room Mix)": "", // 📝 TODO: Find Tidal ID
+            "Space Ghost - Emotional Healer (Nelson of the East Acid Mix)": "", // 📝 TODO: Find Tidal ID
+            "Space Ghost - Sea Snake Island": "", // 📝 TODO: Find Tidal ID
+            "Speed, Glue & Shinki - Big Headed Woman (2017 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "Speed, Glue & Shinki - Chuppy (2017 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "Speed, Glue & Shinki - Don\": "", // 📝 TODO: Find Tidal ID
+            "Spontaneous Overthrow - All About Money": "", // 📝 TODO: Find Tidal ID
+            "St Germain - Real Blues": "", // 📝 TODO: Find Tidal ID
+            "State Of Bengal - Flight IC408": "", // 📝 TODO: Find Tidal ID
+            "Stefan Ringer - Otw": "", // 📝 TODO: Find Tidal ID
+            "Stella, Ed Longo - Détends-Toi (Dub Mix)": "", // 📝 TODO: Find Tidal ID
+            "Stella, Ed Longo - Détends-toi": "", // 📝 TODO: Find Tidal ID
+            "Stella, Ed Longo - Pourquoi": "", // 📝 TODO: Find Tidal ID
+            "Stephon Alexander - Hummingbird": "", // 📝 TODO: Find Tidal ID
+            "Stereolab - Jump Drive Shut-Out": "", // 📝 TODO: Find Tidal ID
+            "Stereolab - Margerine Melodie": "", // 📝 TODO: Find Tidal ID
+            "Stereolab - Vonal Declosion": "", // 📝 TODO: Find Tidal ID
+            "Steve Cobby, Danielle Moore - Lefthanded Books (Ashley Beedle Remix)": "", // 📝 TODO: Find Tidal ID
+            "Steve Miller Band - Swingtown": "", // 📝 TODO: Find Tidal ID
+            "Steve Monite - Only You": "", // 📝 TODO: Find Tidal ID
+            "Steve Reich, Pat Metheny - Electric Counterpoint: III. Fast": "", // 📝 TODO: Find Tidal ID
+            "Stevie Ray Vaughan & Double Trouble - Lenny": "", // 📝 TODO: Find Tidal ID
+            "Stimela - I Love You": "", // 📝 TODO: Find Tidal ID
+            "Stuph - Venice Beach Dub": "", // 📝 TODO: Find Tidal ID
+            "Sub Urban - Freak (feat. REI AMI)": "", // 📝 TODO: Find Tidal ID
+            "Sublime - Steppin\": "", // 📝 TODO: Find Tidal ID
+            "Subset - Eureka St": "", // 📝 TODO: Find Tidal ID
+            "Suicide - Misery Train": "", // 📝 TODO: Find Tidal ID
+            "Sumac Dub - Le jardin de Lucy": "", // 📝 TODO: Find Tidal ID
+            "Sumac Dub - Titania": "", // 📝 TODO: Find Tidal ID
+            "Sun Ra - Love In Outerspace": "", // 📝 TODO: Find Tidal ID
+            "SunPalace - Coral Reef": "", // 📝 TODO: Find Tidal ID
+            "SunPalace - Rude Movements (Moodymann Remix Extended Version)": "", // 📝 TODO: Find Tidal ID
+            "Sundays & Cybele - Waiting for You": "", // 📝 TODO: Find Tidal ID
+            "Superpitcher - Little Raver": "", // 📝 TODO: Find Tidal ID
+            "Supersempfft - Tropical Trip": "", // 📝 TODO: Find Tidal ID
+            "Surprise Chef - Fare Evader": "", // 📝 TODO: Find Tidal ID
+            "Surprise Chef - Friendship Theme": "", // 📝 TODO: Find Tidal ID
+            "Surprise Chef - Have You Fed Baby Huey Today": "", // 📝 TODO: Find Tidal ID
+            "Surprise Chef - Over The Moon": "", // 📝 TODO: Find Tidal ID
+            "Surprise Chef, Harvey Sutherland - New Ferrari (Harvey Sutherland\": "", // 📝 TODO: Find Tidal ID
+            "Susana Estrada - ¡gózame Ya!": "", // 📝 TODO: Find Tidal ID
+            "Susumu Yokota - Tobiume": "", // 📝 TODO: Find Tidal ID
+            "Sven Wunder - Black Iris": "", // 📝 TODO: Find Tidal ID
+            "Sven Wunder - North Wind Rattles the Leaves": "", // 📝 TODO: Find Tidal ID
+            "Sweely - Don\": "", // 📝 TODO: Find Tidal ID
+            "Sweely - Hello Goodbye": "", // 📝 TODO: Find Tidal ID
+            "Sworn Virgins - Fifty Dollar Bills (ε)": "", // 📝 TODO: Find Tidal ID
+            "Sylvester - A Foggy Day": "", // 📝 TODO: Find Tidal ID
+            "Sylvester - I Need Somebody To Love Tonight": "", // 📝 TODO: Find Tidal ID
+            "Syntrovert - Cuarzo": "", // 📝 TODO: Find Tidal ID
+            "System Olympia - Close to my Nebula": "", // 📝 TODO: Find Tidal ID
+            "T.Rex - 20th Century Boy": "", // 📝 TODO: Find Tidal ID
+            "TEED - Blood In The Snow": "", // 📝 TODO: Find Tidal ID
+            "TOYTOY, Golden Rules - Tahin": "", // 📝 TODO: Find Tidal ID
+            "TVAM - Porsche Majeure": "", // 📝 TODO: Find Tidal ID
+            "Taeko Onuki - Genwaku": "", // 📝 TODO: Find Tidal ID
+            "Talking Drums - Courage": "", // 📝 TODO: Find Tidal ID
+            "Talking Heads - Slippery People": "", // 📝 TODO: Find Tidal ID
+            "Tangerine Dream - Continuum": "", // 📝 TODO: Find Tidal ID
+            "Taras Bulba - Pierres Sacradees (Holy Stones)": "", // 📝 TODO: Find Tidal ID
+            "Tatsuro Yamashita - ノスタルジア・オブ・アイランド　": "", // 📝 TODO: Find Tidal ID
+            "Teams, Star Slinger - Say Please": "", // 📝 TODO: Find Tidal ID
+            "Tears For Fears - Everybody Wants To Rule The World (Single Version)": "", // 📝 TODO: Find Tidal ID
+            "Teaspoon Ndelu - Sputla": "", // 📝 TODO: Find Tidal ID
+            "Ted Lucas - It Is So Nice To Get Stoned": "", // 📝 TODO: Find Tidal ID
+            "Telephones - Genesis (Swell 1019 Mix)": "", // 📝 TODO: Find Tidal ID
+            "Telephones - Hot Destinations For A Cooler You": "", // 📝 TODO: Find Tidal ID
+            "Telex - Beautiful Li(f)e (2021 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "Telex - Radio-Radio (2021 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "Telex - Raised By Snakes (2023 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "Telex - Tell Me It\": "", // 📝 TODO: Find Tidal ID
+            "Telex - Twist À Saint-Tropez (2021 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "The Advisory Circle - Mind How You Go": "", // 📝 TODO: Find Tidal ID
+            "The Barry Sisters - Chiribim, Chiribom": "", // 📝 TODO: Find Tidal ID
+            "The Beach Boys - God Only Knows (Remastered 1990)": "", // 📝 TODO: Find Tidal ID
+            "The Beatles - Flying (Remastered 2009)": "", // 📝 TODO: Find Tidal ID
+            "The Beta Band - Squares (Roman Nose Remix) [Bonus Track]": "", // 📝 TODO: Find Tidal ID
+            "The Biddu Orchestra - Girl, You\": "", // 📝 TODO: Find Tidal ID
+            "The Brand New Heavies - Stay This Way (David Morales Lunar Dub)": "", // 📝 TODO: Find Tidal ID
+            "The Chaplin Band - Il Veliero (Single version)": "", // 📝 TODO: Find Tidal ID
+            "The Chemical Brothers - Electronic Battle Weapon 8": "", // 📝 TODO: Find Tidal ID
+            "The Chemical Brothers - Lost In The K-Hole": "", // 📝 TODO: Find Tidal ID
+            "The Claypool Lennon Delirium - Mr. Wright": "", // 📝 TODO: Find Tidal ID
+            "The Crooked Spoke - Black Tower Hotel": "", // 📝 TODO: Find Tidal ID
+            "The Cure - Lullaby (Remastered)": "", // 📝 TODO: Find Tidal ID
+            "The Doors - Tell All The People (2019 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "The Doors - The Crystal Ship (2017 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "The Doors - Wishful Sinful (2019 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "The Durutti Column - Katherine": "", // 📝 TODO: Find Tidal ID
+            "The Edgar Winter Group - Frankenstein": "", // 📝 TODO: Find Tidal ID
+            "The Egyptian Lover - Belly Dance": "", // 📝 TODO: Find Tidal ID
+            "The Egyptian Lover - Popper\": "", // 📝 TODO: Find Tidal ID
+            "The Fabulous Three - White Sands Pt2": "", // 📝 TODO: Find Tidal ID
+            "The Floresents - Dreamtime": "", // 📝 TODO: Find Tidal ID
+            "The Future Sound of London - Papua New Guinea": "", // 📝 TODO: Find Tidal ID
+            "The Gaslamp Killer, The Heliocentrics - Legna": "", // 📝 TODO: Find Tidal ID
+            "The Ghetto Brothers - Mastica Chupa y Jala": "", // 📝 TODO: Find Tidal ID
+            "The Ghetto Brothers - Viva Puerto Rico Libre": "", // 📝 TODO: Find Tidal ID
+            "The Greg Foat Group - Door into Summer": "", // 📝 TODO: Find Tidal ID
+            "The Grits - Chickin Pi": "", // 📝 TODO: Find Tidal ID
+            "The Grits - Jan Jan": "", // 📝 TODO: Find Tidal ID
+            "The Growth Eternal - III. Rain Song for Five Bass Guitars": "", // 📝 TODO: Find Tidal ID
+            "The Handsome Family - Far From Any Road": "", // 📝 TODO: Find Tidal ID
+            "The Heliocentrics - Space Cake": "", // 📝 TODO: Find Tidal ID
+            "The Heliocentrics - The Uncertainty Principle": "", // 📝 TODO: Find Tidal ID
+            "The Heptones - Country Boy": "", // 📝 TODO: Find Tidal ID
+            "The Irresistible Force - Fish Dances - Instrumental": "", // 📝 TODO: Find Tidal ID
+            "The Irresistible Force - Nepalese Fish Dances - Fila Brazillia remix": "", // 📝 TODO: Find Tidal ID
+            "The Langley Schools Music Project - Good Vibrations": "", // 📝 TODO: Find Tidal ID
+            "The Limiñanas - Calentita": "", // 📝 TODO: Find Tidal ID
+            "The Limiñanas - I Miei Occhi Sono I Tuoi Occhi": "", // 📝 TODO: Find Tidal ID
+            "The Limiñanas - Je suis une gogo girl": "", // 📝 TODO: Find Tidal ID
+            "The Limiñanas - Paradise Now": "", // 📝 TODO: Find Tidal ID
+            "The Maytals - It Must Be True Love": "", // 📝 TODO: Find Tidal ID
+            "The Meters - Stormy": "", // 📝 TODO: Find Tidal ID
+            "The Meters - Tippi-Toes": "", // 📝 TODO: Find Tidal ID
+            "The Millers - Last Days": "", // 📝 TODO: Find Tidal ID
+            "The Monty Alexander Trio - Monticello": "", // 📝 TODO: Find Tidal ID
+            "The Natural Yogurt Band - Colours": "", // 📝 TODO: Find Tidal ID
+            "The Neville Brothers - Yellow Moon": "", // 📝 TODO: Find Tidal ID
+            "The Ogyatanaa Show Band - You Monopolise Me": "", // 📝 TODO: Find Tidal ID
+            "The Orb - Golden Clouds (feat. Lee "Scratch" Perry)": "", // 📝 TODO: Find Tidal ID
+            "The Other People Place - Lifestyles Of The Casual": "", // 📝 TODO: Find Tidal ID
+            "The Other People Place - Moonlight Rendezvous": "", // 📝 TODO: Find Tidal ID
+            "The Other People Place - Sunrays": "", // 📝 TODO: Find Tidal ID
+            "The Other People Place - You Said You Want Me": "", // 📝 TODO: Find Tidal ID
+            "The Paragons - When the Lights Are Low": "", // 📝 TODO: Find Tidal ID
+            "The Pharaohs - In the Basement": "", // 📝 TODO: Find Tidal ID
+            "The Pharcyde - Runnin\": "", // 📝 TODO: Find Tidal ID
+            "The Pioneers - Time Hard": "", // 📝 TODO: Find Tidal ID
+            "The Residents - Amber (Live 1986)": "", // 📝 TODO: Find Tidal ID
+            "The Roches - Hammond Song (2006 Remaster)": "", // 📝 TODO: Find Tidal ID
+            "The Rolling Stones - Emotional Rescue (Remastered 2009)": "", // 📝 TODO: Find Tidal ID
+            "The Rugged Nuggets - Rugged Walk": "", // 📝 TODO: Find Tidal ID
+            "The Scientist - For me and You": "", // 📝 TODO: Find Tidal ID
+            "The Solid Doctor - Faustian Bargain": "", // 📝 TODO: Find Tidal ID
+            "The Solid Doctor - Intranauts": "", // 📝 TODO: Find Tidal ID
+            "The Sonarphonic, Margarita Thompson, Bound Sound - Super Breaker": "", // 📝 TODO: Find Tidal ID
+            "The Space Lady - Synthesize Me": "", // 📝 TODO: Find Tidal ID
+            "The Specials - The Lunatics": "", // 📝 TODO: Find Tidal ID
+            "The Sprout House Band - Butternut": "", // 📝 TODO: Find Tidal ID
+            "The Sprout House Band - Spanish Flowers": "", // 📝 TODO: Find Tidal ID
+            "The Spy from Cairo - Ya Amar": "", // 📝 TODO: Find Tidal ID
+            "The Supremes - Where Did Our Love Go (Single Version / Mono)": "", // 📝 TODO: Find Tidal ID
+            "The Velvet Underground - Lady Godiva\": "", // 📝 TODO: Find Tidal ID
+            "The Vision - Fear": "", // 📝 TODO: Find Tidal ID
+            "The Wiseguys - Too Easy": "", // 📝 TODO: Find Tidal ID
+            "Thee Sinseers - Seems Like": "", // 📝 TODO: Find Tidal ID
+            "Thelonious Monk - I\": "", // 📝 TODO: Find Tidal ID
+            "Theo Parrish - Sweet Sticky": "", // 📝 TODO: Find Tidal ID
+            "Thievery Corporation - Air Batucada (Remastered 2022)": "", // 📝 TODO: Find Tidal ID
+            "This Is The Kit - Magic Spell - Bashed Out Album Version": "", // 📝 TODO: Find Tidal ID
+            "Thornato - Welwyn": "", // 📝 TODO: Find Tidal ID
+            "Tia Maria Produções - Hino da Noite": "", // 📝 TODO: Find Tidal ID
+            "Tigerbalm, Joy Tyson - Profunda Alma (Make-A-Dance Acid Remix)": "", // 📝 TODO: Find Tidal ID
+            "Tim Hecker - Monotony II": "", // 📝 TODO: Find Tidal ID
+            "Tim Sweeney, Lauer, T & P - Dance To T & P": "", // 📝 TODO: Find Tidal ID
+            "Tin Hat Trio - Pablo Looks Back": "", // 📝 TODO: Find Tidal ID
+            "Tirzah - Hive Mind (Speakers Corner Quartet Remix)": "", // 📝 TODO: Find Tidal ID
+            "Tnt Band - Música Del Alma": "", // 📝 TODO: Find Tidal ID
+            "Todd Russell & The Dangerous Coats - Playa Larga": "", // 📝 TODO: Find Tidal ID
+            "Todd Terje - Glittertind": "", // 📝 TODO: Find Tidal ID
+            "Todd Terje - Johnny and Mary": "", // 📝 TODO: Find Tidal ID
+            "Todd Terje - Preben Goes to Acapulco": "", // 📝 TODO: Find Tidal ID
+            "Tom Tom Club - Suboceana": "", // 📝 TODO: Find Tidal ID
+            "Tom Trago - Number Own": "", // 📝 TODO: Find Tidal ID
+            "Tommy Guerrero - By Fist And Fury": "", // 📝 TODO: Find Tidal ID
+            "Tommy Guerrero - Thoughts of Tomorrow": "", // 📝 TODO: Find Tidal ID
+            "Tommy Guerrero - Water in Your Hands": "", // 📝 TODO: Find Tidal ID
+            "Tommy McCook & The Supersonics - Reggae Merengue": "", // 📝 TODO: Find Tidal ID
+            "Tomoko Aran - Secret Desire (shitagokoro)": "", // 📝 TODO: Find Tidal ID
+            "Tomoko Aran - ji.re.n.ma (Nijuugosainoyuuutsu) [DILEMMA]": "", // 📝 TODO: Find Tidal ID
+            "Tomoyo Harada, Haruomi Hosono - A Doodlin’ Song": "", // 📝 TODO: Find Tidal ID
+            "Tony Allen, Jeff Mills - The Seed (Edit)": "", // 📝 TODO: Find Tidal ID
+            "Toolate Grooves - Keep Me Satisfied": "", // 📝 TODO: Find Tidal ID
+            "Tornado Wallace - Bit 1": "", // 📝 TODO: Find Tidal ID
+            "Tornado Wallace - Cloud Country": "", // 📝 TODO: Find Tidal ID
+            "Tornado Wallace - Mermaid Beach": "", // 📝 TODO: Find Tidal ID
+            "Tornado Wallace - Png (Praise No Ghosts)": "", // 📝 TODO: Find Tidal ID
+            "Tornado Wallace - Thinking Allowed": "", // 📝 TODO: Find Tidal ID
+            "Tosca - Honey": "", // 📝 TODO: Find Tidal ID
+            "Tosca - Oscar (Remastered)": "", // 📝 TODO: Find Tidal ID
+            "Tosca - Troststrasse": "", // 📝 TODO: Find Tidal ID
+            "Toubab Krewe - Bani": "", // 📝 TODO: Find Tidal ID
+            "Tribeqa - Amali (Part 1)": "", // 📝 TODO: Find Tidal ID
+            "Trinidad Senolia - You Showed Me (Edit)": "", // 📝 TODO: Find Tidal ID
+            "Trio Elétrico - Echo Parcours (Album Mix)": "", // 📝 TODO: Find Tidal ID
+            "Trippin Jaguar - Duat": "", // 📝 TODO: Find Tidal ID
+            "Tullio De Piscopo - Stop Bajon (Club Mix)": "", // 📝 TODO: Find Tidal ID
+            "Tunde Mabadu - Viva Disco (Instrumental) (Instrumental)": "", // 📝 TODO: Find Tidal ID
+            "Turkana - Madam Kwa Bash": "", // 📝 TODO: Find Tidal ID
+            "Tusken. - drip\": "", // 📝 TODO: Find Tidal ID
+            "U-Ziq - Brace Yourself Jason": "", // 📝 TODO: Find Tidal ID
+            "Umoja - La Piragua": "", // 📝 TODO: Find Tidal ID
+            "Underground System - Sleazy": "", // 📝 TODO: Find Tidal ID
+            "Unspecified - Bo Diddlie": "", // 📝 TODO: Find Tidal ID
+            "Upercent - Choo Choo": "", // 📝 TODO: Find Tidal ID
+            "Vangelis - Le singe bleu (Remastered)": "", // 📝 TODO: Find Tidal ID
+            "Vanille - À bientôt": "", // 📝 TODO: Find Tidal ID
+            "Vanishing Twin - Marbles": "", // 📝 TODO: Find Tidal ID
+            "Various Artists - Hard-Boiled Babe": "", // 📝 TODO: Find Tidal ID
+            "Various Artists - Pillow Talk": "", // 📝 TODO: Find Tidal ID
+            "Various Artists - The Beat Goes On": "", // 📝 TODO: Find Tidal ID
+            "Vegyn - Ch---- Pa------- V2 (169.706 BPM)": "", // 📝 TODO: Find Tidal ID
+            "Velly Joonas - Käes On Aeg": "", // 📝 TODO: Find Tidal ID
+            "Venus Gang - Love to Fly": "", // 📝 TODO: Find Tidal ID
+            "Vladimir Cosma - Parlez-moi de sexe": "", // 📝 TODO: Find Tidal ID
+            "Vlastur - Cycladic Dub": "", // 📝 TODO: Find Tidal ID
+            "Voice Actor - Love": "", // 📝 TODO: Find Tidal ID
+            "Voilaaa - Assia": "", // 📝 TODO: Find Tidal ID
+            "WITCH - Jah Let the Sun Shine": "", // 📝 TODO: Find Tidal ID
+            "WITCH - Movin\": "", // 📝 TODO: Find Tidal ID
+            "Walter Wanderley - Crickets Sing For Ana Maria": "", // 📝 TODO: Find Tidal ID
+            "Warumpi Band - Waru (Fire)": "", // 📝 TODO: Find Tidal ID
+            "Water From Your Eyes - Barley": "", // 📝 TODO: Find Tidal ID
+            "Weather Report - Rumba Mama": "", // 📝 TODO: Find Tidal ID
+            "Ween - Bananas and Blow": "", // 📝 TODO: Find Tidal ID
+            "Ween - Pollo Asado": "", // 📝 TODO: Find Tidal ID
+            "Wendy Rene - After Laughter (Comes Tears)": "", // 📝 TODO: Find Tidal ID
+            "Wet Silk - Let Me Do You Baby": "", // 📝 TODO: Find Tidal ID
+            "Weval - Day After Day": "", // 📝 TODO: Find Tidal ID
+            "Weval - Dreaming": "", // 📝 TODO: Find Tidal ID
+            "Weval - Should Be Fine": "", // 📝 TODO: Find Tidal ID
+            "Whispering Lion - Don\": "", // 📝 TODO: Find Tidal ID
+            "Wilhelm Furtwängler - Bach, JS: Matthäus-Passion, BWV 244, Pt. 2: No. 63, Choral. "O Haupt voll Blut und wunden" (Live)": "", // 📝 TODO: Find Tidal ID
+            "Will Hofbauer - Diiing": "", // 📝 TODO: Find Tidal ID
+            "Will Powers - Adventures In Success": "", // 📝 TODO: Find Tidal ID
+            "Will Scott III - Mauve": "", // 📝 TODO: Find Tidal ID
+            "William Onyeabor - Body and Soul": "", // 📝 TODO: Find Tidal ID
+            "William Orbit - Love My Way (Album Version)": "", // 📝 TODO: Find Tidal ID
+            "William Orbit - Scorpion": "", // 📝 TODO: Find Tidal ID
+            "William Orbit - Time To Get Wize": "", // 📝 TODO: Find Tidal ID
+            "William Orbit - Via Caliente": "", // 📝 TODO: Find Tidal ID
+            "Wilson Boateng - Asew Watchman (Mendel\": "", // 📝 TODO: Find Tidal ID
+            "Woolfy - AEROPLANE (Dub Dub Mix)": "", // 📝 TODO: Find Tidal ID
+            "Woolfy, Projections - Fall into You": "", // 📝 TODO: Find Tidal ID
+            "Woolfy, Projections - Neeve (The Time and Space Machine Mix) (The Time and Space Machine Mix)": "", // 📝 TODO: Find Tidal ID
+            "Woolfy, Projections - To the Moon": "", // 📝 TODO: Find Tidal ID
+            "Wrong Way Up - Dowatchalike": "", // 📝 TODO: Find Tidal ID
+            "X.Y.R. - Reading a Wave": "", // 📝 TODO: Find Tidal ID
+            "Xyla - Feel": "", // 📝 TODO: Find Tidal ID
+            "Xyla - Narcissus": "", // 📝 TODO: Find Tidal ID
+            "Xyla - On & On": "", // 📝 TODO: Find Tidal ID
+            "Yasuaki Shimizu - Shiasate": "", // 📝 TODO: Find Tidal ID
+            "Yasuaki Shimizu - Tachikawa": "", // 📝 TODO: Find Tidal ID
+            "Yaya Bey - meet me in brooklyn": "", // 📝 TODO: Find Tidal ID
+            "Yellow Magic Orchestra - Rap Phenomena": "", // 📝 TODO: Find Tidal ID
+            "Yin Yin - The Rabbit That Hunts Tigers": "", // 📝 TODO: Find Tidal ID
+            "Yo-chanc - Innovation": "", // 📝 TODO: Find Tidal ID
+            "Yonderboi - Riders On the Storm": "", // 📝 TODO: Find Tidal ID
+            "Younger Brother - Psychic Gibbon": "", // 📝 TODO: Find Tidal ID
+            "Youth & Gaudi - Black Crow Dub": "", // 📝 TODO: Find Tidal ID
+            "Youth & Gaudi - Good Summer (The Egg Remix)": "", // 📝 TODO: Find Tidal ID
+            "Youth & Gaudi - The Gods Must Be Crazy": "", // 📝 TODO: Find Tidal ID
+            "Yuksek - Into the Light (feat. Isaac Delusion)": "", // 📝 TODO: Find Tidal ID
+            "Yuksek - Universal Love": "", // 📝 TODO: Find Tidal ID
+            "Yuma Abe - Many Strange Things": "", // 📝 TODO: Find Tidal ID
+            "Yusef Lateef - Robot Man": "", // 📝 TODO: Find Tidal ID
+            "Yussef Dayes - Jukebox": "", // 📝 TODO: Find Tidal ID
+            "Yussef Dayes - Raisins Under the Sun (feat. Shabaka Hutchings)": "", // 📝 TODO: Find Tidal ID
+            "YĪN YĪN - The Year of the Rabbit": "", // 📝 TODO: Find Tidal ID
+            "Zapp - Be Alright": "", // 📝 TODO: Find Tidal ID
+            "Zeb - Politricks and Culture": "", // 📝 TODO: Find Tidal ID
+            "Zee Erf - Southern Freeez (Mudd\": "", // 📝 TODO: Find Tidal ID
+            "Zefer, Wilfy D - No Future": "", // 📝 TODO: Find Tidal ID
+            "Zenana - Witches 85\": "", // 📝 TODO: Find Tidal ID
+            "Zenit - Waitin\": "", // 📝 TODO: Find Tidal ID
+            "Zentone, Zenzile, High Tone - Dub Parade (Zen Mix) (Zen Mix)": "", // 📝 TODO: Find Tidal ID
+            "Zopelar - Blue Gate": "", // 📝 TODO: Find Tidal ID
+            "Zru Vogue - Possibly Imagined": "", // 📝 TODO: Find Tidal ID
+            "amiina - Seoul": "", // 📝 TODO: Find Tidal ID
+            "bosq featuring Kaleta & The Ibibio Horns - Song for Ehi": "", // 📝 TODO: Find Tidal ID
+            "clipping., Daveed Diggs, Jonathan Snipes, William Hutson - Keep Pushing": "", // 📝 TODO: Find Tidal ID
+            "ddwy - Concrete Riviera": "", // 📝 TODO: Find Tidal ID
+            "dkmntl - 05 Wolf Müller - Pfad Des Windes.wav.mp3-14287": "", // 📝 TODO: Find Tidal ID
+            "great area - hearts and minds": "", // 📝 TODO: Find Tidal ID
+            "islandman - Hemşin": "", // 📝 TODO: Find Tidal ID
+            "islandman - Kara Toprak": "", // 📝 TODO: Find Tidal ID
+            "islandman - Seikleos": "", // 📝 TODO: Find Tidal ID
+            "kalbox - Cumbia Caribe": "", // 📝 TODO: Find Tidal ID
+            "maya ongaku - Nuska": "", // 📝 TODO: Find Tidal ID
+            "mock & toof - shoeshine boogie": "", // 📝 TODO: Find Tidal ID
+            "musclecars - Sol": "", // 📝 TODO: Find Tidal ID
+            "r mccarthy - Pronz": "", // 📝 TODO: Find Tidal ID
+            "trickpony - Sponsored Ritual": "", // 📝 TODO: Find Tidal ID
+            "Σtella, Redinho - Charmed": "", // 📝 TODO: Find Tidal ID
+            "ГЛУМ - Уходи": "", // 📝 TODO: Find Tidal ID
+            "Жарок и Искусственные Насаждения - Мертвецы на дорогах": "", // 📝 TODO: Find Tidal ID
+            "אריק איינשטיין - פסק זמן": "", // 📝 TODO: Find Tidal ID
+            "אריק איינשטיין, שלום חנוך - אם הייתי": "", // 📝 TODO: Find Tidal ID
+            "אתניקס - כתם הפרי": "", // 📝 TODO: Find Tidal ID
+            "ברי סחרוף - שתי פנים": "", // 📝 TODO: Find Tidal ID
+            "החלונות הגבוהים - כמה נעים": "", // 📝 TODO: Find Tidal ID
+            "המכשפות - עד העונג הבא": "", // 📝 TODO: Find Tidal ID
+            "מטרופולין - Six Heures": "", // 📝 TODO: Find Tidal ID
+            "מטרופולין - מלאכים": "", // 📝 TODO: Find Tidal ID
+            "משתתפי הכבש הששה עשר - הכבש הששה עשר, לילה טוב": "", // 📝 TODO: Find Tidal ID
+            "עדנה גורן - לא כדאי": "", // 📝 TODO: Find Tidal ID
+            "צביקה פיק - שני תפוחים": "", // 📝 TODO: Find Tidal ID
+            "רמי פורטיס - שקיעתה של הזריחה": "", // 📝 TODO: Find Tidal ID
+            "שרון רוטר - הניצוץ": "", // 📝 TODO: Find Tidal ID
+            "บุปผา สายชล - รูปหล่อถมไป": "", // 📝 TODO: Find Tidal ID
+            "พรศักดิ์ ส่องแสง - ข่อยได้แต่บ่หลาย": "", // 📝 TODO: Find Tidal ID
+            "อรอุมา สิงห์ศิริ - แม่ค้าส้มตำ": "", // 📝 TODO: Find Tidal ID
+            "ジップポップ1985 - 魅惑のフードコート": "", // 📝 TODO: Find Tidal ID
+            "ムーンライダーズ - 地下水道 (KANAL DUB) (Bonus Track)": "", // 📝 TODO: Find Tidal ID
+            "柳ジョージ&レイニーウッド - クロス･アイド･ウーマン": "", // 📝 TODO: Find Tidal ID
+            "桜田　淳子 - わたしの青い鳥": "", // 📝 TODO: Find Tidal ID
+            "梅林　茂 - 夢二のテーマ": "", // 📝 TODO: Find Tidal ID
+            "細野　晴臣 - 相合傘〜Broken Radio Version〜": "", // 📝 TODO: Find Tidal ID
+            "細野晴臣 - ＢＯＤＹ　ＳＮＡＴＣＨＥＲＳ": "", // 📝 TODO: Find Tidal ID
+            "鈴木 茂 - スノー・エキスプレス": "", // 📝 TODO: Find Tidal ID
+            "長山　洋子 - ラ・イスラ・ボニータ": "", // 📝 TODO: Find Tidal ID
+            "高中　正義 - BREEZIN\": "", // 📝 TODO: Find Tidal ID
+            "봄의 일렉트로 - Cork": "", // 📝 TODO: Find Tidal ID
+            "ﾃｨﾝ･ﾊﾟﾝ･ｱﾚｰ - 結婚しようよ": "", // 📝 TODO: Find Tidal ID
         };
+
         
         // Function to get direct Tidal track URL if available
         function getTidalTrackUrl(artist, title) {
