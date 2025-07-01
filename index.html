@@ -1195,29 +1195,53 @@
     <script>
         
         // Smart Tidal link handler
-        function handleTidalClick(artist, title, event) {
+        
+        // Database of known Tidal track IDs
+        const knownTidalTracks = {
+            // Format: "Artist - Title": "track_id"
+            "Opez - Balera De Mar": "98156344", // Example from your URL
+            "Tommy Guerrero - Thoughts of Tomorrow": "", // Would need to be found
+            "L'Eclair - Taishi-Koto, Pt. 1": "", // Would need to be found
+            // Add more tracks as you discover their Tidal IDs
+        };
+        
+        // Function to get direct Tidal track URL if available
+        function getTidalTrackUrl(artist, title) {
+            const trackKey = `${artist} - ${title}`;
+            const trackId = knownTidalTracks[trackKey];
+            
+            if (trackId && trackId !== "") {
+                // Direct track link (like your example)
+                return `https://tidal.com/browse/track/${trackId}?u`;
+            } else {
+                // Fallback to search
+                const searchQuery = encodeURIComponent(`${artist} ${title}`);
+                return `https://tidal.com/browse/search/tracks?q=${searchQuery}`;
+            }
+        }
+        
+function handleTidalClick(artist, title, event) {
             event.preventDefault();
             
-            // Since we don't have specific track IDs, we'll use Tidal's search 
-            // but format it to match their browse structure better
-            const searchQuery = encodeURIComponent(`${artist} ${title}`);
+            // Get the appropriate Tidal URL (direct track or search)
+            const tidalUrl = getTidalTrackUrl(artist, title);
+            const trackKey = `${artist} - ${title}`;
+            const isDirectTrack = knownTidalTracks[trackKey] && knownTidalTracks[trackKey] !== "";
             
-            // Use Tidal's browse search format (more reliable than basic search)
-            // This mimics the structure: https://tidal.com/browse/track/ID
-            // But uses search since we don't have track IDs
-            const tidalUrl = `https://tidal.com/browse/search/tracks?q=${searchQuery}`;
-            
-            // Alternative fallback to general browse
-            const fallbackUrl = `https://tidal.com/browse/search?q=${searchQuery}`;
-            
-            // Open Tidal with the track-specific search
             try {
                 window.open(tidalUrl, '_blank', 'noopener');
-                console.log(`🎵 Opening Tidal track search for: ${artist} - ${title}`);
-                console.log(`🔗 URL: ${tidalUrl}`);
+                
+                if (isDirectTrack) {
+                    console.log(`🎵 Opening direct Tidal track for: ${artist} - ${title}`);
+                    console.log(`🔗 Direct URL: ${tidalUrl}`);
+                } else {
+                    console.log(`🔍 Opening Tidal search for: ${artist} - ${title}`);
+                    console.log(`🔗 Search URL: ${tidalUrl}`);
+                }
             } catch (error) {
-                console.log('⚠️ Primary Tidal URL failed, trying fallback');
-                window.open(fallbackUrl, '_blank', 'noopener');
+                console.log('⚠️ Tidal link failed:', error);
+                // Ultimate fallback
+                window.open('https://tidal.com', '_blank', 'noopener');
             }
         }
         
