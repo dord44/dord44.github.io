@@ -2814,443 +2814,67 @@
         };
 
         // Function to get local tracklist by episode identifier
-        function getLocalTracklist(episodeTitle) {
+                        function getLocalTracklist(episodeTitle) {
             // Try to match episode title to local tracklist
             const lowerTitle = episodeTitle.toLowerCase();
             
-            // More specific matching with word boundaries
-            if (lowerTitle.match(/\b1\b/) || lowerTitle.includes('episode 1') || 
-                lowerTitle.includes('rq 1') || lowerTitle.includes('#1') ||
-                lowerTitle.includes('ep 1') || lowerTitle.includes('episode1') ||
-                lowerTitle.includes('rq1')) {
-                return localTracklists['rq-1'];
-            }
-
-            if (lowerTitle.match(/\b2\b/) || lowerTitle.includes('episode 2') || 
-                lowerTitle.includes('rq 2') || lowerTitle.includes('#2') ||
-                lowerTitle.includes('ep 2') || lowerTitle.includes('episode2') ||
-                lowerTitle.includes('rq2')) {
-                return localTracklists['rq-2'];
-            }
-
-            if (lowerTitle.match(/\b3\b/) || lowerTitle.includes('episode 3') || 
-                lowerTitle.includes('rq 3') || lowerTitle.includes('#3') ||
-                lowerTitle.includes('ep 3') || lowerTitle.includes('episode3') ||
-                lowerTitle.includes('rq3')) {
-                return localTracklists['rq-3'];
-            }
-
-            if (lowerTitle.match(/\b4\b/) || lowerTitle.includes('episode 4') || 
-                lowerTitle.includes('rq 4') || lowerTitle.includes('#4') ||
-                lowerTitle.includes('ep 4') || lowerTitle.includes('episode4') ||
-                lowerTitle.includes('rq4')) {
-                return localTracklists['rq-4'];
-            }
-
-            if (lowerTitle.match(/\b5\b/) || lowerTitle.includes('episode 5') || 
-                lowerTitle.includes('rq 5') || lowerTitle.includes('#5') ||
-                lowerTitle.includes('ep 5') || lowerTitle.includes('episode5') ||
-                lowerTitle.includes('rq5')) {
-                return localTracklists['rq-5'];
-            }
-
-            if (lowerTitle.match(/\b6\b/) || lowerTitle.includes('episode 6') || 
-                lowerTitle.includes('rq 6') || lowerTitle.includes('#6') ||
-                lowerTitle.includes('ep 6') || lowerTitle.includes('episode6') ||
-                lowerTitle.includes('rq6')) {
-                return localTracklists['rq-6'];
-            }
-
-            if (lowerTitle.match(/\b7\b/) || lowerTitle.includes('episode 7') || 
-                lowerTitle.includes('rq 7') || lowerTitle.includes('#7') ||
-                lowerTitle.includes('ep 7') || lowerTitle.includes('episode7') ||
-                lowerTitle.includes('rq7')) {
-                return localTracklists['rq-7'];
-            }
-
-            if (lowerTitle.match(/\b8\b/) || lowerTitle.includes('episode 8') || 
-                lowerTitle.includes('rq 8') || lowerTitle.includes('#8') ||
-                lowerTitle.includes('ep 8') || lowerTitle.includes('episode8') ||
-                lowerTitle.includes('rq8')) {
-                return localTracklists['rq-8'];
-            }
-
-            if (lowerTitle.match(/\b9\b/) || lowerTitle.includes('episode 9') || 
-                lowerTitle.includes('rq 9') || lowerTitle.includes('#9') ||
-                lowerTitle.includes('ep 9') || lowerTitle.includes('episode9') ||
-                lowerTitle.includes('rq9')) {
-                return localTracklists['rq-9'];
-            }
-
-            if (lowerTitle.match(/\b10\b/) || lowerTitle.includes('episode 10') || 
-                lowerTitle.includes('rq 10') || lowerTitle.includes('#10') ||
-                lowerTitle.includes('ep 10') || lowerTitle.includes('episode10') ||
-                lowerTitle.includes('rq10')) {
-                return localTracklists['rq-10'];
-            }
-
-            if (lowerTitle.match(/\b11\b/) || lowerTitle.includes('episode 11') || 
-                lowerTitle.includes('rq 11') || lowerTitle.includes('#11') ||
-                lowerTitle.includes('ep 11') || lowerTitle.includes('episode11') ||
-                lowerTitle.includes('rq11')) {
-                return localTracklists['rq-11'];
-            }
-
-            if (lowerTitle.match(/\b12\b/) || lowerTitle.includes('episode 12') || 
-                lowerTitle.includes('rq 12') || lowerTitle.includes('#12') ||
-                lowerTitle.includes('ep 12') || lowerTitle.includes('episode12') ||
-                lowerTitle.includes('rq12')) {
-                return localTracklists['rq-12'];
-            }
-
-            if (lowerTitle.match(/\b13\b/) || lowerTitle.includes('episode 13') || 
-                lowerTitle.includes('rq 13') || lowerTitle.includes('#13') ||
-                lowerTitle.includes('ep 13') || lowerTitle.includes('episode13') ||
-                lowerTitle.includes('rq13')) {
-                return localTracklists['rq-13'];
-            }
-
-            if (lowerTitle.match(/\b14\b/) || lowerTitle.includes('episode 14') || 
-                lowerTitle.includes('rq 14') || lowerTitle.includes('#14') ||
-                lowerTitle.includes('ep 14') || lowerTitle.includes('episode14') ||
-                lowerTitle.includes('rq14')) {
-                return localTracklists['rq-14'];
-            }
-
-            if (lowerTitle.match(/\b15\b/) || lowerTitle.includes('episode 15') || 
-                lowerTitle.includes('rq 15') || lowerTitle.includes('#15') ||
-                lowerTitle.includes('ep 15') || lowerTitle.includes('episode15') ||
-                lowerTitle.includes('rq15')) {
-                return localTracklists['rq-15'];
-            }
-
-            if (lowerTitle.match(/\b16\b/) || lowerTitle.includes('episode 16') || 
-                lowerTitle.includes('rq 16') || lowerTitle.includes('#16') ||
-                lowerTitle.includes('ep 16') || lowerTitle.includes('episode16') ||
-                lowerTitle.includes('rq16')) {
-                return localTracklists['rq-16'];
-            }
-
-            if (lowerTitle.match(/\b17\b/) || lowerTitle.includes('episode 17') || 
-                lowerTitle.includes('rq 17') || lowerTitle.includes('#17') ||
-                lowerTitle.includes('ep 17') || lowerTitle.includes('episode17') ||
-                lowerTitle.includes('rq17')) {
-                return localTracklists['rq-17'];
-            }
-
-            if (lowerTitle.match(/\b18\b/) || lowerTitle.includes('episode 18') || 
-                lowerTitle.includes('rq 18') || lowerTitle.includes('#18') ||
-                lowerTitle.includes('ep 18') || lowerTitle.includes('episode18') ||
-                lowerTitle.includes('rq18')) {
-                return localTracklists['rq-18'];
-            }
-
-            if (lowerTitle.match(/\b19\b/) || lowerTitle.includes('episode 19') || 
-                lowerTitle.includes('rq 19') || lowerTitle.includes('#19') ||
-                lowerTitle.includes('ep 19') || lowerTitle.includes('episode19') ||
-                lowerTitle.includes('rq19')) {
-                return localTracklists['rq-19'];
-            }
-
-            if (lowerTitle.match(/\b20\b/) || lowerTitle.includes('episode 20') || 
-                lowerTitle.includes('rq 20') || lowerTitle.includes('#20') ||
-                lowerTitle.includes('ep 20') || lowerTitle.includes('episode20') ||
-                lowerTitle.includes('rq20')) {
-                return localTracklists['rq-20'];
-            }
-
-            if (lowerTitle.match(/\b21\b/) || lowerTitle.includes('episode 21') || 
-                lowerTitle.includes('rq 21') || lowerTitle.includes('#21') ||
-                lowerTitle.includes('ep 21') || lowerTitle.includes('episode21') ||
-                lowerTitle.includes('rq21')) {
-                return localTracklists['rq-21'];
-            }
-
-            if (lowerTitle.match(/\b22\b/) || lowerTitle.includes('episode 22') || 
-                lowerTitle.includes('rq 22') || lowerTitle.includes('#22') ||
-                lowerTitle.includes('ep 22') || lowerTitle.includes('episode22') ||
-                lowerTitle.includes('rq22')) {
-                return localTracklists['rq-22'];
-            }
-
-            if (lowerTitle.match(/\b23\b/) || lowerTitle.includes('episode 23') || 
-                lowerTitle.includes('rq 23') || lowerTitle.includes('#23') ||
-                lowerTitle.includes('ep 23') || lowerTitle.includes('episode23') ||
-                lowerTitle.includes('rq23')) {
-                return localTracklists['rq-23'];
-            }
-
-            if (lowerTitle.match(/\b24\b/) || lowerTitle.includes('episode 24') || 
-                lowerTitle.includes('rq 24') || lowerTitle.includes('#24') ||
-                lowerTitle.includes('ep 24') || lowerTitle.includes('episode24') ||
-                lowerTitle.includes('rq24')) {
-                return localTracklists['rq-24'];
-            }
-
-            if (lowerTitle.match(/\b25\b/) || lowerTitle.includes('episode 25') || 
-                lowerTitle.includes('rq 25') || lowerTitle.includes('#25') ||
-                lowerTitle.includes('ep 25') || lowerTitle.includes('episode25') ||
-                lowerTitle.includes('rq25')) {
-                return localTracklists['rq-25'];
-            }
-
-            if (lowerTitle.match(/\b26\b/) || lowerTitle.includes('episode 26') || 
-                lowerTitle.includes('rq 26') || lowerTitle.includes('#26') ||
-                lowerTitle.includes('ep 26') || lowerTitle.includes('episode26') ||
-                lowerTitle.includes('rq26')) {
-                return localTracklists['rq-26'];
-            }
-
-            if (lowerTitle.match(/\b27\b/) || lowerTitle.includes('episode 27') || 
-                lowerTitle.includes('rq 27') || lowerTitle.includes('#27') ||
-                lowerTitle.includes('ep 27') || lowerTitle.includes('episode27') ||
-                lowerTitle.includes('rq27')) {
-                return localTracklists['rq-27'];
-            }
-
-            if (lowerTitle.match(/\b28\b/) || lowerTitle.includes('episode 28') || 
-                lowerTitle.includes('rq 28') || lowerTitle.includes('#28') ||
-                lowerTitle.includes('ep 28') || lowerTitle.includes('episode28') ||
-                lowerTitle.includes('rq28')) {
-                return localTracklists['rq-28'];
-            }
-
-            if (lowerTitle.match(/\b29\b/) || lowerTitle.includes('episode 29') || 
-                lowerTitle.includes('rq 29') || lowerTitle.includes('#29') ||
-                lowerTitle.includes('ep 29') || lowerTitle.includes('episode29') ||
-                lowerTitle.includes('rq29')) {
-                return localTracklists['rq-29'];
-            }
-
-            if (lowerTitle.match(/\b30\b/) || lowerTitle.includes('episode 30') || 
-                lowerTitle.includes('rq 30') || lowerTitle.includes('#30') ||
-                lowerTitle.includes('ep 30') || lowerTitle.includes('episode30') ||
-                lowerTitle.includes('rq30')) {
-                return localTracklists['rq-30'];
-            }
-
-            if (lowerTitle.match(/\b31\b/) || lowerTitle.includes('episode 31') || 
-                lowerTitle.includes('rq 31') || lowerTitle.includes('#31') ||
-                lowerTitle.includes('ep 31') || lowerTitle.includes('episode31') ||
-                lowerTitle.includes('rq31')) {
-                return localTracklists['rq-31'];
-            }
-
-            if (lowerTitle.match(/\b32\b/) || lowerTitle.includes('episode 32') || 
-                lowerTitle.includes('rq 32') || lowerTitle.includes('#32') ||
-                lowerTitle.includes('ep 32') || lowerTitle.includes('episode32') ||
-                lowerTitle.includes('rq32')) {
-                return localTracklists['rq-32'];
-            }
-
-            if (lowerTitle.match(/\b33\b/) || lowerTitle.includes('episode 33') || 
-                lowerTitle.includes('rq 33') || lowerTitle.includes('#33') ||
-                lowerTitle.includes('ep 33') || lowerTitle.includes('episode33') ||
-                lowerTitle.includes('rq33')) {
-                return localTracklists['rq-33'];
-            }
-
-            if (lowerTitle.match(/\b34\b/) || lowerTitle.includes('episode 34') || 
-                lowerTitle.includes('rq 34') || lowerTitle.includes('#34') ||
-                lowerTitle.includes('ep 34') || lowerTitle.includes('episode34') ||
-                lowerTitle.includes('rq34')) {
-                return localTracklists['rq-34'];
-            }
-
-            if (lowerTitle.match(/\b35\b/) || lowerTitle.includes('episode 35') || 
-                lowerTitle.includes('rq 35') || lowerTitle.includes('#35') ||
-                lowerTitle.includes('ep 35') || lowerTitle.includes('episode35') ||
-                lowerTitle.includes('rq35')) {
-                return localTracklists['rq-35'];
-            }
-
-            if (lowerTitle.match(/\b36\b/) || lowerTitle.includes('episode 36') || 
-                lowerTitle.includes('rq 36') || lowerTitle.includes('#36') ||
-                lowerTitle.includes('ep 36') || lowerTitle.includes('episode36') ||
-                lowerTitle.includes('rq36')) {
-                return localTracklists['rq-36'];
-            }
-
-            if (lowerTitle.match(/\b37\b/) || lowerTitle.includes('episode 37') || 
-                lowerTitle.includes('rq 37') || lowerTitle.includes('#37') ||
-                lowerTitle.includes('ep 37') || lowerTitle.includes('episode37') ||
-                lowerTitle.includes('rq37')) {
-                return localTracklists['rq-37'];
-            }
-
-            if (lowerTitle.match(/\b38\b/) || lowerTitle.includes('episode 38') || 
-                lowerTitle.includes('rq 38') || lowerTitle.includes('#38') ||
-                lowerTitle.includes('ep 38') || lowerTitle.includes('episode38') ||
-                lowerTitle.includes('rq38')) {
-                return localTracklists['rq-38'];
-            }
-
-            if (lowerTitle.match(/\b39\b/) || lowerTitle.includes('episode 39') || 
-                lowerTitle.includes('rq 39') || lowerTitle.includes('#39') ||
-                lowerTitle.includes('ep 39') || lowerTitle.includes('episode39') ||
-                lowerTitle.includes('rq39')) {
-                return localTracklists['rq-39'];
-            }
-
-            if (lowerTitle.match(/\b40\b/) || lowerTitle.includes('episode 40') || 
-                lowerTitle.includes('rq 40') || lowerTitle.includes('#40') ||
-                lowerTitle.includes('ep 40') || lowerTitle.includes('episode40') ||
-                lowerTitle.includes('rq40')) {
-                return localTracklists['rq-40'];
-            }
-
-            if (lowerTitle.match(/\b41\b/) || lowerTitle.includes('episode 41') || 
-                lowerTitle.includes('rq 41') || lowerTitle.includes('#41') ||
-                lowerTitle.includes('ep 41') || lowerTitle.includes('episode41') ||
-                lowerTitle.includes('rq41')) {
-                return localTracklists['rq-41'];
-            }
-
-            if (lowerTitle.match(/\b42\b/) || lowerTitle.includes('episode 42') || 
-                lowerTitle.includes('rq 42') || lowerTitle.includes('#42') ||
-                lowerTitle.includes('ep 42') || lowerTitle.includes('episode42') ||
-                lowerTitle.includes('rq42')) {
-                return localTracklists['rq-42'];
-            }
-
-            if (lowerTitle.match(/\b43\b/) || lowerTitle.includes('episode 43') || 
-                lowerTitle.includes('rq 43') || lowerTitle.includes('#43') ||
-                lowerTitle.includes('ep 43') || lowerTitle.includes('episode43') ||
-                lowerTitle.includes('rq43')) {
-                return localTracklists['rq-43'];
-            }
-
-            if (lowerTitle.match(/\b44\b/) || lowerTitle.includes('episode 44') || 
-                lowerTitle.includes('rq 44') || lowerTitle.includes('#44') ||
-                lowerTitle.includes('ep 44') || lowerTitle.includes('episode44') ||
-                lowerTitle.includes('rq44')) {
-                return localTracklists['rq-44'];
-            }
-
-            if (lowerTitle.match(/\b45\b/) || lowerTitle.includes('episode 45') || 
-                lowerTitle.includes('rq 45') || lowerTitle.includes('#45') ||
-                lowerTitle.includes('ep 45') || lowerTitle.includes('episode45') ||
-                lowerTitle.includes('rq45')) {
-                return localTracklists['rq-45'];
-            }
-
-            if (lowerTitle.match(/\b46\b/) || lowerTitle.includes('episode 46') || 
-                lowerTitle.includes('rq 46') || lowerTitle.includes('#46') ||
-                lowerTitle.includes('ep 46') || lowerTitle.includes('episode46') ||
-                lowerTitle.includes('rq46')) {
-                return localTracklists['rq-46'];
-            }
-
-            if (lowerTitle.match(/\b47\b/) || lowerTitle.includes('episode 47') || 
-                lowerTitle.includes('rq 47') || lowerTitle.includes('#47') ||
-                lowerTitle.includes('ep 47') || lowerTitle.includes('episode47') ||
-                lowerTitle.includes('rq47')) {
-                return localTracklists['rq-47'];
-            }
-
-            if (lowerTitle.match(/\b48\b/) || lowerTitle.includes('episode 48') || 
-                lowerTitle.includes('rq 48') || lowerTitle.includes('#48') ||
-                lowerTitle.includes('ep 48') || lowerTitle.includes('episode48') ||
-                lowerTitle.includes('rq48')) {
-                return localTracklists['rq-48'];
-            }
-
-            if (lowerTitle.match(/\b49\b/) || lowerTitle.includes('episode 49') || 
-                lowerTitle.includes('rq 49') || lowerTitle.includes('#49') ||
-                lowerTitle.includes('ep 49') || lowerTitle.includes('episode49') ||
-                lowerTitle.includes('rq49')) {
-                return localTracklists['rq-49'];
-            }
-
-            if (lowerTitle.match(/\b50\b/) || lowerTitle.includes('episode 50') || 
-                lowerTitle.includes('rq 50') || lowerTitle.includes('#50') ||
-                lowerTitle.includes('ep 50') || lowerTitle.includes('episode50') ||
-                lowerTitle.includes('rq50')) {
-                return localTracklists['rq-50'];
-            }
-
-            if (lowerTitle.match(/\b51\b/) || lowerTitle.includes('episode 51') || 
-                lowerTitle.includes('rq 51') || lowerTitle.includes('#51') ||
-                lowerTitle.includes('ep 51') || lowerTitle.includes('episode51') ||
-                lowerTitle.includes('rq51')) {
-                return localTracklists['rq-51'];
-            }
-
-            if (lowerTitle.match(/\b52\b/) || lowerTitle.includes('episode 52') || 
-                lowerTitle.includes('rq 52') || lowerTitle.includes('#52') ||
-                lowerTitle.includes('ep 52') || lowerTitle.includes('episode52') ||
-                lowerTitle.includes('rq52')) {
-                return localTracklists['rq-52'];
-            }
-
-            if (lowerTitle.match(/\b53\b/) || lowerTitle.includes('episode 53') || 
-                lowerTitle.includes('rq 53') || lowerTitle.includes('#53') ||
-                lowerTitle.includes('ep 53') || lowerTitle.includes('episode53') ||
-                lowerTitle.includes('rq53')) {
-                return localTracklists['rq-53'];
-            }
-
-            if (lowerTitle.match(/\b54\b/) || lowerTitle.includes('episode 54') || 
-                lowerTitle.includes('rq 54') || lowerTitle.includes('#54') ||
-                lowerTitle.includes('ep 54') || lowerTitle.includes('episode54') ||
-                lowerTitle.includes('rq54')) {
-                return localTracklists['rq-54'];
-            }
-
-            if (lowerTitle.match(/\b55\b/) || lowerTitle.includes('episode 55') || 
-                lowerTitle.includes('rq 55') || lowerTitle.includes('#55') ||
-                lowerTitle.includes('ep 55') || lowerTitle.includes('episode55') ||
-                lowerTitle.includes('rq55')) {
-                return localTracklists['rq-55'];
-            }
-
-            if (lowerTitle.match(/\b56\b/) || lowerTitle.includes('episode 56') || 
-                lowerTitle.includes('rq 56') || lowerTitle.includes('#56') ||
-                lowerTitle.includes('ep 56') || lowerTitle.includes('episode56') ||
-                lowerTitle.includes('rq56')) {
-                return localTracklists['rq-56'];
-            }
-
-            if (lowerTitle.match(/\b57\b/) || lowerTitle.includes('episode 57') || 
-                lowerTitle.includes('rq 57') || lowerTitle.includes('#57') ||
-                lowerTitle.includes('ep 57') || lowerTitle.includes('episode57') ||
-                lowerTitle.includes('rq57')) {
-                return localTracklists['rq-57'];
-            }
-
-            if (lowerTitle.includes('58-goma') || (lowerTitle.includes('58') && lowerTitle.includes('goma')) ||
-                lowerTitle.match(/\b58\b/) && lowerTitle.includes('goma')) {
+            // Extract all numbers from the title to find episode number
+            const numbers = lowerTitle.match(/\d+/g);
+            if (!numbers) return null;
+            
+            // Special case: Episode 58-Goma
+            if (lowerTitle.includes('goma') && numbers.includes('58')) {
                 return localTracklists['rq-58-goma'];
             }
-
-            if (lowerTitle.match(/\b59\b/) || lowerTitle.includes('episode 59') || 
-                lowerTitle.includes('rq 59') || lowerTitle.includes('#59') ||
-                lowerTitle.includes('ep 59') || lowerTitle.includes('episode59') ||
-                lowerTitle.includes('rq59')) {
-                return localTracklists['rq-59'];
+            
+            // Find the most likely episode number
+            // Look for explicit episode indicators first
+            let episodeNumber = null;
+            
+            // Check for explicit episode/ep/rq patterns
+            const explicitPatterns = [
+                /(?:episode|ep|rq)\s*(\d+)/g,
+                /#(\d+)/g,
+                /live\s*(\d+)/g
+            ];
+            
+            for (const pattern of explicitPatterns) {
+                const match = pattern.exec(lowerTitle);
+                if (match) {
+                    episodeNumber = match[1];
+                    break;
+                }
             }
-
-            if (lowerTitle.match(/\b60\b/) || lowerTitle.includes('episode 60') || 
-                lowerTitle.includes('rq 60') || lowerTitle.includes('#60') ||
-                lowerTitle.includes('ep 60') || lowerTitle.includes('episode60') ||
-                lowerTitle.includes('rq60')) {
-                return localTracklists['rq-60'];
+            
+            // If no explicit pattern found, look for standalone numbers
+            if (!episodeNumber) {
+                // Look for word-boundary numbers that could be episode numbers
+                const boundaryNumbers = lowerTitle.match(/\b\d+\b/g);
+                if (boundaryNumbers) {
+                    // Filter to reasonable episode numbers (1-62)
+                    const validNumbers = boundaryNumbers.filter(n => {
+                        const num = parseInt(n);
+                        return num >= 1 && num <= 62;
+                    });
+                    
+                    if (validNumbers.length === 1) {
+                        episodeNumber = validNumbers[0];
+                    } else if (validNumbers.length > 1) {
+                        // Multiple valid numbers - pick the most likely one
+                        // Prefer higher numbers (more specific)
+                        episodeNumber = validNumbers.sort((a, b) => parseInt(b) - parseInt(a))[0];
+                    }
+                }
             }
-
-            if (lowerTitle.match(/\b61\b/) || lowerTitle.includes('episode 61') || 
-                lowerTitle.includes('rq 61') || lowerTitle.includes('#61') ||
-                lowerTitle.includes('ep 61') || lowerTitle.includes('episode61') ||
-                lowerTitle.includes('rq61')) {
-                return localTracklists['rq-61'];
+            
+            // Return the appropriate tracklist
+            if (episodeNumber) {
+                const tracklistKey = `rq-${episodeNumber}`;
+                if (localTracklists[tracklistKey]) {
+                    return localTracklists[tracklistKey];
+                }
             }
-
-            if (lowerTitle.match(/\b62\b/) || lowerTitle.includes('episode 62') || 
-                lowerTitle.includes('rq 62') || lowerTitle.includes('#62') ||
-                lowerTitle.includes('ep 62') || lowerTitle.includes('episode62') ||
-                lowerTitle.includes('rq62')) {
-                return localTracklists['rq-62'];
-            }
-
+            
             return null;
         }
 
