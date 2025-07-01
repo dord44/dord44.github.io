@@ -342,6 +342,19 @@
         .fire-text {
             animation: fire 0.5s infinite;
         }
+        
+        .logo-link {
+            transition: transform 0.3s ease, opacity 0.9s ease;
+        }
+        
+        .logo-link:hover {
+            transform: scale(1.05);
+            opacity: 0.9;
+        }
+        
+        .radio-logo {
+            cursor: pointer;
+        }
 
         .webring {
             margin: 30px 0;
@@ -978,7 +991,13 @@
             <span class="spinning-disc">🎵</span>
         </div>
 
-        <h1 class="fire-text">☆ RADIO QUEBRADA ☆</h1>
+        <a href="/" class="logo-link" style="text-decoration: none; color: inherit;">
+            <div class="radio-logo" style="display: flex; align-items: center; justify-content: center; flex-direction: column;">
+                <!-- Logo image will go here when available -->
+                <!-- <img src="./radio-quebrada-logo.png" alt="Radio Quebrada Logo" style="max-height: 80px; margin-bottom: 10px;"> -->
+                <h1 class="fire-text">☆ RADIO QUEBRADA ☆</h1>
+            </div>
+        </a>
         
         <div class="marquee">
             <span>♪♫♪ WELCOME TO THE HOTTEST RADIO STATION ON THE WORLD WIDE WEB!!! ♪♫♪ NOW PLAYING THE FRESHEST BEATS!!! ♪♫♪ TELL YOUR FRIENDS!!! ♪♫♪</span>
