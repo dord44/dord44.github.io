@@ -1202,7 +1202,7 @@
             
             // Create search URLs for each platform
             const bandcampUrl = `https://bandcamp.com/search?q=${searchQuery}`;
-            const tidalUrl = `https://listen.tidal.com/search?q=${searchQuery}`;
+            const tidalUrl = `https://tidal.com`;
             const appleMusicUrl = `https://music.apple.com/search?term=${searchQuery}`;
             
             // Return HTML with proper icon-based platform links
@@ -1215,7 +1215,7 @@
                             <path fill="#629aa0" d="M0 19h9l4-14H4L0 19zm15 0h9l-4-14h-9l4 14z"/>
                         </svg>
                     </a>
-                    <a href="${tidalUrl}" target="_blank" rel="noopener" title="Search '${artist} - ${title}' on Tidal" 
+                    <a href="${tidalUrl}" target="_blank" rel="noopener" title="Listen to '${artist} - ${title}' on Tidal (subscription required)" 
                        style="display: inline-block; margin-right: 6px; text-decoration: none; opacity: 0.8; transition: opacity 0.2s;" 
                        onmouseover="this.style.opacity='1'" onmouseout="this.style.opacity='0.8'">
                         <svg width="16" height="16" viewBox="0 0 24 24" style="vertical-align: middle;">
