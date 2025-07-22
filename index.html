@@ -2892,10 +2892,10 @@
                 // Look for word-boundary numbers that could be episode numbers
                 const boundaryNumbers = lowerTitle.match(/\b\d+\b/g);
                 if (boundaryNumbers) {
-                    // Filter to reasonable episode numbers (1-62)
+                    // Filter to reasonable episode numbers (1-64)
                     const validNumbers = boundaryNumbers.filter(n => {
                         const num = parseInt(n);
-                        return num >= 1 && num <= 62;
+                        return num >= 1 && num <= 64;
                     });
                     
                     if (validNumbers.length === 1) {
