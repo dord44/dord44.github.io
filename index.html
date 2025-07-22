@@ -1006,8 +1006,14 @@
                 <button class="mini-button" onclick="toggleMainTracklist()" id="tracklist-toggle-btn">🔽 HIDE TRACKLIST</button>
             </div>
             
+            <button class="rainbow-button" onclick="playPreviousEpisode()">
+                ⏮️ PREVIOUS
+            </button>
             <button class="rainbow-button" onclick="playRandomEpisode()">
                 🎲 SHUFFLE THAT BEAT! 🎲
+            </button>
+            <button class="rainbow-button" onclick="playNextEpisode()">
+                NEXT ⏭️
             </button>
             <button id="start-radio" class="rainbow-button" style="background: linear-gradient(to right, #FF0000, #FFFF00); animation: pulse 1s infinite;">
                 🔊 CLICK HERE TO START THE RADIO! 🔊
@@ -3279,6 +3285,9 @@
             const episode = episodes[index];
             if (episode) {
                 currentEpisode = episode;
+                currentEpisodeIndex = index;  // Track current episode index for auto-advance
+                window.episodeStartTime = Date.now(); // Track episode start time
+                
                 document.getElementById('current-episode').innerHTML = `🎧 NOW ON AIR: ${episode.title} 🎧`;
                 
                 // Hide start button once playing
@@ -3304,6 +3313,11 @@
                 // Load tracklist for this episode
                 loadTracklistForCurrentEpisode();
                 
+                // Start auto-advance monitoring
+                startAutoAdvanceMonitoring();
+                
+                console.log(`🎵 Now playing: ${episode.title} (Episode ${index + 1}/${episodes.length})`);
+                
                 // Show track display after a short delay
                 setTimeout(() => {
                     if (currentTracklist.length > 0) {
@@ -3316,8 +3330,125 @@
         function playRandomEpisode() {
             if (episodes.length > 0) {
                 const randomIndex = Math.floor(Math.random() * episodes.length);
+                window.episodeStartTime = Date.now(); // Track when episode started
                 playEpisode(randomIndex);
             }
+        }
+
+        // Add manual next/previous controls with auto-advance support
+        function playNextEpisode() {
+            if (!episodes.length) return;
+            
+            let nextIndex = (currentEpisodeIndex || 0) + 1;
+            if (nextIndex >= episodes.length) {
+                nextIndex = 0; // Loop back to start
+            }
+            
+            window.episodeStartTime = Date.now();
+            playEpisode(nextIndex);
+        }
+        
+        function playPreviousEpisode() {
+            if (!episodes.length) return;
+            
+            let prevIndex = (currentEpisodeIndex || 0) - 1;
+            if (prevIndex < 0) {
+                prevIndex = episodes.length - 1; // Loop to end
+            }
+            
+            window.episodeStartTime = Date.now();
+            playEpisode(prevIndex);
+        }
+
+        // Auto-advance functionality (enhanced)
+        let autoAdvanceEnabled = true;
+        let playerCheckInterval = null;
+        let currentEpisodeIndex = 0;
+
+        function startAutoAdvanceMonitoring() {
+            if (!autoAdvanceEnabled) return;
+            
+            // Clear any existing monitoring
+            if (playerCheckInterval) {
+                clearInterval(playerCheckInterval);
+            }
+            
+            // Check every 5 seconds if the episode has ended
+            playerCheckInterval = setInterval(() => {
+                checkIfEpisodeEnded();
+            }, 5000);
+            
+            console.log('🎵 Started auto-advance monitoring');
+        }
+        
+        function checkIfEpisodeEnded() {
+            if (!autoAdvanceEnabled || !episodes.length) return;
+            
+            const currentTime = Date.now();
+            const timeSinceStart = currentTime - (window.episodeStartTime || currentTime);
+            
+            // Get estimated duration based on episode number
+            let episodeDuration = getEpisodeDuration(currentEpisode);
+            
+            // Add buffer time (5 minutes) to account for variations
+            const BUFFER_TIME = 5 * 60 * 1000; // 5 minutes
+            const totalTimeout = episodeDuration + BUFFER_TIME;
+            
+            // Check if we should advance
+            if (timeSinceStart > totalTimeout) {
+                console.log(`🕒 Episode completion detected (${Math.round(timeSinceStart / 1000 / 60)}min), auto-advancing...`);
+                autoAdvanceToNext();
+            }
+        }
+        
+        function getEpisodeDuration(episode) {
+            if (!episode) return 2.5 * 60 * 60 * 1000; // Default 2.5 hours
+            
+            // Extract episode number and use dynamic duration based on episode patterns
+            const episodeNumber = extractEpisodeNumber(episode.title);
+            
+            // Radio Quebrada episodes duration patterns
+            if (episodeNumber <= 10) return 90 * 60 * 1000;  // Early episodes: 1.5 hours
+            if (episodeNumber <= 30) return 2 * 60 * 60 * 1000;  // Mid episodes: 2 hours
+            if (episodeNumber <= 50) return 2.5 * 60 * 60 * 1000; // Later episodes: 2.5 hours
+            return 3 * 60 * 60 * 1000; // Recent episodes (51-64): 3 hours
+        }
+        
+        function extractEpisodeNumber(title) {
+            const match = title.match(/Episode\s*(\d+)/i);
+            return match ? parseInt(match[1]) : 50; // Default to episode 50 if can't extract
+        }
+        
+        function autoAdvanceToNext() {
+            if (!autoAdvanceEnabled || !episodes.length) return;
+            
+            console.log('🎵 AUTO-ADVANCING TO NEXT EPISODE...');
+            
+            // Show advancement message
+            const currentEpisodeDiv = document.getElementById('current-episode');
+            if (currentEpisodeDiv) {
+                const originalText = currentEpisodeDiv.innerHTML;
+                currentEpisodeDiv.innerHTML = '🚀 AUTO-ADVANCING TO NEXT EPISODE... 🚀';
+                currentEpisodeDiv.style.background = 'linear-gradient(45deg, #00FF00, #00FFFF)';
+                currentEpisodeDiv.style.color = '#000';
+                
+                setTimeout(() => {
+                    currentEpisodeDiv.style.background = '';
+                    currentEpisodeDiv.style.color = '';
+                }, 2000);
+            }
+            
+            // Advance to next episode (with looping)
+            let nextIndex = currentEpisodeIndex + 1;
+            if (nextIndex >= episodes.length) {
+                nextIndex = 0; // Loop back to first episode (64 → 1)
+                console.log('🔄 Reached end of playlist, looping back to start');
+            }
+            
+            // Small delay for user feedback, then play next episode
+            setTimeout(() => {
+                playEpisode(nextIndex);
+            }, 2000);
         }
 
         // Initialize on page load
