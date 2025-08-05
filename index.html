@@ -2979,14 +2979,20 @@
             });
             
             container.innerHTML = html;
-            document.getElementById('main-tracklist').classList.add('visible');
+            // Don't automatically show the tracklist - let the user decide
+            // document.getElementById('main-tracklist').classList.add('visible');
             
-            // Show the toggle button container
+            // Show the toggle button container and ensure button shows "SHOW TRACKLIST"
             if (toggleContainer) {
                 toggleContainer.style.display = 'block';
+                const toggleBtn = document.getElementById('tracklist-toggle-btn');
+                if (toggleBtn) {
+                    toggleBtn.innerHTML = '🔍 SHOW TRACKLIST';
+                }
             }
             
-            isTracklistVisible = true;
+            // Keep tracklist hidden by default
+            isTracklistVisible = false;
         }
         
         function startTrackTimer() {
@@ -3426,18 +3432,6 @@
                 if (data.audio_length) {
                     // Convert seconds to milliseconds
                     const actualDuration = data.audio_length * 1000;
-                    
-                    // TESTING MODE: Dramatically shorten duration for testing
-                    // Remove this section for production!
-                    const isTestMode = window.location.search.includes('test=true') || 
-                                      window.location.hostname === 'localhost' || 
-                                      confirm('🧪 TESTING MODE: Shorten episode to 2 minutes for auto-advance testing?');
-                    
-                    if (isTestMode) {
-                        console.log('🧪 TEST MODE: Using 2-minute duration instead of actual duration');
-                        return 2 * 60 * 1000; // 2 minutes for testing
-                    }
-                    
                     return actualDuration;
                 }
             } catch (error) {
@@ -3686,50 +3680,10 @@
             }, 2000);
         }
 
-        // Debug function to manually test auto-advance
-        function testAutoAdvance() {
-            console.log('🧪 TESTING AUTO-ADVANCE MANUALLY');
-            autoAdvanceToNext();
-        }
 
-        // Add debug controls to page
-        function addDebugControls() {
-            const debugDiv = document.createElement('div');
-            debugDiv.style.position = 'fixed';
-            debugDiv.style.top = '10px';
-            debugDiv.style.right = '10px';
-            debugDiv.style.background = 'rgba(0,0,0,0.8)';
-            debugDiv.style.color = '#00FF00';
-            debugDiv.style.padding = '10px';
-            debugDiv.style.border = '1px solid #00FF00';
-            debugDiv.style.fontSize = '12px';
-            debugDiv.style.zIndex = '9999';
-            debugDiv.innerHTML = `
-                <div style="margin-bottom: 5px;"><strong>🧪 DEBUG CONTROLS</strong></div>
-                <button onclick="testAutoAdvance()" style="background: #FF0000; color: #FFF; border: none; padding: 5px;">Test Auto-Advance</button>
-                <div id="debug-info" style="margin-top: 5px; font-size: 10px;"></div>
-            `;
-            document.body.appendChild(debugDiv);
-            
-            // Update debug info every second
-            setInterval(() => {
-                const debugInfo = document.getElementById('debug-info');
-                if (debugInfo && currentEpisode) {
-                    debugInfo.innerHTML = `
-                        Current: ${currentEpisode.title}<br>
-                        Index: ${currentEpisodeIndex}<br>
-                        Auto-advance: ${autoAdvanceEnabled ? 'ON' : 'OFF'}<br>
-                        Monitoring: ${playerCheckInterval ? 'ACTIVE' : 'INACTIVE'}
-                    `;
-                }
-            }, 1000);
-        }
 
         // Initialize on page load
         window.addEventListener('DOMContentLoaded', () => {
-            // Add debug controls for testing
-            addDebugControls();
-            
             // Start loading episodes
             fetchAllEpisodes().then(() => {
                 // Check if we should autoplay
