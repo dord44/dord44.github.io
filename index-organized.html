@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>☆☆☆ RADIO QUEBRADA ☆☆☆ The Coolest Station on the Web!</title>
+    
+    <!-- OpenGraph Meta Tags for Social Media Previews -->
+    <meta property="og:title" content="☆ RADIO QUEBRADA ☆ - The Coolest Station on the Web!">
+    <meta property="og:description" content="🎵 Tune into Radio Quebrada - Your ultimate underground radio station! Fresh beats, DJ mixes, and the hottest tracks from cyberspace. Join the audio revolution! 📻✨">
+    <meta property="og:image" content="./preview.jpg">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Radio Quebrada - Underground Web Radio Station">
+    <meta property="og:url" content="">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Radio Quebrada">
+    <meta property="og:locale" content="en_US">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="☆ RADIO QUEBRADA ☆ - The Coolest Station on the Web!">
+    <meta name="twitter:description" content="🎵 Tune into Radio Quebrada - Your ultimate underground radio station! Fresh beats, DJ mixes, and the hottest tracks from cyberspace. Join the audio revolution! 📻✨">
+    <meta name="twitter:image" content="./preview.jpg">
+    <meta name="twitter:image:alt" content="Radio Quebrada - Underground Web Radio Station">
+    
+    <!-- Additional Meta Tags -->
+    <meta name="description" content="🎵 Tune into Radio Quebrada - Your ultimate underground radio station! Fresh beats, DJ mixes, and the hottest tracks from cyberspace. Join the audio revolution! 📻✨">
+    <meta name="keywords" content="radio, music, DJ, underground, electronic, beats, mixcloud, radio station, web radio, retro">
+    <meta name="author" content="Radio Quebrada">
+    
+    <!-- Favicon and App Icons -->
+    <link rel="icon" type="image/x-icon" href="./preview.jpg">
+    <link rel="apple-touch-icon" href="./preview.jpg">
+    
+    <!-- Additional OpenGraph Tags for Better Compatibility -->
+    <meta property="fb:app_id" content="">
+    <meta property="article:author" content="Radio Quebrada">
+    <meta property="og:video" content="">
+    <meta property="og:audio" content="">
+    
+    <!-- Schema.org structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "RadioStation",
+      "name": "Radio Quebrada",
+      "description": "The coolest underground radio station on the web featuring DJ mixes and electronic beats",
+      "url": "",
+      "logo": "./preview.jpg",
+      "sameAs": [
+        "https://www.mixcloud.com/radioquebrada/"
+      ]
+    }
+    </script>
+    
+    <!-- External CSS -->
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="fire-text">☆☆☆ RADIO QUEBRADA ☆☆☆</h1>
+        
+        <div class="gif-decoration">
+            <span class="spinning-disc">💿</span>
+            <span class="spinning-disc">💿</span>
+            <span class="spinning-disc">💿</span>
+        </div>
+
+        <div class="marquee">
+            <span>★ ★ ★ THE COOLEST UNDERGROUND RADIO ON THE WEB! ★ FRESH BEATS ★ DJ MIXES ★ RETRO VIBES ★ TUNE IN NOW! ★ ★ ★</span>
+        </div>
+
+        <p class="under-construction">🚨 BROADCASTING LIVE FROM CYBERSPACE 🚨</p>
+
+        <div id="player-container">
+            <div id="current-episode">🎧 LOADING LATEST EPISODE... 🎧</div>
+            
+            <iframe id="mixcloud-player" 
+                width="100%" 
+                height="120" 
+                src="" 
+                frameborder="0" 
+                webkitallowfullscreen 
+                mozallowfullscreen 
+                allowfullscreen>
+            </iframe>
+            
+            <div id="current-track" style="display: none; margin-top: 15px; padding: 10px; background: linear-gradient(45deg, #FF00FF, #00FFFF); color: #000; font-weight: bold; text-align: center; border: 3px solid #FFD700;">
+                <div id="track-title" style="font-size: 16px; margin-bottom: 5px;"></div>
+                <div id="track-artist" style="font-size: 14px;"></div>
+                <button onclick="toggleCurrentTrack()" class="track-toggle-btn mini-button" style="margin-top: 10px;">🔽 HIDE</button>
+            </div>
+            
+            <button id="show-track-btn" onclick="showCurrentTrack()" class="mini-button" style="display: none; margin-top: 10px;">🎶 SHOW CURRENT TRACK</button>
+            
+            <!-- Main page tracklist display -->
+            <div id="main-tracklist">
+                <div class="tracklist-header">🎵 NOW PLAYING TRACKLIST 🎵</div>
+                <div class="mini-tracklist">
+                    <!-- Tracks will be populated by JavaScript -->
+                </div>
+                <div class="tracklist-controls">
+                    <button id="tracklist-toggle-btn" onclick="toggleMainTracklist()" class="mini-button">🔽 HIDE TRACKLIST</button>
+                </div>
+            </div>
+            
+            <button id="start-radio" class="rainbow-button">🎵 CLICK TO START RADIO! 🎵</button>
+            
+            <div style="margin-top: 20px;">
+                <button class="rainbow-button" onclick="RadioQuebrada.playRandomEpisode()">
+                    🎲 PLAY RANDOM EPISODE 🎲
+                </button>
+                
+                <button class="rainbow-button" onclick="RadioQuebrada.Episodes.showMoreEpisodes()">
+                    📻 SHOW ALL EPISODES 📻
+                </button>
+            </div>
+        </div>
+
+        <h2 style="color: #00FF00; font-size: 36px; text-shadow: 2px 2px 0px #FF00FF;">
+            📻 ALL EPISODES 📻
+        </h2>
+
+        <table class="episode-table">
+            <thead>
+                <tr>
+                    <th>COVER</th>
+                    <th>EPISODE TITLE & DATE</th>
+                    <th>ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody id="episodes-list">
+                <tr>
+                    <td colspan="3" style="color: #FFFF00; text-align: center;">
+                        <span class="spinning-disc">💿</span>
+                        INITIALIZING CYBERSPACE CONNECTION...
+                        <span class="spinning-disc">💿</span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Bitcoin Tip Section -->
+        <div class="tip-section">
+            <h2 class="tip-title">💰 SUPPORT RADIO QUEBRADA! 💰</h2>
+            <p style="color: #000; font-size: 18px; font-weight: bold;">
+                🚀 HELP KEEP THE UNDERGROUND ALIVE! SEND BITCOIN TO SUPPORT THE STATION! 🚀
+            </p>
+            
+            <div class="bitcoin-address" onclick="copyAddress()">
+                bc1q063g9xpxaky6vls0gg4vuja8v8dhdw2m5hzuhhs6s58rqkuwlmzsrgcxxt
+            </div>
+            
+            <button class="copy-btn" onclick="copyAddress()">
+                📋 COPY ADDRESS
+            </button>
+            
+            <div class="tip-amounts">
+                <button class="tip-amount-btn">🎵 $5 TIP</button>
+                <button class="tip-amount-btn">🎧 $10 TIP</button>
+                <button class="tip-amount-btn">🚀 $25 TIP</button>
+                <button class="tip-amount-btn">💎 $50+ TIP</button>
+            </div>
+            
+            <p style="color: #000; font-size: 14px; margin-top: 20px;">
+                💖 Every satoshi helps keep the beats flowing! Your support powers our underground mission! 💖
+            </p>
+        </div>
+
+        <!-- Merch Section -->
+        <div class="merch-section">
+            <h2 class="merch-title">🛒 RADIO QUEBRADA MERCH STORE 🛒</h2>
+            
+            <div class="merch-grid">
+                <div class="merch-item">
+                    <img src="radio-quebrada-logo.jpg" alt="Radio Quebrada T-Shirt">
+                    <h3>OFFICIAL T-SHIRT</h3>
+                    <div class="price">$25.00</div>
+                    <button class="rainbow-button">🛒 ADD TO CART</button>
+                </div>
+                
+                <div class="merch-item">
+                    <img src="radio-quebrada-logo.jpg" alt="Radio Quebrada Sticker Pack">
+                    <h3>STICKER PACK</h3>
+                    <div class="price">$8.00</div>
+                    <button class="rainbow-button">🛒 ADD TO CART</button>
+                </div>
+                
+                <div class="merch-item">
+                    <img src="radio-quebrada-logo.jpg" alt="Radio Quebrada USB Mixtape">
+                    <h3>USB MIXTAPE</h3>
+                    <div class="price sold-out">SOLD OUT</div>
+                    <button class="rainbow-button">😭 SOLD OUT</button>
+                </div>
+                
+                <div class="merch-item">
+                    <img src="radio-quebrada-logo.jpg" alt="Radio Quebrada Poster">
+                    <h3>LIMITED POSTER</h3>
+                    <div class="price">$15.00</div>
+                    <button class="rainbow-button">🛒 ADD TO CART</button>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px; color: #000; font-size: 16px;">
+                <span class="spinning-disc">💳</span>
+                PAYMENT METHODS: BITCOIN, PAYPAL, CREDIT CARD, LOVE & GOOD VIBES!
+                <span class="spinning-disc">💳</span>
+            </div>
+        </div>
+
+        <!-- Webring -->
+        <div class="webring">
+            <p style="color: #FFD700; font-size: 24px; font-weight: bold; margin-bottom: 15px;">
+                🌐 UNDERGROUND WEB RING 🌐
+            </p>
+            <p style="color: #00FF00; font-size: 20px;">
+                ← <a href="#" style="color: #00FFFF;">PREVIOUS SITE</a> | 
+                <a href="#" style="color: #FF00FF;">RANDOM SITE</a> | 
+                <a href="#" style="color: #FFFF00;">NEXT SITE</a> →
+            </p>
+            <p style="color: #FFF; font-size: 14px; margin-top: 10px;">
+                Discover more underground radio stations and retro websites!
+            </p>
+        </div>
+
+        <div class="visitor-counter">
+            <strong>VISITORS:</strong> <span id="counter">001337</span>
+        </div>
+
+        <p style="color: #888; font-size: 12px; margin-top: 30px;">
+            © 2024 RADIO QUEBRADA | BROADCASTING FROM THE DIGITAL UNDERGROUND
+        </p>
+    </div>
+
+    <!-- Tracklist Modal -->
+    <div id="tracklistModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="close-modal" onclick="closeModal()">&times;</span>
+                <div id="modalTitle">🎵 TRACKLIST 🎵</div>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Content will be loaded dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="js/radio-quebrada.js"></script>
+    <script src="js/tracklist.js"></script>
+</body>
+</html>

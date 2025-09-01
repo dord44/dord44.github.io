@@ -3385,6 +3385,8 @@
 
         // Auto-advance functionality (enhanced)
         let autoAdvanceEnabled = true;
+        let shuffleEnabled = true; // Enable shuffle by default
+        let shuffleHistory = []; // Track played episodes to avoid immediate repeats
         let playerCheckInterval = null;
         let currentEpisodeIndex = 0;
         let mixcloudMessageListener = null; // Track the listener to avoid duplicates
@@ -3647,18 +3649,55 @@
             return match ? parseInt(match[1]) : 50; // Default to episode 50 if can't extract
         }
         
+        function getSmartShuffleEpisode() {
+            if (!episodes.length) return 0;
+            
+            // If we haven't played many episodes yet, allow any episode
+            if (shuffleHistory.length < 3) {
+                let randomIndex;
+                do {
+                    randomIndex = Math.floor(Math.random() * episodes.length);
+                } while (shuffleHistory.includes(randomIndex) && shuffleHistory.length < episodes.length);
+                return randomIndex;
+            }
+            
+            // Advanced shuffle: avoid recently played episodes
+            const recentlyPlayed = shuffleHistory.slice(-Math.min(10, Math.floor(episodes.length / 3)));
+            const availableEpisodes = [];
+            
+            for (let i = 0; i < episodes.length; i++) {
+                if (!recentlyPlayed.includes(i)) {
+                    availableEpisodes.push(i);
+                }
+            }
+            
+            // If all episodes have been played recently, reset and use any episode
+            if (availableEpisodes.length === 0) {
+                console.log('🔄 Shuffle history reset - all episodes played recently');
+                shuffleHistory = [];
+                return Math.floor(Math.random() * episodes.length);
+            }
+            
+            // Pick random episode from available ones
+            return availableEpisodes[Math.floor(Math.random() * availableEpisodes.length)];
+        }
+
         function autoAdvanceToNext() {
             if (!autoAdvanceEnabled || !episodes.length) return;
             
             console.log('🎵 AUTO-ADVANCING TO NEXT EPISODE...');
             console.log('🎵 Current episode index:', currentEpisodeIndex);
             console.log('🎵 Total episodes:', episodes.length);
+            console.log('🎵 Shuffle enabled:', shuffleEnabled);
             
             // Show advancement message
             const currentEpisodeDiv = document.getElementById('current-episode');
             if (currentEpisodeDiv) {
-                const originalText = currentEpisodeDiv.innerHTML;
-                currentEpisodeDiv.innerHTML = '🚀 AUTO-ADVANCING TO NEXT EPISODE... 🚀';
+                const advanceMessage = shuffleEnabled ? 
+                    '🎲 AUTO-ADVANCING TO RANDOM EPISODE... 🎲' : 
+                    '🚀 AUTO-ADVANCING TO NEXT EPISODE... 🚀';
+                    
+                currentEpisodeDiv.innerHTML = advanceMessage;
                 currentEpisodeDiv.style.background = 'linear-gradient(45deg, #00FF00, #00FFFF)';
                 currentEpisodeDiv.style.color = '#000';
                 
@@ -3668,15 +3707,33 @@
                 }, 2000);
             }
             
-            // Advance to next episode (with looping)
-            let nextIndex = currentEpisodeIndex + 1;
-            if (nextIndex >= episodes.length) {
-                nextIndex = 0; // Loop back to first episode (64 → 1)
-                console.log('🔄 Reached end of playlist, looping back to start');
+            let nextIndex;
+            
+            if (shuffleEnabled) {
+                // Shuffle mode: pick a smart random episode
+                nextIndex = getSmartShuffleEpisode();
+                console.log('🎲 Shuffle mode: Selected episode', nextIndex);
+                
+                // Add current episode to history
+                if (currentEpisodeIndex !== undefined && currentEpisodeIndex !== nextIndex) {
+                    shuffleHistory.push(currentEpisodeIndex);
+                    // Keep history manageable
+                    if (shuffleHistory.length > Math.min(20, episodes.length)) {
+                        shuffleHistory.shift();
+                    }
+                }
+            } else {
+                // Sequential mode: advance to next episode (with looping)
+                nextIndex = currentEpisodeIndex + 1;
+                if (nextIndex >= episodes.length) {
+                    nextIndex = 0; // Loop back to first episode
+                    console.log('🔄 Reached end of playlist, looping back to start');
+                }
             }
             
             console.log('🎵 Next episode index will be:', nextIndex);
             console.log('🎵 Next episode title:', episodes[nextIndex]?.title);
+            console.log('🎵 Shuffle history length:', shuffleHistory.length);
             
             // Small delay for user feedback, then play next episode
             setTimeout(() => {
@@ -3685,6 +3742,17 @@
         }
 
 
+
+        // Play latest episode (first in sorted array)
+        function playLatestEpisode() {
+            if (episodes.length > 0) {
+                // Episodes are sorted by date (newest first), so index 0 is the latest
+                const latestIndex = 0;
+                window.episodeStartTime = Date.now();
+                playEpisode(latestIndex);
+                console.log('🎵 Auto-playing latest episode:', episodes[latestIndex].title);
+            }
+        }
 
         // Initialize on page load
         window.addEventListener('DOMContentLoaded', () => {
@@ -3697,12 +3765,12 @@
                     if (startBtn) {
                         startBtn.style.fontSize = '24px';
                         startBtn.style.padding = '20px 40px';
-                        startBtn.innerHTML = '🎵 CLICK TO START RADIO! 🎵<br><small>AUTOPLAY READY!</small>';
+                        startBtn.innerHTML = '🎵 CLICK TO START RADIO! 🎵<br><small>LATEST EPISODE READY!</small>';
                     }
                     
-                    // Try autoplay after a small delay
+                    // Try autoplay after a small delay - play LATEST episode
                     setTimeout(() => {
-                        playRandomEpisode();
+                        playLatestEpisode();
                     }, 100);
                 }
             });
@@ -3711,14 +3779,14 @@
             const startBtn = document.getElementById('start-radio');
             startBtn.addEventListener('click', () => {
                 if (episodes.length > 0) {
-                    playRandomEpisode();
+                    playLatestEpisode();
                 } else {
                     // If episodes not loaded yet, wait and try again
                     startBtn.textContent = '⏳ LOADING... PLEASE WAIT! ⏳';
                     const checkInterval = setInterval(() => {
                         if (episodes.length > 0) {
                             clearInterval(checkInterval);
-                            playRandomEpisode();
+                            playLatestEpisode();
                         }
                     }, 500);
                 }
