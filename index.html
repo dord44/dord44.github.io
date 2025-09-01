@@ -3311,10 +3311,14 @@
                 // Always load the specific episode URL for precise control
                 // We'll handle auto-advance through episode detection and manual progression
                 console.log('🎯 Loading specific episode:', episode.title, 'URL:', episode.url);
+                
+                // Track user interaction to help with autoplay
+                window.userInteracted = true;
+                
                 iframe.src = `https://www.mixcloud.com/widget/iframe/?hide_cover=1&autoplay=1&feed=${encodeURIComponent(episode.url)}`;
                 
                 iframe.frameBorder = '0';
-                iframe.allow = 'autoplay';
+                iframe.allow = 'autoplay; encrypted-media';
                 
                 console.log('🎵 Loading Mixcloud widget:', iframe.src);
                 
