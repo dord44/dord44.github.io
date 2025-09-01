@@ -3359,28 +3359,64 @@
             if (!episodes.length) return;
             
             window.isManualNavigation = true; // Flag for manual control
-            let nextIndex = (currentEpisodeIndex || 0) + 1;
-            if (nextIndex >= episodes.length) {
-                nextIndex = 0; // Loop back to start
+            
+            // Get current episode number
+            const currentEpisodeNumber = extractEpisodeNumber(episodes[currentEpisodeIndex]?.title);
+            console.log('🎯 Current episode number:', currentEpisodeNumber);
+            
+            // Find the next higher episode number
+            const nextEpisodeNumber = currentEpisodeNumber + 1;
+            let nextEpisodeIndex = episodes.findIndex(ep => 
+                extractEpisodeNumber(ep.title) === nextEpisodeNumber
+            );
+            
+            // If next episode number doesn't exist, find the lowest episode number (wrap around)
+            if (nextEpisodeIndex === -1) {
+                const episodeNumbers = episodes.map(ep => extractEpisodeNumber(ep.title)).sort((a, b) => a - b);
+                const lowestEpisodeNumber = episodeNumbers[0];
+                nextEpisodeIndex = episodes.findIndex(ep => 
+                    extractEpisodeNumber(ep.title) === lowestEpisodeNumber
+                );
+                console.log('🔄 Wrapping to lowest episode number:', lowestEpisodeNumber);
             }
             
-            window.episodeStartTime = Date.now();
-            console.log('🎯 Manual Next: Moving to episode', nextIndex + 1);
-            playEpisode(nextIndex);
+            if (nextEpisodeIndex !== -1) {
+                window.episodeStartTime = Date.now();
+                console.log('🎯 Manual Next: Moving from episode', currentEpisodeNumber, 'to episode', extractEpisodeNumber(episodes[nextEpisodeIndex].title));
+                playEpisode(nextEpisodeIndex);
+            }
         }
         
         function playPreviousEpisode() {
             if (!episodes.length) return;
             
             window.isManualNavigation = true; // Flag for manual control
-            let prevIndex = (currentEpisodeIndex || 0) - 1;
-            if (prevIndex < 0) {
-                prevIndex = episodes.length - 1; // Loop to end
+            
+            // Get current episode number
+            const currentEpisodeNumber = extractEpisodeNumber(episodes[currentEpisodeIndex]?.title);
+            console.log('🎯 Current episode number:', currentEpisodeNumber);
+            
+            // Find the next lower episode number
+            const prevEpisodeNumber = currentEpisodeNumber - 1;
+            let prevEpisodeIndex = episodes.findIndex(ep => 
+                extractEpisodeNumber(ep.title) === prevEpisodeNumber
+            );
+            
+            // If previous episode number doesn't exist, find the highest episode number (wrap around)
+            if (prevEpisodeIndex === -1) {
+                const episodeNumbers = episodes.map(ep => extractEpisodeNumber(ep.title)).sort((a, b) => b - a);
+                const highestEpisodeNumber = episodeNumbers[0];
+                prevEpisodeIndex = episodes.findIndex(ep => 
+                    extractEpisodeNumber(ep.title) === highestEpisodeNumber
+                );
+                console.log('🔄 Wrapping to highest episode number:', highestEpisodeNumber);
             }
             
-            window.episodeStartTime = Date.now();
-            console.log('🎯 Manual Previous: Moving to episode', prevIndex + 1);
-            playEpisode(prevIndex);
+            if (prevEpisodeIndex !== -1) {
+                window.episodeStartTime = Date.now();
+                console.log('🎯 Manual Previous: Moving from episode', currentEpisodeNumber, 'to episode', extractEpisodeNumber(episodes[prevEpisodeIndex].title));
+                playEpisode(prevEpisodeIndex);
+            }
         }
 
         // Auto-advance functionality (enhanced)
