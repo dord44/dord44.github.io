@@ -279,9 +279,10 @@ RadioQuebrada.AutoAdvance = {
                 }
             }
         } else {
-            nextIndex = RadioQuebrada.currentEpisodeIndex + 1;
-            if (nextIndex >= RadioQuebrada.episodes.length) {
-                nextIndex = 0;
+            // Sequential mode: go DOWN the episode list (69 -> 68 -> 67...)
+            nextIndex = RadioQuebrada.currentEpisodeIndex - 1;
+            if (nextIndex < 0) {
+                nextIndex = RadioQuebrada.episodes.length - 1;
                 console.log('🔄 Reached end of playlist, looping back to start');
             }
         }
@@ -428,8 +429,12 @@ RadioQuebrada.AutoAdvance = {
 
     // Extract episode number from title
     extractEpisodeNumber(title) {
-        const match = title.match(/Episode\s*(\d+)/i);
-        return match ? parseInt(match[1]) : 50;
+        // Match patterns like "RADIO QUEBRADA LIVE! #69" or "Episode 69"
+        const match = title.match(/#(\d+)|Episode\s*(\d+)/i);
+        if (match) {
+            return parseInt(match[1] || match[2]);
+        }
+        return 0; // Return 0 if can't extract
     }
 };
 

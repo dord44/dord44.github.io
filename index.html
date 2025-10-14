@@ -3337,6 +3337,14 @@
                 // Start auto-advance monitoring for this episode
                 startAutoAdvanceMonitoring();
                 
+                // Reset manual navigation flag after a short delay (episode has started)
+                setTimeout(() => {
+                    if (window.isManualNavigation) {
+                        console.log('✅ Episode loaded - resetting manual navigation flag');
+                        window.isManualNavigation = false;
+                    }
+                }, 3000); // 3 second delay to let episode load
+                
                 // Show track display after a short delay
                 setTimeout(() => {
                     if (currentTracklist.length > 0) {
@@ -3360,30 +3368,43 @@
             
             window.isManualNavigation = true; // Flag for manual control
             
+            // DEBUG: Show current state
+            console.log('=== NEXT BUTTON CLICKED ===');
+            console.log('📊 Total episodes:', episodes.length);
+            console.log('📍 Current index:', currentEpisodeIndex);
+            console.log('📺 Current episode:', episodes[currentEpisodeIndex]?.title);
+            
             // Get current episode number
             const currentEpisodeNumber = extractEpisodeNumber(episodes[currentEpisodeIndex]?.title);
-            console.log('🎯 Current episode number:', currentEpisodeNumber);
+            console.log('🎯 Current episode NUMBER:', currentEpisodeNumber);
             
-            // Find the next higher episode number
-            const nextEpisodeNumber = currentEpisodeNumber + 1;
+            // Find the next LOWER episode number (going down: 69 -> 68)
+            const nextEpisodeNumber = currentEpisodeNumber - 1;
+            console.log('🔍 Looking for episode NUMBER:', nextEpisodeNumber);
+            
             let nextEpisodeIndex = episodes.findIndex(ep => 
                 extractEpisodeNumber(ep.title) === nextEpisodeNumber
             );
+            console.log('📌 Found at INDEX:', nextEpisodeIndex);
             
-            // If next episode number doesn't exist, find the lowest episode number (wrap around)
+            // If next episode number doesn't exist, find the highest episode number (wrap around)
             if (nextEpisodeIndex === -1) {
-                const episodeNumbers = episodes.map(ep => extractEpisodeNumber(ep.title)).sort((a, b) => a - b);
-                const lowestEpisodeNumber = episodeNumbers[0];
+                console.log('⚠️  Episode', nextEpisodeNumber, 'not found! Wrapping...');
+                const episodeNumbers = episodes.map(ep => extractEpisodeNumber(ep.title)).sort((a, b) => b - a);
+                console.log('📋 All episode numbers:', episodeNumbers.slice(0, 10));
+                const highestEpisodeNumber = episodeNumbers[0];
                 nextEpisodeIndex = episodes.findIndex(ep => 
-                    extractEpisodeNumber(ep.title) === lowestEpisodeNumber
+                    extractEpisodeNumber(ep.title) === highestEpisodeNumber
                 );
-                console.log('🔄 Wrapping to lowest episode number:', lowestEpisodeNumber);
+                console.log('🔄 Wrapping to highest episode NUMBER:', highestEpisodeNumber, 'at INDEX:', nextEpisodeIndex);
             }
             
             if (nextEpisodeIndex !== -1) {
                 window.episodeStartTime = Date.now();
-                console.log('🎯 Manual Next: Moving from episode', currentEpisodeNumber, 'to episode', extractEpisodeNumber(episodes[nextEpisodeIndex].title));
+                console.log('✅ Playing episode at INDEX:', nextEpisodeIndex, '- TITLE:', episodes[nextEpisodeIndex].title);
                 playEpisode(nextEpisodeIndex);
+            } else {
+                console.error('❌ ERROR: Could not find next episode!');
             }
         }
         
@@ -3392,30 +3413,43 @@
             
             window.isManualNavigation = true; // Flag for manual control
             
+            // DEBUG: Show current state
+            console.log('=== PREVIOUS BUTTON CLICKED ===');
+            console.log('📊 Total episodes:', episodes.length);
+            console.log('📍 Current index:', currentEpisodeIndex);
+            console.log('📺 Current episode:', episodes[currentEpisodeIndex]?.title);
+            
             // Get current episode number
             const currentEpisodeNumber = extractEpisodeNumber(episodes[currentEpisodeIndex]?.title);
-            console.log('🎯 Current episode number:', currentEpisodeNumber);
+            console.log('🎯 Current episode NUMBER:', currentEpisodeNumber);
             
-            // Find the next lower episode number
-            const prevEpisodeNumber = currentEpisodeNumber - 1;
+            // Find the next HIGHER episode number (going up: 68 -> 69)
+            const prevEpisodeNumber = currentEpisodeNumber + 1;
+            console.log('🔍 Looking for episode NUMBER:', prevEpisodeNumber);
+            
             let prevEpisodeIndex = episodes.findIndex(ep => 
                 extractEpisodeNumber(ep.title) === prevEpisodeNumber
             );
+            console.log('📌 Found at INDEX:', prevEpisodeIndex);
             
-            // If previous episode number doesn't exist, find the highest episode number (wrap around)
+            // If previous episode number doesn't exist, find the LOWEST episode number (wrap around)
             if (prevEpisodeIndex === -1) {
-                const episodeNumbers = episodes.map(ep => extractEpisodeNumber(ep.title)).sort((a, b) => b - a);
-                const highestEpisodeNumber = episodeNumbers[0];
+                console.log('⚠️  Episode', prevEpisodeNumber, 'not found! Wrapping...');
+                const episodeNumbers = episodes.map(ep => extractEpisodeNumber(ep.title)).sort((a, b) => a - b);
+                console.log('📋 All episode numbers:', episodeNumbers.slice(0, 10));
+                const lowestEpisodeNumber = episodeNumbers[0];
                 prevEpisodeIndex = episodes.findIndex(ep => 
-                    extractEpisodeNumber(ep.title) === highestEpisodeNumber
+                    extractEpisodeNumber(ep.title) === lowestEpisodeNumber
                 );
-                console.log('🔄 Wrapping to highest episode number:', highestEpisodeNumber);
+                console.log('🔄 Wrapping to lowest episode NUMBER:', lowestEpisodeNumber, 'at INDEX:', prevEpisodeIndex);
             }
             
             if (prevEpisodeIndex !== -1) {
                 window.episodeStartTime = Date.now();
-                console.log('🎯 Manual Previous: Moving from episode', currentEpisodeNumber, 'to episode', extractEpisodeNumber(episodes[prevEpisodeIndex].title));
+                console.log('✅ Playing episode at INDEX:', prevEpisodeIndex, '- TITLE:', episodes[prevEpisodeIndex].title);
                 playEpisode(prevEpisodeIndex);
+            } else {
+                console.error('❌ ERROR: Could not find previous episode!');
             }
         }
 
@@ -3681,8 +3715,15 @@
         }
         
         function extractEpisodeNumber(title) {
-            const match = title.match(/Episode\s*(\d+)/i);
-            return match ? parseInt(match[1]) : 50; // Default to episode 50 if can't extract
+            // Match patterns like "RADIO QUEBRADA LIVE! #69" or "Episode 69"
+            const match = title.match(/#(\d+)|Episode\s*(\d+)/i);
+            if (match) {
+                const episodeNum = parseInt(match[1] || match[2]);
+                console.log('📝 Extracted episode number', episodeNum, 'from:', title);
+                return episodeNum;
+            }
+            console.warn('⚠️  Could not extract episode number from:', title);
+            return 0; // Return 0 if can't extract (will be sorted to end)
         }
         
         function getSmartShuffleEpisode() {
@@ -3720,6 +3761,13 @@
 
         function autoAdvanceToNext() {
             if (!autoAdvanceEnabled || !episodes.length) return;
+            
+            // Check if this is manual navigation - don't auto-advance
+            if (window.isManualNavigation) {
+                console.log('⏸️  Manual navigation detected - skipping auto-advance');
+                window.isManualNavigation = false; // Reset flag
+                return;
+            }
             
             console.log('🎵 AUTO-ADVANCING TO NEXT EPISODE...');
             console.log('🎵 Current episode index:', currentEpisodeIndex);
@@ -3759,11 +3807,11 @@
                     }
                 }
             } else {
-                // Sequential mode: advance to next episode (with looping)
-                nextIndex = currentEpisodeIndex + 1;
-                if (nextIndex >= episodes.length) {
-                    nextIndex = 0; // Loop back to first episode
-                    console.log('🔄 Reached end of playlist, looping back to start');
+                // Sequential mode: go DOWN the episode list (69 -> 68 -> 67...)
+                nextIndex = currentEpisodeIndex - 1;
+                if (nextIndex < 0) {
+                    nextIndex = episodes.length - 1; // Loop back to last episode
+                    console.log('🔄 Reached beginning of playlist, looping to end');
                 }
             }
             
